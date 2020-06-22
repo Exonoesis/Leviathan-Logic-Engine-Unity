@@ -72,4 +72,9 @@ public class DisplayDialogue : MonoBehaviour
 
         isTyping = false;
     }
+
+    private void TextScaling()
+    {
+
+    }
 }
