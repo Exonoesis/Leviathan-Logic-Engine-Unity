@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class BackgroundTesting : MonoBehaviour
 {
-    BackgroundTransition behavior;
+    BackgroundViewer behavior;
 
     public Texture tex;
     public RawImage activeImage;
 
     void Start()
     {
-        behavior = BackgroundTransition.instance;
+        behavior = BackgroundViewer.instance;
     }
 
     void Update()

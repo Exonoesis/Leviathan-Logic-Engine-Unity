@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class DisplayDialogue : MonoBehaviour
+public class DialogueViewer : MonoBehaviour
 {
-    public static DisplayDialogue instance;
+    public static DialogueViewer instance;
 
     public TextMeshProUGUI SpeakerName;
     public TextMeshProUGUI DialogueText;

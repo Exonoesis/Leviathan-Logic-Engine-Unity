@@ -6,12 +6,12 @@ using TMPro;
 
 public class DialogueTesting : MonoBehaviour
 {
-    DisplayDialogue behavior;
+    DialogueViewer behavior;
 
     // Start is called before the first frame update
     void Start()
     {
-        behavior = DisplayDialogue.instance;
+        behavior = DialogueViewer.instance;
     }
 
     // Update is called once per frame
