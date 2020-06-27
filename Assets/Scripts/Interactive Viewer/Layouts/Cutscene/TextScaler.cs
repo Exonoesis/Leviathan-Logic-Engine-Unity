@@ -19,7 +19,7 @@ public class TextScaler: MonoBehaviour
     {
         float totalCurrentRes = Screen.height * Screen.width;
         float percentAdjustment = totalCurrentRes / defaultResolution;
-        int fontsize = Mathf.RoundToInt((float)fontSize * percent);
+        int fontsize = Mathf.RoundToInt((float)fontSize * percentAdjustment);
 
         text.fontSize = fontsize;
     }
