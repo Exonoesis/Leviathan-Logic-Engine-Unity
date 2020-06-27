@@ -15,7 +15,7 @@ public class TextScaler: MonoBehaviour
         Adjust();
     }
 
-    void Adjust()
+    private void AdjustFontSize()
     {
         float totalCurrentRes = Screen.height + Screen.width;
         float percent = totalCurrentRes / defaultResolution;
