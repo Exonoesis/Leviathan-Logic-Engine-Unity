@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+﻿using UnityEngine;
 
 public class DialogueTesting : MonoBehaviour
 {
-    DisplayDialogue behavior;
+    DialogueViewer behavior;
 
     // Start is called before the first frame update
     void Start()
     {
-        behavior = DisplayDialogue.instance;
+        behavior = DialogueViewer.instance;
     }
 
     // Update is called once per frame

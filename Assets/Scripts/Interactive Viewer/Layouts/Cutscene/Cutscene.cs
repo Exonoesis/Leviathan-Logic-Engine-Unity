@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class Cutscene
 {
-    BackgroundTransition TransitionFile;
+    BackgroundViewer bgViewer;
 
     Canvas backgroundPanel;
     Canvas dialoguePanel;
@@ -34,9 +31,9 @@ public class Cutscene
     //This function needs testing still
     private void showBackground()
     {
-        TransitionFile = BackgroundTransition.instance;
+        bgViewer = BackgroundViewer.instance;
  
-        TransitionFile.Transition(background);
+        bgViewer.Transition(background);
     }
 
     //Print dialogue [returns choices that determine next node]

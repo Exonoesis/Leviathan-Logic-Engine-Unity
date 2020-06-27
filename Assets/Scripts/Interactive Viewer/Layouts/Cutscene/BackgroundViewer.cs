@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class BackgroundTransition : MonoBehaviour
+public class BackgroundViewer : MonoBehaviour
 {
-    public static BackgroundTransition instance;
+    public static BackgroundViewer instance;
 
     private GameObject BGStatic;
     private GameObject BGDynamic;
