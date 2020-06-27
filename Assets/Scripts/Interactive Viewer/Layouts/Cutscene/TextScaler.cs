@@ -8,7 +8,7 @@ public class TextScaler: MonoBehaviour
     public int fontSize = 24;
     private static float defaultResolution = 1327104f;
 
-    void Start()
+    private void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
 
