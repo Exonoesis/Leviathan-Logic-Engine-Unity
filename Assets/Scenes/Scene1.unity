@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 272830268}
   - component: {fileID: 272830269}
   - component: {fileID: 272830267}
-  - component: {fileID: 272830270}
   m_Layer: 5
   m_Name: SpeakerNameText
   m_TagString: SpeakerNameBox
@@ -287,19 +286,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272830265}
   m_Mesh: {fileID: 0}
---- !u!114 &272830270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272830265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3435bc9185edf43a8938d0819d745c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fontSize: 24
 --- !u!1 &447828449
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1016,7 +1002,6 @@ GameObject:
   - component: {fileID: 1961565848}
   - component: {fileID: 1961565849}
   - component: {fileID: 1961565847}
-  - component: {fileID: 1961565850}
   m_Layer: 5
   m_Name: DialogueText
   m_TagString: DialogueText
@@ -1170,19 +1155,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961565845}
   m_Mesh: {fileID: 0}
---- !u!114 &1961565850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961565845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3435bc9185edf43a8938d0819d745c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fontSize: 24
 --- !u!1 &1979545477
 GameObject:
   m_ObjectHideFlags: 0
