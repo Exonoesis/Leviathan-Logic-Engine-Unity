@@ -12,7 +12,7 @@ public class TextScaler: MonoBehaviour
     {
         text = GetComponent<TextMeshProUGUI>();
 
-        Adjust();
+        AdjustFontSize();
     }
 
     private void AdjustFontSize()
