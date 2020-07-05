@@ -6,6 +6,7 @@ public class DialogueViewer : MonoBehaviour
 {
     public static DialogueViewer instance;
 
+    public GameObject DialoguePanel;
     public TextMeshProUGUI SpeakerName;
     public TextMeshProUGUI DialogueText;
 
@@ -37,6 +38,11 @@ public class DialogueViewer : MonoBehaviour
 
     public void PrintDialogue(string speaker, string text)
     {
+        if (!DialoguePanel.activeSelf)
+        {
+            DialoguePanel.SetActive(true);
+        }
+
         if (!isTyping && !isHoldingText)
         {
             typingCoroutine = StartCoroutine(Teletype(speaker, text));
