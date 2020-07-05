@@ -12,7 +12,6 @@ public class CutsceneTesting : MonoBehaviour
 
     Cutscene test = new Cutscene();
 
-    // Start is called before the first frame update
     void Start()
     {
         test.name = name;
@@ -22,7 +21,6 @@ public class CutsceneTesting : MonoBehaviour
         test.next = next;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown("space"))

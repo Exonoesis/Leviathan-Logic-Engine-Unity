@@ -2,19 +2,15 @@
 
 public class DialogueTesting : MonoBehaviour
 {
-    public DialogueViewer behavior;
+    DialogueViewer behavior;
 
-    // Start is called before the first frame update
     void Start()
     {
         behavior = DialogueViewer.instance;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-
         if (Input.GetKeyDown("space"))
         {
             behavior.PrintDialogue("Jesse", "This is a test of the <color=purple>color " +
@@ -24,5 +20,4 @@ public class DialogueTesting : MonoBehaviour
             
         }
     }
-    
 }
