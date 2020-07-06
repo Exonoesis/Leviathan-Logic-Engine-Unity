@@ -2,8 +2,8 @@
 
 public class Cutscene
 {
-    BackgroundViewer bgViewer;
-    DialogueViewer dlViewer;
+    private BackgroundViewer bgViewer;
+    private DialogueViewer dlViewer;
 
     public string name;
     public Texture background;
