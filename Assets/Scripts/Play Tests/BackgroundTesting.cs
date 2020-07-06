@@ -10,11 +10,11 @@ public class BackgroundTesting : MonoBehaviour
 
     void Start()
     {
-        behavior = BackgroundViewer.instance;
+        behavior = BackgroundViewer.Instance;
     }
 
     void Update()
-    { 
+    {
         if (Input.GetKey(KeyCode.S))
         {
             behavior.Transition(tex);

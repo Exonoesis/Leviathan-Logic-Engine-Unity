@@ -10,10 +10,12 @@ public class CutsceneTesting : MonoBehaviour
     public string dialogue; //Should be an array for additive text?
     public string[] next;
 
-    Cutscene test = new Cutscene();
+    Cutscene test;
 
     void Start()
     {
+        test = new Cutscene();
+
         test.name = name;
         test.background = background;
         test.speaker = speaker;

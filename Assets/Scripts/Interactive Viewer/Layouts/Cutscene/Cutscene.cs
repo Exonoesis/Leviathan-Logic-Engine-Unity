@@ -9,7 +9,13 @@ public class Cutscene
     public Texture background;
     public string speaker;
     public string dialogue; //Should be an array for additive text?
-    public string[] next; 
+    public string[] next;
+
+    public Cutscene()
+    {
+        bgViewer = BackgroundViewer.Instance;
+        dlViewer = DialogueViewer.Instance;
+    }
 
     public void show()
     {
@@ -27,16 +33,12 @@ public class Cutscene
     //Fade between current and given background
     private void showBackground()
     {
-        bgViewer = BackgroundViewer.instance;
-
         bgViewer.Transition(background);
     }
 
     //Print dialogue [returns choices that determine next node]
     private void showDialogue()
     {
-        dlViewer = DialogueViewer.instance;
-
         dlViewer.PrintDialogue(speaker, dialogue);
     }
 }
