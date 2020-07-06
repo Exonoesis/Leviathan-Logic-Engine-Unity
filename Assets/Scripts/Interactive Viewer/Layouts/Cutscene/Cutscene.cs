@@ -5,11 +5,11 @@ public class Cutscene
     private BackgroundViewer bgViewer;
     private DialogueViewer dlViewer;
 
-    public string name;
-    public Texture background;
-    public string speaker;
-    public string dialogue; //Should be an array for additive text?
-    public string[] next;
+    public string sceneName { get; set; }
+    public Texture background { get; set; }
+    public string speaker { get; set; }
+    public string dialogue { get; set; } //Should be an array for additive text?
+    public string[] next { get; set; }
 
     public Cutscene()
     {

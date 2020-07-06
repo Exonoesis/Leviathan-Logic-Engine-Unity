@@ -2,7 +2,7 @@
 
 public class DialogueTesting : MonoBehaviour
 {
-    DialogueViewer behavior;
+    private DialogueViewer behavior;
 
     void Start()
     {

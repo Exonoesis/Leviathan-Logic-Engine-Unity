@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CutsceneTesting : MonoBehaviour
 {
-    public string name;
+    public string sceneName;
     public Texture background;
     public string speaker;
     public string dialogue; //Should be an array for additive text?
@@ -16,7 +14,7 @@ public class CutsceneTesting : MonoBehaviour
     {
         test = new Cutscene();
 
-        test.name = name;
+        test.sceneName = name;
         test.background = background;
         test.speaker = speaker;
         test.dialogue = dialogue;
