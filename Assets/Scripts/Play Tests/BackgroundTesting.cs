@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class BackgroundTesting : MonoBehaviour
 {
-    BackgroundViewer behavior;
+    private BackgroundViewer behavior;
 
     public Texture tex;
     public RawImage activeImage;
