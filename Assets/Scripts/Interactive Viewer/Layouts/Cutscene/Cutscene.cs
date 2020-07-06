@@ -5,11 +5,61 @@ public class Cutscene
     private BackgroundViewer bgViewer;
     private DialogueViewer dlViewer;
 
-    public string sceneName { get; set; }
-    public Texture background { get; set; }
-    public string speaker { get; set; }
-    public string dialogue { get; set; } //Should be an array for additive text?
-    public string[] next { get; set; }
+    private string _sceneName;
+    private Texture _background;
+    private string _speaker;
+    private string _dialogue; //Should be an array for additive text?
+    private string[] _next;
+
+    public string getSceneName()
+    {
+        return _sceneName;
+    }
+
+    public void setSceneName(string sceneName)
+    { 
+        _sceneName = sceneName; 
+    }
+
+    public Texture getBackground()
+    {
+        return _background;
+    }
+
+    public void setBackground(Texture background)
+    {
+        _background = background;
+    }
+
+    public string getSpeaker()
+    {
+        return _speaker;
+    }
+
+    public void setSpeaker(string speaker)
+    {
+        _speaker = speaker;
+    }
+
+    public string getDialogue()
+    {
+        return _dialogue;
+    }
+
+    public void setDialogue(string dialogue)
+    {
+        _dialogue = dialogue;
+    }
+
+    public string[] getNext()
+    {
+        return _next;
+    }
+
+    public void setNext(string[] next)
+    {
+        _next = next;
+    }
 
     public Cutscene()
     {
@@ -19,12 +69,12 @@ public class Cutscene
 
     public void show()
     {
-        if (background != null)
+        if (_background != null)
         {
             showBackground();
         }
 
-        if (dialogue != null)
+        if (_dialogue != null)
         {
             showDialogue();
         }
@@ -33,12 +83,12 @@ public class Cutscene
     //Fade between current and given background
     private void showBackground()
     {
-        bgViewer.Transition(background);
+        bgViewer.Transition(_background);
     }
 
     //Print dialogue [returns choices that determine next node]
     private void showDialogue()
     {
-        dlViewer.PrintDialogue(speaker, dialogue);
+        dlViewer.PrintDialogue(_speaker, _dialogue);
     }
 }

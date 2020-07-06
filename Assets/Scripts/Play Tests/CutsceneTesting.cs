@@ -14,11 +14,11 @@ public class CutsceneTesting : MonoBehaviour
     {
         test = new Cutscene();
 
-        test.sceneName = name;
-        test.background = background;
-        test.speaker = speaker;
-        test.dialogue = dialogue;
-        test.next = next;
+        test.setSceneName(sceneName);
+        test.setBackground(background);
+        test.setSpeaker(speaker);
+        test.setDialogue(dialogue);
+        test.setNext(next);
     }
 
     void Update()
