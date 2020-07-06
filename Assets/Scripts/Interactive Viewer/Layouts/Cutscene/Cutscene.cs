@@ -8,7 +8,7 @@ public class Cutscene
     private string _sceneName;
     private Texture _background;
     private string _speaker;
-    private string _dialogue; //Should be an array for additive text?
+    private string _dialogue = ""; //Should be an array for additive text?
     private string[] _next;
 
     public string getSceneName()
@@ -74,7 +74,7 @@ public class Cutscene
             showBackground();
         }
 
-        if (_dialogue != null)
+        if (_dialogue != "")
         {
             showDialogue();
         }

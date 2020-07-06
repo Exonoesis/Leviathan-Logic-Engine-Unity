@@ -31,7 +31,7 @@ public class DialogueViewer : MonoBehaviour
 
     private int dialogueLength;
 
-    public void Awake()
+    void Awake()
     {
         //DontDestroyOnLoad(this.gameObject);
     }

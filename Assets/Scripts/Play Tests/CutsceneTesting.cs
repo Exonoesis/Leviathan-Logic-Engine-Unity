@@ -8,7 +8,7 @@ public class CutsceneTesting : MonoBehaviour
     public string dialogue; //Should be an array for additive text?
     public string[] next;
 
-    Cutscene test;
+    private Cutscene test;
 
     void Start()
     {
