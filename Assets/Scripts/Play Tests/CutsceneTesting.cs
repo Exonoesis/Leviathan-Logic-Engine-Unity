@@ -6,7 +6,6 @@ public class CutsceneTesting : MonoBehaviour
     public Texture background;
     public string speaker;
     public string dialogue; //Should be an array for additive text?
-    public string[] next;
 
     private Cutscene test;
 
@@ -18,7 +17,6 @@ public class CutsceneTesting : MonoBehaviour
         test.setBackground(background);
         test.setSpeaker(speaker);
         test.setDialogue(dialogue);
-        test.setNext(next);
     }
 
     void Update()

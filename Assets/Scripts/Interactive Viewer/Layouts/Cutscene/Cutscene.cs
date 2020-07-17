@@ -9,7 +9,6 @@ public class Cutscene
     private Texture _background;
     private string _speaker;
     private string _dialogue = ""; //Should be an array for additive text?
-    private string[] _next;
 
     public string getSceneName()
     {
@@ -51,16 +50,6 @@ public class Cutscene
         _dialogue = dialogue;
     }
 
-    public string[] getNext()
-    {
-        return _next;
-    }
-
-    public void setNext(string[] next)
-    {
-        _next = next;
-    }
-
     public Cutscene()
     {
         bgViewer = BackgroundViewer.Instance;
@@ -69,15 +58,9 @@ public class Cutscene
 
     public void show()
     {
-        if (_background != null)
-        {
-            showBackground();
-        }
-
-        if (_dialogue != "")
-        {
-            showDialogue();
-        }
+        showBackground();
+      
+        showDialogue();
     }
 
     //Fade between current and given background

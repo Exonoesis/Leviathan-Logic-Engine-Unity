@@ -976,14 +976,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65a26d887e8b1447aa981843f351b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: First
-  background: {fileID: 2800000, guid: e9f7d9de984c19644babb651b3d5599b, type: 3}
+  sceneName: 
+  background: {fileID: 2800000, guid: 517cee70475e0674bb109032a96256fe, type: 3}
   speaker: Jesse 2.0
   dialogue: This is a test of the <color=purple>color changing system</color>. It's
     <b>built-in</b>, and that's real <i>fancy</i>. Now I need to make this longer
     to test other issues and make sure that the line snapping is fixed by this new
     method. Floccinaucinihilipilification.
-  next: []
 --- !u!1 &1961565845
 GameObject:
   m_ObjectHideFlags: 0

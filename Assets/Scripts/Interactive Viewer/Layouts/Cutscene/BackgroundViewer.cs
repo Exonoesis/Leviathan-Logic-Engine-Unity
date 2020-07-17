@@ -62,7 +62,7 @@ public class BackgroundViewer : MonoBehaviour
 
     public void Transition(Texture tex)
     {
-        if (!isTransitioning)
+        if (!isTransitioning && tex != null)
         {
             dynamicImage.texture = staticImage.texture;
             BGDynamic.SetActive(true);

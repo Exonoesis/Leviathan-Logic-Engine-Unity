@@ -50,19 +50,22 @@ public class DialogueViewer : MonoBehaviour
 
     public void PrintDialogue(string speaker, string text)
     {
-        if (!DialoguePanel.activeSelf)
+        if (text != "")
         {
-            DialoguePanel.SetActive(true);
-        }
+            if (!DialoguePanel.activeSelf)
+            {
+                DialoguePanel.SetActive(true);
+            }
 
-        if (!isTyping && !isHoldingText)
-        {
-            typingCoroutine = StartCoroutine(Teletype(speaker, text));
-        }
+            if (!isTyping && !isHoldingText)
+            {
+                typingCoroutine = StartCoroutine(Teletype(speaker, text));
+            }
 
-        if (isHoldingText)
-        {
-            isHoldingText = false;
+            if (isHoldingText)
+            {
+                isHoldingText = false;
+            }
         }
     }
 
