@@ -4,8 +4,21 @@ using TMPro;
 
 public class DialogueViewer : MonoBehaviour
 {
-    public static DialogueViewer instance;
+    private static DialogueViewer _instance;
+    public static DialogueViewer Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<DialogueViewer>();
+            }
 
+            return _instance;
+        }
+    }
+
+    public GameObject DialoguePanel;
     public TextMeshProUGUI SpeakerName;
     public TextMeshProUGUI DialogueText;
 
@@ -18,9 +31,9 @@ public class DialogueViewer : MonoBehaviour
 
     private int dialogueLength;
 
-    void Start()
+    void Awake()
     {
-        instance = this; 
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     void Update()
@@ -37,14 +50,22 @@ public class DialogueViewer : MonoBehaviour
 
     public void PrintDialogue(string speaker, string text)
     {
-        if (!isTyping && !isHoldingText)
+        if (text != "")
         {
-            typingCoroutine = StartCoroutine(Teletype(speaker, text));
-        }
-        
-        if (isHoldingText)
-        {
-            isHoldingText = false;
+            if (!DialoguePanel.activeSelf)
+            {
+                DialoguePanel.SetActive(true);
+            }
+
+            if (!isTyping && !isHoldingText)
+            {
+                typingCoroutine = StartCoroutine(Teletype(speaker, text));
+            }
+
+            if (isHoldingText)
+            {
+                isHoldingText = false;
+            }
         }
     }
 

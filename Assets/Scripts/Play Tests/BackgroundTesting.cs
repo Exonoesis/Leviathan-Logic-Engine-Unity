@@ -3,18 +3,18 @@ using UnityEngine.UI;
 
 public class BackgroundTesting : MonoBehaviour
 {
-    BackgroundViewer behavior;
+    private BackgroundViewer behavior;
 
     public Texture tex;
     public RawImage activeImage;
 
     void Start()
     {
-        behavior = BackgroundViewer.instance;
+        behavior = BackgroundViewer.Instance;
     }
 
     void Update()
-    { 
+    {
         if (Input.GetKey(KeyCode.S))
         {
             behavior.Transition(tex);

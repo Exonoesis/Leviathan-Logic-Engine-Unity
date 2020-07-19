@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 272830267}
   m_Layer: 5
   m_Name: SpeakerNameText
-  m_TagString: SpeakerNameBox
+  m_TagString: SpeakerNameText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -573,7 +573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1149919431
 RectTransform:
   m_ObjectHideFlags: 0
@@ -878,8 +878,7 @@ GameObject:
   - component: {fileID: 1493621222}
   - component: {fileID: 1493621221}
   - component: {fileID: 1493621220}
-  - component: {fileID: 1493621226}
-  - component: {fileID: 1493621224}
+  - component: {fileID: 1493621227}
   - component: {fileID: 1493621225}
   - component: {fileID: 1493621223}
   m_Layer: 0
@@ -949,23 +948,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d88303ebea06e4f4680f193b1c67c8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DialoguePanel: {fileID: 1149919430}
   SpeakerName: {fileID: 272830267}
   DialogueText: {fileID: 1961565847}
   charPrintDelay: 0.05
---- !u!114 &1493621224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493621219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daef3251d6e7b7a4a9c6637f4f008afb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tex: {fileID: 2800000, guid: 517cee70475e0674bb109032a96256fe, type: 3}
-  activeImage: {fileID: 0}
 --- !u!114 &1493621225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,7 +964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e3843fb390c5642bfa2033c6817a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1493621226
+--- !u!114 &1493621227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -987,9 +973,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1493621219}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45181e28d6128147a7c4e99de941a93, type: 3}
+  m_Script: {fileID: 11500000, guid: e65a26d887e8b1447aa981843f351b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: 
+  background: {fileID: 2800000, guid: 517cee70475e0674bb109032a96256fe, type: 3}
+  speaker: Jesse 2.0
+  dialogue: This is a test of the <color=purple>color changing system</color>. It's
+    <b>built-in</b>, and that's real <i>fancy</i>. Now I need to make this longer
+    to test other issues and make sure that the line snapping is fixed by this new
+    method. Floccinaucinihilipilification.
 --- !u!1 &1961565845
 GameObject:
   m_ObjectHideFlags: 0
