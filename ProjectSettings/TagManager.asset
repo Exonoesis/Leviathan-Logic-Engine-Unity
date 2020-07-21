@@ -17,6 +17,7 @@ TagManager:
   - DialogueText
   - BGPanelStatic
   - BGPanelDynamic
+  - EventSystem
   layers:
   - Default
   - TransparentFX
