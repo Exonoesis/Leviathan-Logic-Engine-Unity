@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
@@ -6,19 +8,36 @@ using System.Collections;
 [TestFixture]
 public class PlayTestSuite
 {
-    //private Game game;
+    private BackgroundViewer bgViewer;
+    private Texture desiredBackground;
 
     [SetUp]
     public void Setup()
     {
-        //GameObject gameGameObject = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
-        //game = gameGameObject.GetComponent<Game>();
+        SceneManager.LoadScene(0);
+
+        desiredBackground = Resources.Load<Texture>("Images/BG/AXt4WfZ");
     }
 
     [TearDown]
     public void Teardown()
     {
-        //Object.Destroy(game.gameObject);
+        
+    }
+
+    [UnityTest]
+    public IEnumerator testBackgroundViewerTransition()
+    {
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        bgViewer = eventSystem.GetComponent<BackgroundViewer>();
+
+        bgViewer.Transition(desiredBackground);
+        yield return new WaitForSeconds(1f);
+
+        GameObject staticPanel = GameObject.FindWithTag("BGPanelStatic");
+        Texture currentBackground = staticPanel.GetComponent<RawImage>().texture;
+
+        Assert.AreEqual(desiredBackground, currentBackground);
     }
 
     [UnityTest]
