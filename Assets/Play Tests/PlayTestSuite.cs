@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using TMPro;
 using NUnit.Framework;
 using System.Collections;
 
@@ -10,6 +11,8 @@ public class PlayTestSuite
 {
     private BackgroundViewer bgViewer;
     private Texture desiredBackground;
+    private string desiredSpeaker;
+    private string desiredDialogue;
 
     [SetUp]
     public void Setup()
@@ -17,6 +20,8 @@ public class PlayTestSuite
         SceneManager.LoadScene(0);
 
         desiredBackground = Resources.Load<Texture>("Images/BG/AXt4WfZ");
+        desiredSpeaker = "Bob";
+        desiredDialogue = "Hello! This is a test to see if the dialogue works.";
     }
 
     [TearDown]
@@ -41,9 +46,23 @@ public class PlayTestSuite
     }
 
     [UnityTest]
-    public void testCutsceneShowsText()
+    public IEnumerator testCutsceneShowsText()
     {
-        
+        Cutscene currentScene = new Cutscene();
+        currentScene.setSpeaker(desiredSpeaker);
+        currentScene.setDialogue(desiredDialogue);
+
+        currentScene.show();
+        yield return new WaitForSeconds(3f);
+
+        GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
+        string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
+
+        GameObject dialogueText = GameObject.FindWithTag("DialogueText");
+        string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
+
+        Assert.AreEqual(desiredSpeaker, currentSpeaker);
+        Assert.AreEqual(desiredDialogue, currentDialogue);
     }
 
     [UnityTest]

@@ -14,15 +14,12 @@ public class EditTestSuite
     //private Cutscene cutscene;
 
     private Image background;
-    private String cutsceneText;
-    private String speakerName;
 
     [SetUp]
     public void Setup()
     {
         background = Resources.Load<Image>("Images/UI/BG1");
-        speakerName = "Bob";
-        cutsceneText = "Hello! This is a test to see if the dialogue works.";
+
 
         //cutscene = new Cutscene(background, cutsceneText);
         //clickerScene = new ClickerView(background);
