@@ -14,15 +14,12 @@ public class EditTestSuite
     //private Cutscene cutscene;
 
     private Image background;
-    private String cutsceneText;
-    private String speakerName;
 
     [SetUp]
     public void Setup()
     {
         background = Resources.Load<Image>("Images/UI/BG1");
-        speakerName = "Bob";
-        cutsceneText = "Hello! This is a test to see if the dialogue works.";
+
 
         //cutscene = new Cutscene(background, cutsceneText);
         //clickerScene = new ClickerView(background);
@@ -31,35 +28,6 @@ public class EditTestSuite
     [TearDown]
     public void Teardown()
     {
-    }
-
-    [Test]
-    public void testCutsceneShowsText()
-    {
-        //InteractiveViewer viewer = new InteractiveViewer();
-        //viewer.addScene(cutscene);
-
-        //viewer.showCurrentScene();
-
-        Text shownDialogue = GameObject.FindWithTag("DialogueText").GetComponent<Text>();
-        Assert.Equals(cutsceneText, shownDialogue.text);
-
-        Text shownSpeakerName = GameObject.FindWithTag("SpeakerNameText").GetComponent<Text>();
-        Assert.Equals(speakerName, shownSpeakerName.text);
-    }
-
-    [Test]
-    public void testCutsceneShowsBackground()
-    {
-        //InteractiveViewer viewer = new InteractiveViewer();
-        //viewer.addScene(cutscene);
-
-        //viewer.showCurrentScene();
-
-        Image shownBackground = GameObject
-                                .FindWithTag("BackgroundPanel")
-                                .GetComponent<Image>();
-        Assert.Equals(background, shownBackground);
     }
 
     [Test]
