@@ -57,11 +57,12 @@ public class PlayTestSuite
 
         GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
         string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
-
+        
+        Assert.AreEqual(desiredSpeaker, currentSpeaker);
+        
         GameObject dialogueText = GameObject.FindWithTag("DialogueText");
         string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
-
-        Assert.AreEqual(desiredSpeaker, currentSpeaker);
+        
         Assert.AreEqual(desiredDialogue, currentDialogue);
     }
 
