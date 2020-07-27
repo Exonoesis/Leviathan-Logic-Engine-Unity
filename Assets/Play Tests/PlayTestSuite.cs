@@ -41,6 +41,27 @@ public class PlayTestSuite
     }
 
     [UnityTest]
+    public void testCutsceneShowsText()
+    {
+        
+    }
+
+    [UnityTest]
+    public IEnumerator testCutsceneShowsBackground()
+    {
+        Cutscene currentScene = new Cutscene();
+        currentScene.setBackground(desiredBackground);
+
+        currentScene.show();
+        yield return new WaitForSeconds(1f);
+
+        GameObject staticPanel = GameObject.FindWithTag("BGPanelStatic");
+        Texture currentBackground = staticPanel.GetComponent<RawImage>().texture;
+
+        Assert.AreEqual(desiredBackground, currentBackground);
+    }
+
+    [UnityTest]
     public IEnumerator testAssetShowsTextOnClicked()
     {
         yield return null;

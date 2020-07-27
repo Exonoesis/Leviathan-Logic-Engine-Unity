@@ -34,35 +34,6 @@ public class EditTestSuite
     }
 
     [Test]
-    public void testCutsceneShowsText()
-    {
-        //InteractiveViewer viewer = new InteractiveViewer();
-        //viewer.addScene(cutscene);
-
-        //viewer.showCurrentScene();
-
-        Text shownDialogue = GameObject.FindWithTag("DialogueText").GetComponent<Text>();
-        Assert.Equals(cutsceneText, shownDialogue.text);
-
-        Text shownSpeakerName = GameObject.FindWithTag("SpeakerNameText").GetComponent<Text>();
-        Assert.Equals(speakerName, shownSpeakerName.text);
-    }
-
-    [Test]
-    public void testCutsceneShowsBackground()
-    {
-        //InteractiveViewer viewer = new InteractiveViewer();
-        //viewer.addScene(cutscene);
-
-        //viewer.showCurrentScene();
-
-        Image shownBackground = GameObject
-                                .FindWithTag("BackgroundPanel")
-                                .GetComponent<Image>();
-        Assert.Equals(background, shownBackground);
-    }
-
-    [Test]
     public void testClickerSceneShowsAssets()
     {
 
