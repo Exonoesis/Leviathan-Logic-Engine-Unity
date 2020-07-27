@@ -10,6 +10,7 @@ using System.Collections;
 public class PlayTestSuite
 {
     private BackgroundViewer bgViewer;
+    private DialogueViewer dlViewer;
     private Texture desiredBackground;
     private string desiredSpeaker;
     private string desiredDialogue;
@@ -20,8 +21,11 @@ public class PlayTestSuite
         SceneManager.LoadScene(0);
 
         desiredBackground = Resources.Load<Texture>("Images/BG/AXt4WfZ");
-        desiredSpeaker = "Bob";
-        desiredDialogue = "Hello! This is a test to see if the dialogue works.";
+        desiredSpeaker = "Jesse";
+        desiredDialogue = "This is a test of the <color=purple>color " +
+                "changing system</color>. It's <b>built-in</b>, and that's real <i>fancy</i>. " +
+                "Now I need to make this longer to test other issues and make sure that " +
+                "the line snapping is fixed by this new method. Floccinaucinihilipilification.";
     }
 
     [TearDown]
@@ -46,6 +50,26 @@ public class PlayTestSuite
     }
 
     [UnityTest]
+    public IEnumerator testDialogueViewerPrintsDialogue()
+    {
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        dlViewer = eventSystem.GetComponent<DialogueViewer>();
+
+        dlViewer.PrintDialogue(desiredSpeaker, desiredDialogue);
+        yield return new WaitForSeconds(15f);
+
+        GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
+        string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
+        
+        Assert.AreEqual(desiredSpeaker, currentSpeaker);
+        
+        GameObject dialogueText = GameObject.FindWithTag("DialogueText");
+        string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
+        
+        Assert.AreEqual(desiredDialogue, currentDialogue);
+    }
+
+    [UnityTest]
     public IEnumerator testCutsceneShowsText()
     {
         Cutscene currentScene = new Cutscene();
@@ -53,7 +77,7 @@ public class PlayTestSuite
         currentScene.setDialogue(desiredDialogue);
 
         currentScene.show();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(15f);
 
         GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
         string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
