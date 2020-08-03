@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Cutscene
+public class Cutscene : Scene
 {
     private BackgroundViewer bgViewer;
     private DialogueViewer dlViewer;
@@ -56,7 +56,7 @@ public class Cutscene
         dlViewer = DialogueViewer.Instance;
     }
 
-    public void show()
+    public override void show()
     {
         showBackground();
       
