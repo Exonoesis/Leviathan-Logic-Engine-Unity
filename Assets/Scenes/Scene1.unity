@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 109216895}
   - component: {fileID: 109216894}
   - component: {fileID: 109216893}
+  - component: {fileID: 109216896}
   m_Layer: 5
   m_Name: Eevee
   m_TagString: Untagged
@@ -154,10 +155,10 @@ RectTransform:
   m_Father: {fileID: 1262587215}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -229.2, y: 80}
-  m_SizeDelta: {x: 139.99277, y: 185.28625}
+  m_AnchorMin: {x: 0.1275, y: 0.47134092}
+  m_AnchorMax: {x: 0.30125, y: 0.87729555}
+  m_AnchoredPosition: {x: 0.4963684, y: -25}
+  m_SizeDelta: {x: 0.99276733, y: 2.286255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &109216893
 MonoBehaviour:
@@ -171,7 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc1eb87e2e52d383b12d72aed53d206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectTransform: {fileID: 0}
   onClicked:
     m_PersistentCalls:
       m_Calls:
@@ -223,6 +223,47 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109216891}
   m_CullTransparentMesh: 0
+--- !u!60 &109216896
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109216891}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 43.415253, y: 68.92707}
+      - {x: -12.572205, y: 32.341675}
+      - {x: -27.63443, y: 40.386}
+      - {x: -30.232117, y: 90.465034}
+      - {x: -46.534668, y: 32.396263}
+      - {x: -56.33261, y: 16.02501}
+      - {x: -58.778656, y: -2.3892593}
+      - {x: -69.311584, y: -31.300537}
+      - {x: -53.77588, y: -84.479904}
+      - {x: -23.130875, y: -92.327194}
+      - {x: 9.990799, y: -85.22092}
+      - {x: 25.486115, y: -68.101776}
+      - {x: 53.769882, y: -53.18364}
+      - {x: 67.40631, y: -23.91425}
+      - {x: 63.736725, y: 30.777275}
+      - {x: 4.9886017, y: 14.104065}
 --- !u!1 &133465467
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +276,7 @@ GameObject:
   - component: {fileID: 133465471}
   - component: {fileID: 133465470}
   - component: {fileID: 133465469}
+  - component: {fileID: 133465472}
   m_Layer: 5
   m_Name: Gem
   m_TagString: Untagged
@@ -256,10 +298,10 @@ RectTransform:
   m_Father: {fileID: 1262587215}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0.80250007, y: 0.47134092}
+  m_AnchorMax: {x: 0.81624997, y: 0.5}
+  m_AnchoredPosition: {x: -118, y: 69}
+  m_SizeDelta: {x: 267.67307, y: 238.57208}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133465469
 MonoBehaviour:
@@ -273,7 +315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc1eb87e2e52d383b12d72aed53d206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectTransform: {fileID: 133465468}
   onClicked:
     m_PersistentCalls:
       m_Calls:
@@ -325,6 +366,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133465467}
   m_CullTransparentMesh: 0
+--- !u!60 &133465472
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133465467}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 138.63039, y: 71.370026}
+      - {x: 124.9485, y: 100.81055}
+      - {x: 81.36795, y: 117.24805}
+      - {x: 32.618362, y: 123.946106}
+      - {x: -14.212891, y: 115.86307}
+      - {x: -65.7054, y: 90.113434}
+      - {x: -115.94105, y: 39.49037}
+      - {x: -135.19716, y: -6.826519}
+      - {x: -142.08815, y: -54.264023}
+      - {x: -109.10651, y: -77.963974}
+      - {x: 69.588135, y: -121.87332}
+      - {x: 116.36984, y: 2.8181229}
 --- !u!1 &272830265
 GameObject:
   m_ObjectHideFlags: 0
