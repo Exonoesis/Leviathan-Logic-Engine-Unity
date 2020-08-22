@@ -65,7 +65,7 @@ public class PlayTestSuite
         
         GameObject dialogueText = GameObject.FindWithTag("DialogueText");
         string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
-        
+
         Assert.AreEqual(desiredDialogue, currentDialogue);
     }
 

@@ -19,10 +19,6 @@ public class EditTestSuite
     public void Setup()
     {
         background = Resources.Load<Image>("Images/UI/BG1");
-
-
-        //cutscene = new Cutscene(background, cutsceneText);
-        //clickerScene = new ClickerView(background);
     }
 
     [TearDown]
@@ -39,15 +35,7 @@ public class EditTestSuite
     [Test]
     public void testClickerSceneShowsBackground()
     {
-        //InteractiveViewer viewer = new InteractiveViewer();
-        //viewer.addScene(clickerScene);
 
-        //viewer.showCurrentScene();
-
-        Image shownBackground = GameObject
-                                .FindWithTag("BackgroundPanel")
-                                .GetComponent<Image>();
-        Assert.Equals(background, shownBackground);
     }
 
     [Test]

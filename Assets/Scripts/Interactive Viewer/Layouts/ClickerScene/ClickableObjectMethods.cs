@@ -1,16 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ClickableObjectMethods : MonoBehaviour
 {
+    private DialogueViewer dlViewer;
+
+    void Start()
+    {
+        dlViewer = DialogueViewer.Instance;
+    }
+
     public void ClickedEevee()
     {
-        print("Clicked Eevee");
+        dlViewer.PrintDialogue("Eevee", "I've been clicked!");
     }
 
     public void ClickedGem()
     {
-        print("Clicked Gem");
+        dlViewer.PrintDialogue("Gem", "I'm a gem – thus not a sentient being – but if I was I would tell you that I've been clicked.");
     }
 }

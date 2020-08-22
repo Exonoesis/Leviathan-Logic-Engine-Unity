@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-     
+
 public class Clicked : MonoBehaviour
 {
     public UnityEvent onClicked;

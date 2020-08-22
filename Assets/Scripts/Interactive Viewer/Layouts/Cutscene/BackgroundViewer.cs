@@ -10,7 +10,7 @@ public class BackgroundViewer : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = GameObject.FindObjectOfType<BackgroundViewer>();
+                _instance = FindObjectOfType<BackgroundViewer>();
             }
 
             return _instance;
@@ -47,7 +47,7 @@ public class BackgroundViewer : MonoBehaviour
             dynamicImage.color = ToAlpha(dynamicImage.color,
                 Mathf.MoveTowards(dynamicImage.color.a, 0f, speed));
 
-            if (dynamicImage.color.a == 0)
+            if (dynamicImage.color.a <= 0)
             {
                 isTransitioning = false;
                 BGDynamic.SetActive(false);
