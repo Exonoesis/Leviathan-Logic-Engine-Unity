@@ -155,10 +155,10 @@ RectTransform:
   m_Father: {fileID: 1262587215}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1275, y: 0.47134092}
-  m_AnchorMax: {x: 0.30125, y: 0.87729555}
-  m_AnchoredPosition: {x: 0.4963684, y: -25}
-  m_SizeDelta: {x: 0.99276733, y: 2.286255}
+  m_AnchorMin: {x: 0.1275, y: 0.4157791}
+  m_AnchorMax: {x: 0.1275, y: 0.4157791}
+  m_AnchoredPosition: {x: 48, y: 93}
+  m_SizeDelta: {x: 120, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &109216893
 MonoBehaviour:
@@ -207,7 +207,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 3f0a16b72f3640fb1a06c91235d3275c, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -248,21 +248,27 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 43.415253, y: 68.92707}
-      - {x: -12.572205, y: 32.341675}
-      - {x: -27.63443, y: 40.386}
-      - {x: -30.232117, y: 90.465034}
-      - {x: -46.534668, y: 32.396263}
-      - {x: -56.33261, y: 16.02501}
-      - {x: -58.778656, y: -2.3892593}
-      - {x: -69.311584, y: -31.300537}
-      - {x: -53.77588, y: -84.479904}
-      - {x: -23.130875, y: -92.327194}
-      - {x: 9.990799, y: -85.22092}
-      - {x: 25.486115, y: -68.101776}
-      - {x: 53.769882, y: -53.18364}
-      - {x: 67.40631, y: -23.91425}
-      - {x: 63.736725, y: 30.777275}
+    - - {x: 32.586105, y: 51.394135}
+      - {x: -6.3841248, y: 24.090897}
+      - {x: -22.993347, y: 30.588173}
+      - {x: -23.528381, y: 71.90074}
+      - {x: -35.705536, y: 28.786522}
+      - {x: -47.050476, y: 11.899597}
+      - {x: -50.012207, y: -6.51466}
+      - {x: -58.998108, y: -27.175135}
+      - {x: -45.00943, y: -66.431305}
+      - {x: -25.193542, y: -71.700226}
+      - {x: -12.97052, y: -74.13431}
+      - {x: 3.8027039, y: -67.688}
+      - {x: 12.0785675, y: -67.070435}
+      - {x: 21.84845, y: -53.150875}
+      - {x: 46.034744, y: -45.448498}
+      - {x: 52.738525, y: -36.682037}
+      - {x: 56.863922, y: -32.55664}
+      - {x: 57.59169, y: -6.685688}
+      - {x: 51.191498, y: 10.244339}
+      - {x: 52.45175, y: 24.043472}
+      - {x: 32.796234, y: 19.948135}
       - {x: 4.9886017, y: 14.104065}
 --- !u!1 &133465467
 GameObject:
@@ -298,10 +304,10 @@ RectTransform:
   m_Father: {fileID: 1262587215}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.80250007, y: 0.47134092}
-  m_AnchorMax: {x: 0.81624997, y: 0.5}
-  m_AnchoredPosition: {x: -118, y: 69}
-  m_SizeDelta: {x: 267.67307, y: 238.57208}
+  m_AnchorMin: {x: 0.45875, y: 0.3602209}
+  m_AnchorMax: {x: 0.72875005, y: 0.83743006}
+  m_AnchoredPosition: {x: 1.1580963, y: -1.2141037}
+  m_SizeDelta: {x: 2.316101, y: 2.4281616}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133465469
 MonoBehaviour:
@@ -350,7 +356,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5310fc10db0dbe32992e4b9703141b3e, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -391,18 +397,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 138.63039, y: 71.370026}
-      - {x: 124.9485, y: 100.81055}
-      - {x: 81.36795, y: 117.24805}
-      - {x: 32.618362, y: 123.946106}
-      - {x: -14.212891, y: 115.86307}
-      - {x: -65.7054, y: 90.113434}
-      - {x: -115.94105, y: 39.49037}
-      - {x: -135.19716, y: -6.826519}
-      - {x: -142.08815, y: -54.264023}
-      - {x: -109.10651, y: -77.963974}
-      - {x: 69.588135, y: -121.87332}
-      - {x: 116.36984, y: 2.8181229}
+    - - {x: -5.319008, y: 90.35961}
+      - {x: -52.01365, y: 67.8606}
+      - {x: -86.18067, y: 35.486153}
+      - {x: -105.33591, y: -10.655735}
+      - {x: -107.515884, y: -41.47406}
+      - {x: -91.63715, y: -61.041714}
+      - {x: 55.21736, y: -95.593765}
+      - {x: 109.757904, y: 47.779495}
+      - {x: 103.37508, y: 70.65128}
+      - {x: 71.627716, y: 88.84928}
+      - {x: 27.014282, y: 95.519554}
 --- !u!1 &272830265
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1149919431
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1208,6 +1213,8 @@ MonoBehaviour:
   SpeakerName: {fileID: 272830267}
   DialogueText: {fileID: 1961565847}
   charPrintDelay: 0.05
+  isTyping: 0
+  isHoldingText: 0
 --- !u!114 &1493621224
 MonoBehaviour:
   m_ObjectHideFlags: 0
