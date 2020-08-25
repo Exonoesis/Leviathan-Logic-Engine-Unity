@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class Clicked : MonoBehaviour
+public class HoverListener : MonoBehaviour
 {
-    public UnityEvent onClicked;
+    public UnityEvent methodReference;
 
     private Color normalColor = Color.white;
     private Color hoverColor = Color.grey;
@@ -26,9 +26,10 @@ public class Clicked : MonoBehaviour
         {
             image.color = hoverColor;
 
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
             {
-                onClicked.Invoke();
+                //methodReference.Invoke();
+                print("Method Call");
             }
         }
         else

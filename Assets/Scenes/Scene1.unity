@@ -175,8 +175,8 @@ MonoBehaviour:
   onClicked:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1493621224}
-        m_MethodName: ClickedEevee
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -324,8 +324,8 @@ MonoBehaviour:
   onClicked:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1493621224}
-        m_MethodName: ClickedGem
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1141,7 +1141,6 @@ GameObject:
   - component: {fileID: 1493621220}
   - component: {fileID: 1493621225}
   - component: {fileID: 1493621223}
-  - component: {fileID: 1493621224}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: EventSystem
@@ -1213,20 +1212,6 @@ MonoBehaviour:
   SpeakerName: {fileID: 272830267}
   DialogueText: {fileID: 1961565847}
   charPrintDelay: 0.05
-  isTyping: 0
-  isHoldingText: 0
---- !u!114 &1493621224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493621219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8d5364661cd8cc36aa656e5209270e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1493621225
 MonoBehaviour:
   m_ObjectHideFlags: 0

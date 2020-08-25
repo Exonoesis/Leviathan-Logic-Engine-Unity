@@ -38,7 +38,7 @@ public class DialogueViewer : MonoBehaviour
 
     void Update()
     {
-        if (isTyping && Input.GetMouseButtonDown(0))
+        if (isTyping && Input.GetMouseButtonDown((int)MouseCodes.PrimaryButton))
         {
             StopCoroutine(typingCoroutine);
 
@@ -47,7 +47,7 @@ public class DialogueViewer : MonoBehaviour
             isHoldingText = true;
         }
 
-        if (isHoldingText && Input.GetMouseButtonUp(0))
+        if (isHoldingText && Input.GetMouseButtonUp((int)MouseCodes.PrimaryButton))
         {
             isHoldingText = false;
         }
