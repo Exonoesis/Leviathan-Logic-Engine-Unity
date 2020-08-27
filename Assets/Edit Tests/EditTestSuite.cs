@@ -1,11 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.TestTools;
 using UnityEngine.UI;
 using NUnit.Framework;
-using System.Collections;
-using System;
-
-//using InteractiveLayouts;
 
 [TestFixture]
 public class EditTestSuite
@@ -21,5 +16,35 @@ public class EditTestSuite
     public void Teardown()
     {
 
+    }
+
+    [Test]
+    public void testAssetDimsOnHover()
+    {
+        GameObject eevee = GameObject.FindWithTag("Eevee");
+        Image eeveeImage = eevee.GetComponent<Image>();
+        HoverListener eeveeHoverListener = eevee.GetComponent<HoverListener>();
+
+        Assert.AreEqual(eeveeImage.color, Color.white);
+
+        eeveeHoverListener.Darken(eeveeImage);
+
+        Assert.AreEqual(eeveeImage.color, Color.grey);
+    }
+
+    [Test]
+    public void testAssetLightensOnHoverExit()
+    {
+        GameObject eevee = GameObject.FindWithTag("Eevee");
+        Image eeveeImage = eevee.GetComponent<Image>();
+        HoverListener eeveeHoverListener = eevee.GetComponent<HoverListener>();
+
+        eeveeHoverListener.Darken(eeveeImage);
+
+        Assert.AreEqual(eeveeImage.color, Color.grey);
+
+        eeveeHoverListener.Lighten(eeveeImage);
+
+        Assert.AreEqual(eeveeImage.color, Color.white);
     }
 }

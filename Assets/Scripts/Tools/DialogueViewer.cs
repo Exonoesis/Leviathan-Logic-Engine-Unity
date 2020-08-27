@@ -24,8 +24,8 @@ public class DialogueViewer : MonoBehaviour
 
     public float charPrintDelay = 0.05f;
 
-    private bool isTyping = false;
-    private bool isHoldingText = false;
+    private bool isTyping;
+    private bool isHoldingText;
 
     private Coroutine typingCoroutine;
 
@@ -38,7 +38,7 @@ public class DialogueViewer : MonoBehaviour
 
     void Update()
     {
-        if (isTyping && Input.GetMouseButtonDown((int)MouseCodes.PrimaryButton))
+        if (isTyping && Input.GetMouseButtonDown(MouseCodes.PrimaryButton))
         {
             StopCoroutine(typingCoroutine);
 
@@ -47,7 +47,7 @@ public class DialogueViewer : MonoBehaviour
             isHoldingText = true;
         }
 
-        if (isHoldingText && Input.GetMouseButtonUp((int)MouseCodes.PrimaryButton))
+        if (isHoldingText && Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
         {
             isHoldingText = false;
         }

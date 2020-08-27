@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using TMPro;
 using NUnit.Framework;
 using System.Collections;
 
@@ -104,23 +103,6 @@ public class PlayTestSuite
 
         Assert.AreEqual(desiredBackground, currentBackground);
     }
-
-    [UnityTest]
-    public IEnumerator testAssetDimsOnHover()
-    {
-        yield return null;
-
-        Assert.Less(1, 2);
-    }
-
-    [UnityTest]
-    public IEnumerator testAssetLightensOnHoverExit()
-    {
-        yield return null;
-
-        Assert.Less(1, 2);
-    }
-
 
     /*
 

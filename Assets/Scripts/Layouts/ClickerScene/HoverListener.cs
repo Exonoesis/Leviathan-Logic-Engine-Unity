@@ -6,16 +6,13 @@ public class HoverListener : MonoBehaviour
 {
     public UnityEvent methodReference;
 
-    private Color normalColor = Color.white;
-    private Color hoverColor = Color.grey;
-
     private PolygonCollider2D objCollider;
-    private MaskableGraphic image;
+    private Image spriteImage;
 
     void Start()
     {
         objCollider = gameObject.GetComponent<PolygonCollider2D> ();
-        image = gameObject.GetComponent<MaskableGraphic> ();   
+        spriteImage = gameObject.GetComponent<Image> ();   
     }
 
     void Update()
@@ -24,7 +21,7 @@ public class HoverListener : MonoBehaviour
 
         if (objCollider.bounds.Contains(mPos))
         {
-            image.color = hoverColor;
+            Darken(spriteImage);
 
             if (Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
             {
@@ -34,7 +31,17 @@ public class HoverListener : MonoBehaviour
         }
         else
         {
-            image.color = normalColor;
+            Lighten(spriteImage);
         }
+    }
+
+    public void Darken(Image image)
+    {
+        image.color = Color.grey;
+    }
+
+    public void Lighten(Image image)
+    {
+        image.color = Color.white;
     }
 }
