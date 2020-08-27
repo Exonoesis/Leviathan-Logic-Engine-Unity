@@ -1,100 +1,50 @@
 ﻿using UnityEngine;
-using UnityEngine.TestTools;
 using UnityEngine.UI;
 using NUnit.Framework;
-using System.Collections;
-using System;
-
-//using InteractiveLayouts;
 
 [TestFixture]
 public class EditTestSuite
 {
-    //private ClickerView clickerScene;
-    //private Cutscene cutscene;
-
-    private Image background;
 
     [SetUp]
     public void Setup()
     {
-        background = Resources.Load<Image>("Images/UI/BG1");
 
-
-        //cutscene = new Cutscene(background, cutsceneText);
-        //clickerScene = new ClickerView(background);
     }
 
     [TearDown]
     public void Teardown()
     {
-    }
-
-    [Test]
-    public void testClickerSceneShowsAssets()
-    {
 
     }
 
     [Test]
-    public void testClickerSceneShowsBackground()
+    public void testAssetDimsOnHover()
     {
-        //InteractiveViewer viewer = new InteractiveViewer();
-        //viewer.addScene(clickerScene);
+        GameObject eevee = GameObject.FindWithTag("Eevee");
+        Image eeveeImage = eevee.GetComponent<Image>();
+        HoverListener eeveeHoverListener = eevee.GetComponent<HoverListener>();
 
-        //viewer.showCurrentScene();
+        Assert.AreEqual(eeveeImage.color, Color.white);
 
-        Image shownBackground = GameObject
-                                .FindWithTag("BackgroundPanel")
-                                .GetComponent<Image>();
-        Assert.Equals(background, shownBackground);
+        eeveeHoverListener.Darken(eeveeImage);
+
+        Assert.AreEqual(eeveeImage.color, Color.grey);
     }
 
     [Test]
-    public void testNextSceneFromCutsceneToClicker()
+    public void testAssetLightensOnHoverExit()
     {
+        GameObject eevee = GameObject.FindWithTag("Eevee");
+        Image eeveeImage = eevee.GetComponent<Image>();
+        HoverListener eeveeHoverListener = eevee.GetComponent<HoverListener>();
 
-    }
+        eeveeHoverListener.Darken(eeveeImage);
 
-    [Test]
-    public void testNextSceneFromClickerToCutscene()
-    {
+        Assert.AreEqual(eeveeImage.color, Color.grey);
 
-    }
+        eeveeHoverListener.Lighten(eeveeImage);
 
-    [Test]
-    public void testNextSceneFromCutsceneToCutscene()
-    {
-
-    }
-
-    [Test]
-    public void testNextSceneFromClickerToClicker()
-    {
-
-    }
-
-    [Test]
-    public void testPreviousSceneFromCutsceneToClicker()
-    {
-
-    }
-
-    [Test]
-    public void testPreviousSceneFromClickerToCutscene()
-    {
-
-    }
-
-    [Test]
-    public void testPreviousSceneFromCutsceneToCutscene()
-    {
-
-    }
-
-    [Test]
-    public void testPreviousSceneFromClickerToClicker()
-    {
-
+        Assert.AreEqual(eeveeImage.color, Color.white);
     }
 }

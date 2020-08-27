@@ -18,6 +18,7 @@ TagManager:
   - BGPanelStatic
   - BGPanelDynamic
   - EventSystem
+  - Eevee
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using TMPro;
 using NUnit.Framework;
 using System.Collections;
 
@@ -65,7 +64,7 @@ public class PlayTestSuite
         
         GameObject dialogueText = GameObject.FindWithTag("DialogueText");
         string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
-        
+
         Assert.AreEqual(desiredDialogue, currentDialogue);
     }
 
@@ -105,8 +104,18 @@ public class PlayTestSuite
         Assert.AreEqual(desiredBackground, currentBackground);
     }
 
+    /*
+
     [UnityTest]
-    public IEnumerator testAssetShowsTextOnClicked()
+    public void testClickerSceneShowsAssets()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
+    }
+
+    [UnityTest]
+    public void testClickerSceneShowsBackground()
     {
         yield return null;
 
@@ -130,26 +139,51 @@ public class PlayTestSuite
     }
 
     [UnityTest]
-    public IEnumerator testAssetChangesBackgroundOnClicked()
-    {
-        yield return null;
-
-        Assert.Less(1, 2);
-    }
-
-    [UnityTest]
-    public IEnumerator testAssetShowsOtherAssetOnClicked()
-    {
-        yield return null;
-
-        Assert.Less(1, 2);
-    }
-
-    [UnityTest]
     public IEnumerator testAssetTriggersCutsceneOnClicked()
     {
         yield return null;
 
         Assert.Less(1, 2);
     }
+
+    [UnityTest]
+    public IEnumerator testAssetTriggersClickerSceneOnClicked()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
+    }
+
+    [UnityTest]
+    public void testNextSceneFromCutsceneToClicker()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
+    }
+
+    [UnityTest]
+    public void testNextSceneFromClickerToCutscene()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
+    }
+
+    [UnityTest]
+    public void testNextSceneFromCutsceneToCutscene()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
+    }
+
+    [UnityTest]
+    public void testNextSceneFromClickerToClicker()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
+    }
+    */
 }

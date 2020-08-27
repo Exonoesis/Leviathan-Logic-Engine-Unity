@@ -11,7 +11,7 @@ public class DialogueViewer : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = GameObject.FindObjectOfType<DialogueViewer>();
+                _instance = FindObjectOfType<DialogueViewer>();
             }
 
             return _instance;
@@ -24,8 +24,8 @@ public class DialogueViewer : MonoBehaviour
 
     public float charPrintDelay = 0.05f;
 
-    private bool isTyping = false;
-    private bool isHoldingText = false;
+    private bool isTyping;
+    private bool isHoldingText;
 
     private Coroutine typingCoroutine;
 
@@ -38,13 +38,18 @@ public class DialogueViewer : MonoBehaviour
 
     void Update()
     {
-        if (isTyping && Input.GetKeyDown("space"))
+        if (isTyping && Input.GetMouseButtonDown(MouseCodes.PrimaryButton))
         {
             StopCoroutine(typingCoroutine);
 
             DialogueText.maxVisibleCharacters = dialogueLength;
             isTyping = false;
             isHoldingText = true;
+        }
+
+        if (isHoldingText && Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
+        {
+            isHoldingText = false;
         }
     }
 
@@ -60,11 +65,6 @@ public class DialogueViewer : MonoBehaviour
             if (!isTyping && !isHoldingText)
             {
                 typingCoroutine = StartCoroutine(Teletype(speaker, text));
-            }
-
-            if (isHoldingText)
-            {
-                isHoldingText = false;
             }
         }
     }

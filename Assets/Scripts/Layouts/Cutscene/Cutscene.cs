@@ -59,17 +59,14 @@ public class Cutscene : Scene
     public override void show()
     {
         showBackground();
-      
         showDialogue();
     }
 
-    //Fade between current and given background
     private void showBackground()
     {
         bgViewer.Transition(_background);
     }
 
-    //Print dialogue [returns choices that determine next node]
     private void showDialogue()
     {
         dlViewer.PrintDialogue(_speaker, _dialogue);
