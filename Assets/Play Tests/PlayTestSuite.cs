@@ -104,23 +104,29 @@ public class PlayTestSuite
         Assert.AreEqual(desiredBackground, currentBackground);
     }
 
+    [UnityTest]
+    public IEnumerator testClickerSceneShowsBackground()
+    {
+        ClickerScene currentScene = new ClickerScene();
+        currentScene.setBackground(desiredBackground);
+
+        currentScene.show();
+        yield return new WaitForSeconds(1f);
+
+        GameObject staticPanel = GameObject.FindWithTag("BGPanelStatic");
+        Texture currentBackground = staticPanel.GetComponent<RawImage>().texture;
+
+        Assert.AreEqual(desiredBackground, currentBackground);
+    }
+
     /*
-
     [UnityTest]
-    public void testClickerSceneShowsAssets()
+    public IEnumerator testClickerSceneShowsAssets()
     {
         yield return null;
 
         Assert.Less(1, 2);
-    }
-
-    [UnityTest]
-    public void testClickerSceneShowsBackground()
-    {
-        yield return null;
-
-        Assert.Less(1, 2);
-    }
+    }   
 
     [UnityTest]
     public IEnumerator testAssetIsGlowingWhenNotClickedOnYet()
