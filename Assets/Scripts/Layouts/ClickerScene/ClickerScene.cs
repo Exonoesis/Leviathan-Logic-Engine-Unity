@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ClickerScene : Scene
 {
     private BackgroundViewer bgViewer;
+    private RectTransform caPanelRT;
 
-    //private List<> assetList;
+    private List<Asset> _assetList;
     private Texture _background;
 
     public Texture getBackground()
@@ -19,10 +19,22 @@ public class ClickerScene : Scene
         _background = background;
     }
 
+    public List<Asset> getAsssets()
+    {
+        return _assetList;
+    }
+
+    public void setAssets(List<Asset> assetNames)
+    {
+        _assetList = assetNames;
+    }
+
     public ClickerScene()
     {
         bgViewer = BackgroundViewer.Instance;
-        //???
+
+        GameObject caPanel = GameObject.FindWithTag("ClickableAssetsPanel");
+        caPanelRT = caPanel.GetComponent<RectTransform>();
     }
 
     public override void show()
@@ -38,11 +50,9 @@ public class ClickerScene : Scene
 
     private void showAssets()
     {
-        //For each asset in assetList, call placeAsset(asset);
-    }
-
-    private void placeAsset()
-    {
-        //???
+        foreach (Asset asset in _assetList)
+        {
+            asset.place(caPanelRT);
+        }
     }
 }

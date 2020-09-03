@@ -121,12 +121,23 @@ public class PlayTestSuite
 
     /*
     [UnityTest]
+    public IEnumerator testAssetClassPlacesAsset()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
+    }  
+    
+    [UnityTest]
     public IEnumerator testClickerSceneShowsAssets()
     {
         yield return null;
 
         Assert.Less(1, 2);
     }   
+
+
+
 
     [UnityTest]
     public IEnumerator testAssetIsGlowingWhenNotClickedOnYet()
@@ -143,6 +154,8 @@ public class PlayTestSuite
 
         Assert.Less(1, 2);
     }
+
+   
 
     [UnityTest]
     public IEnumerator testAssetTriggersCutsceneOnClicked()
