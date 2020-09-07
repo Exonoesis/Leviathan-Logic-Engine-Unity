@@ -5,6 +5,7 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 //Pause
 //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.N));
@@ -151,9 +152,11 @@ public class PlayTestSuite
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
         Transform asset = aPanel.transform.GetChild(0);
                 
-        Assert.AreEqual(asset.name, desiredAsset.getAssetName() + "(Clone)");
-        Assert.AreEqual(asset.position, desiredAsset.getPosition());
+        Assert.AreEqual(desiredAsset.getAssetName() + "(Clone)", asset.name);
 
+        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().x), Math.Floor(asset.position.x));
+        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().y), Math.Floor(asset.position.y));
+        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().z), Math.Floor(asset.position.z));
     }
 
     [UnityTest]
@@ -167,9 +170,12 @@ public class PlayTestSuite
 
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
         Transform asset = aPanel.transform.GetChild(0);
-                
-        Assert.AreEqual(asset.name, desiredAsset.getAssetName() + "(Clone)");
-        Assert.AreEqual(asset.position, desiredAsset.getPosition());
+                        
+        Assert.AreEqual(desiredAsset.getAssetName() + "(Clone)", asset.name);
+       
+        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().x), Math.Floor(asset.position.x));
+        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().y), Math.Floor(asset.position.y));
+        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().z), Math.Floor(asset.position.z));
     }
 
     [UnityTest]
@@ -185,11 +191,11 @@ public class PlayTestSuite
         Image assetImage = asset.GetComponent<Image>();
         HoverListener assetHoverListener = asset.GetComponent<HoverListener>();
 
-        Assert.AreEqual(assetImage.color, Color.white);
+        Assert.AreEqual(Color.white, assetImage.color);
 
         assetHoverListener.Darken(assetImage);
 
-        Assert.AreEqual(assetImage.color, Color.grey);
+        Assert.AreEqual(Color.grey, assetImage.color);
     }
 
     [UnityTest]
@@ -207,11 +213,11 @@ public class PlayTestSuite
 
         assetHoverListener.Darken(assetImage);
 
-        Assert.AreEqual(assetImage.color, Color.grey);
+        Assert.AreEqual(Color.grey, assetImage.color);
 
         assetHoverListener.Lighten(assetImage);
 
-        Assert.AreEqual(assetImage.color, Color.white);
+        Assert.AreEqual(Color.white, assetImage.color);
     }
 
     /*
