@@ -4,15 +4,25 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
+
+//Pause
+//yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.N));
 
 [TestFixture]
 public class PlayTestSuite
 {
     private BackgroundViewer bgViewer;
     private DialogueViewer dlViewer;
+    private AssetViewer aViewer;
+
     private Texture desiredBackground;
     private string desiredSpeaker;
     private string desiredDialogue;
+
+    private Asset desiredAsset;
+    private Vector3 desiredAssetPosition;
+    private List<Asset> assetList;
 
     [SetUp]
     public void Setup()
@@ -25,6 +35,15 @@ public class PlayTestSuite
                 "changing system</color>. It's <b>built-in</b>, and that's real <i>fancy</i>. " +
                 "Now I need to make this longer to test other issues and make sure that " +
                 "the line snapping is fixed by this new method. Floccinaucinihilipilification.";
+
+        desiredAsset = new Asset();
+        assetList = new List<Asset>();
+
+        desiredAsset.setAssetName("CA [Eevee]");
+        desiredAssetPosition = new Vector3(0, 0, 0);
+        desiredAsset.setPosition(desiredAssetPosition);
+
+        assetList.Add(desiredAsset);
     }
 
     [TearDown]
@@ -109,6 +128,7 @@ public class PlayTestSuite
     {
         ClickerScene currentScene = new ClickerScene();
         currentScene.setBackground(desiredBackground);
+        currentScene.setAssets(assetList);
 
         currentScene.show();
         yield return new WaitForSeconds(1f);
@@ -119,26 +139,82 @@ public class PlayTestSuite
         Assert.AreEqual(desiredBackground, currentBackground);
     }
 
-    /*
     [UnityTest]
-    public IEnumerator testAssetClassPlacesAsset()
+    public IEnumerator testAssetViewerPlacesAsset()
     {
-        yield return null;
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        aViewer = eventSystem.GetComponent<AssetViewer>();
 
-        Assert.Less(1, 2);
-    }  
-    
+        aViewer.place(desiredAsset);
+        yield return new WaitForSeconds(1f);
+
+        GameObject caPanel = GameObject.FindWithTag("AssetsPanel");
+        Transform eevee = caPanel.transform.GetChild(0);
+                
+        Assert.AreEqual(eevee.name, desiredAsset.getAssetName() + "(Clone)");
+        Assert.AreEqual(eevee.position, desiredAsset.getPosition());
+
+    }
+
     [UnityTest]
     public IEnumerator testClickerSceneShowsAssets()
     {
-        yield return null;
+        ClickerScene currentScene = new ClickerScene();
+        currentScene.setAssets(assetList);
 
-        Assert.Less(1, 2);
-    }   
+        currentScene.show();
+        yield return new WaitForSeconds(1f);
 
+        GameObject caPanel = GameObject.FindWithTag("AssetsPanel");
+        Transform eevee = caPanel.transform.GetChild(0);
+                
+        Assert.AreEqual(eevee.name, desiredAsset.getAssetName() + "(Clone)");
+        Assert.AreEqual(eevee.position, desiredAsset.getPosition());
+    }
 
+    [UnityTest]
+    public IEnumerator testAssetDimsOnHover()
+    {
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        aViewer = eventSystem.GetComponent<AssetViewer>();
 
+        aViewer.place(desiredAsset);
+        yield return new WaitForSeconds(1f);
 
+        GameObject eevee = GameObject.FindWithTag("Eevee");
+        Image eeveeImage = eevee.GetComponent<Image>();
+        HoverListener eeveeHoverListener = eevee.GetComponent<HoverListener>();
+
+        Assert.AreEqual(eeveeImage.color, Color.white);
+
+        eeveeHoverListener.Darken(eeveeImage);
+
+        Assert.AreEqual(eeveeImage.color, Color.grey);
+    }
+
+    [UnityTest]
+    public IEnumerator testAssetLightensOnHoverExit()
+    {
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        aViewer = eventSystem.GetComponent<AssetViewer>();
+
+        aViewer.place(desiredAsset);
+        yield return new WaitForSeconds(1f);
+
+        GameObject eevee = GameObject.FindWithTag("Eevee");
+        Image eeveeImage = eevee.GetComponent<Image>();
+        HoverListener eeveeHoverListener = eevee.GetComponent<HoverListener>();
+
+        eeveeHoverListener.Darken(eeveeImage);
+
+        Assert.AreEqual(eeveeImage.color, Color.grey);
+
+        eeveeHoverListener.Lighten(eeveeImage);
+
+        Assert.AreEqual(eeveeImage.color, Color.white);
+    }
+
+    /*
     [UnityTest]
     public IEnumerator testAssetIsGlowingWhenNotClickedOnYet()
     {

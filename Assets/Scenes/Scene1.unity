@@ -539,8 +539,8 @@ GameObject:
   - component: {fileID: 844465411}
   - component: {fileID: 844465413}
   m_Layer: 5
-  m_Name: ClickableAssetsPanel
-  m_TagString: ClickableAssetsPanel
+  m_Name: AssetsPanel
+  m_TagString: AssetsPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -807,6 +807,7 @@ GameObject:
   - component: {fileID: 1493621220}
   - component: {fileID: 1493621225}
   - component: {fileID: 1493621223}
+  - component: {fileID: 1493621224}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: EventSystem
@@ -878,6 +879,18 @@ MonoBehaviour:
   SpeakerName: {fileID: 272830267}
   DialogueText: {fileID: 1961565847}
   charPrintDelay: 0.05
+--- !u!114 &1493621224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493621219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1402d5e835d01f8996e0e906627f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1493621225
 MonoBehaviour:
   m_ObjectHideFlags: 0

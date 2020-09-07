@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Asset : MonoBehaviour
+public class Asset 
 {
     private string _assetName;
     private Vector3 _position;
@@ -23,14 +23,5 @@ public class Asset : MonoBehaviour
     public void setPosition(Vector3 position)
     {
         _position = position;
-    }
-
-    public void place(RectTransform rootPanel)
-    {
-        GameObject prefab = Resources.Load("Prefabs/" + _assetName) as GameObject;
-
-        GameObject prefabObject = Instantiate(prefab, rootPanel);
-
-        prefabObject.transform.position = _position;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class ClickerScene : Scene
 {
     private BackgroundViewer bgViewer;
-    private RectTransform caPanelRT;
+    private AssetViewer aViewer;
 
     private List<Asset> _assetList;
     private Texture _background;
@@ -32,9 +32,7 @@ public class ClickerScene : Scene
     public ClickerScene()
     {
         bgViewer = BackgroundViewer.Instance;
-
-        GameObject caPanel = GameObject.FindWithTag("ClickableAssetsPanel");
-        caPanelRT = caPanel.GetComponent<RectTransform>();
+        aViewer = AssetViewer.Instance;
     }
 
     public override void show()
@@ -52,7 +50,7 @@ public class ClickerScene : Scene
     {
         foreach (Asset asset in _assetList)
         {
-            asset.place(caPanelRT);
+            aViewer.place(asset);
         }
     }
 }
