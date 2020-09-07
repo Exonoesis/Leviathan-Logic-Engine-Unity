@@ -18,19 +18,19 @@ public class AssetViewer : MonoBehaviour
         }
     }
 
-    private RectTransform caPanelRT;
+    private RectTransform aPanelRT;
 
     void Awake()
     {
-        GameObject caPanel = GameObject.FindWithTag("AssetsPanel");
-        caPanelRT = caPanel.GetComponent<RectTransform>();
+        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        aPanelRT = aPanel.GetComponent<RectTransform>();
     }
 
     public void place(Asset asset)
     {
         GameObject prefab = Resources.Load("Prefabs/" + asset.getAssetName()) as GameObject;
 
-        GameObject prefabObject = Instantiate(prefab, caPanelRT);
+        GameObject prefabObject = Instantiate(prefab, aPanelRT);
 
         prefabObject.transform.position = asset.getPosition();
     }

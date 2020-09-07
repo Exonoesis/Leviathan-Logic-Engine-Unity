@@ -148,11 +148,11 @@ public class PlayTestSuite
         aViewer.place(desiredAsset);
         yield return new WaitForSeconds(1f);
 
-        GameObject caPanel = GameObject.FindWithTag("AssetsPanel");
-        Transform eevee = caPanel.transform.GetChild(0);
+        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        Transform asset = aPanel.transform.GetChild(0);
                 
-        Assert.AreEqual(eevee.name, desiredAsset.getAssetName() + "(Clone)");
-        Assert.AreEqual(eevee.position, desiredAsset.getPosition());
+        Assert.AreEqual(asset.name, desiredAsset.getAssetName() + "(Clone)");
+        Assert.AreEqual(asset.position, desiredAsset.getPosition());
 
     }
 
@@ -165,11 +165,11 @@ public class PlayTestSuite
         currentScene.show();
         yield return new WaitForSeconds(1f);
 
-        GameObject caPanel = GameObject.FindWithTag("AssetsPanel");
-        Transform eevee = caPanel.transform.GetChild(0);
+        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        Transform asset = aPanel.transform.GetChild(0);
                 
-        Assert.AreEqual(eevee.name, desiredAsset.getAssetName() + "(Clone)");
-        Assert.AreEqual(eevee.position, desiredAsset.getPosition());
+        Assert.AreEqual(asset.name, desiredAsset.getAssetName() + "(Clone)");
+        Assert.AreEqual(asset.position, desiredAsset.getPosition());
     }
 
     [UnityTest]
@@ -181,15 +181,15 @@ public class PlayTestSuite
         aViewer.place(desiredAsset);
         yield return new WaitForSeconds(1f);
 
-        GameObject eevee = GameObject.FindWithTag("Eevee");
-        Image eeveeImage = eevee.GetComponent<Image>();
-        HoverListener eeveeHoverListener = eevee.GetComponent<HoverListener>();
+        GameObject asset = GameObject.FindWithTag("Eevee");
+        Image assetImage = asset.GetComponent<Image>();
+        HoverListener assetHoverListener = asset.GetComponent<HoverListener>();
 
-        Assert.AreEqual(eeveeImage.color, Color.white);
+        Assert.AreEqual(assetImage.color, Color.white);
 
-        eeveeHoverListener.Darken(eeveeImage);
+        assetHoverListener.Darken(assetImage);
 
-        Assert.AreEqual(eeveeImage.color, Color.grey);
+        Assert.AreEqual(assetImage.color, Color.grey);
     }
 
     [UnityTest]
@@ -201,17 +201,17 @@ public class PlayTestSuite
         aViewer.place(desiredAsset);
         yield return new WaitForSeconds(1f);
 
-        GameObject eevee = GameObject.FindWithTag("Eevee");
-        Image eeveeImage = eevee.GetComponent<Image>();
-        HoverListener eeveeHoverListener = eevee.GetComponent<HoverListener>();
+        GameObject asset = GameObject.FindWithTag("Eevee");
+        Image assetImage = asset.GetComponent<Image>();
+        HoverListener assetHoverListener = asset.GetComponent<HoverListener>();
 
-        eeveeHoverListener.Darken(eeveeImage);
+        assetHoverListener.Darken(assetImage);
 
-        Assert.AreEqual(eeveeImage.color, Color.grey);
+        Assert.AreEqual(assetImage.color, Color.grey);
 
-        eeveeHoverListener.Lighten(eeveeImage);
+        assetHoverListener.Lighten(assetImage);
 
-        Assert.AreEqual(eeveeImage.color, Color.white);
+        Assert.AreEqual(assetImage.color, Color.white);
     }
 
     /*
