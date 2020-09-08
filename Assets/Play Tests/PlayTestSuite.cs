@@ -127,9 +127,7 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testClickerSceneShowsBackground()
     {
-        ClickerScene currentScene = new ClickerScene();
-        currentScene.setBackground(desiredBackground);
-        currentScene.setAssets(assetList);
+        ClickerScene currentScene = new ClickerScene(desiredBackground, assetList);
 
         currentScene.show();
         yield return new WaitForSeconds(1f);
@@ -150,7 +148,7 @@ public class PlayTestSuite
         yield return new WaitForSeconds(1f);
 
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
-        Transform asset = aPanel.transform.GetChild(0);
+        var asset = aPanel.transform.GetChild(0);
                 
         Assert.AreEqual(desiredAsset.getAssetName() + "(Clone)", asset.name);
 
@@ -162,8 +160,7 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testClickerSceneShowsAssets()
     {
-        ClickerScene currentScene = new ClickerScene();
-        currentScene.setAssets(assetList);
+        ClickerScene currentScene = new ClickerScene(desiredBackground, assetList);
 
         currentScene.show();
         yield return new WaitForSeconds(1f);

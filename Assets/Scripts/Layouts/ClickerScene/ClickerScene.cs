@@ -6,7 +6,7 @@ public class ClickerScene : Scene
     private BackgroundViewer bgViewer;
     private AssetViewer aViewer;
 
-    private List<Asset> _assetList;
+    private List<Asset> _assets;
     private Texture _background;
 
     public Texture getBackground()
@@ -19,20 +19,23 @@ public class ClickerScene : Scene
         _background = background;
     }
 
-    public List<Asset> getAsssets()
+    public List<Asset> getAssets()
     {
-        return _assetList;
+        return _assets;
     }
 
     public void setAssets(List<Asset> assetNames)
     {
-        _assetList = assetNames;
+        _assets = assetNames;
     }
 
-    public ClickerScene()
+    public ClickerScene(Texture background, List<Asset> assets)
     {
         bgViewer = BackgroundViewer.Instance;
         aViewer = AssetViewer.Instance;
+
+        _assets = assets;
+        _background = background;
     }
 
     public override void show()
@@ -48,7 +51,7 @@ public class ClickerScene : Scene
 
     private void showAssets()
     {
-        foreach (Asset asset in _assetList)
+        foreach (Asset asset in _assets)
         {
             aViewer.place(asset);
         }
