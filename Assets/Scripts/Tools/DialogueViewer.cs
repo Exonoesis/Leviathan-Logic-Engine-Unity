@@ -101,4 +101,9 @@ public class DialogueViewer : MonoBehaviour
         SpeakerName.text = speaker;
         DialogueText.text = text;
     }
+
+    public void hideDialoguePanel()
+    {
+        DialoguePanel.SetActive(false);
+    }
 }

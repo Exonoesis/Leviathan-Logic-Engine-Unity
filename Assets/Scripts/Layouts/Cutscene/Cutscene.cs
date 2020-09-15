@@ -85,6 +85,6 @@ public class Cutscene : Scene
 
     private void deactivateDialoguePanel()
     {
-        dlViewer.DialoguePanel.SetActive(false);
+        dlViewer.hideDialoguePanel();
     }
 }
