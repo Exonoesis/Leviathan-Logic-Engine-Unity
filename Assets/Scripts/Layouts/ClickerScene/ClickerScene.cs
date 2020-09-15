@@ -53,12 +53,20 @@ public class ClickerScene : Scene
     {
         foreach (Asset asset in _assets)
         {
-            aViewer.place(asset);
+            aViewer.placeInScene(asset);
         }
     }
 
     public override void hide()
     {
+        removeAssets();
+    }
 
+    private void removeAssets()
+    {
+        foreach (Asset asset in _assets)
+        {
+            aViewer.removeFromScene(asset);
+        }
     }
 }

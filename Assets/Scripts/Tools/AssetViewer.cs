@@ -26,12 +26,19 @@ public class AssetViewer : MonoBehaviour
         aPanelRT = aPanel.GetComponent<RectTransform>();
     }
 
-    public void place(Asset asset)
+    public void placeInScene(Asset asset)
     {
         GameObject prefab = Resources.Load("Prefabs/" + asset.getAssetName()) as GameObject;
 
         GameObject prefabObject = Instantiate(prefab, aPanelRT);
 
         prefabObject.transform.position = asset.getPosition();
+    }
+
+    public void removeFromScene(Asset asset)
+    {
+        GameObject assetToRemove = GameObject.Find(asset.getAssetName() + "(Clone)");
+
+        Destroy(assetToRemove);
     }
 }

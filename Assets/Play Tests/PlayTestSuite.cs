@@ -144,7 +144,7 @@ public class PlayTestSuite
         GameObject eventSystem = GameObject.FindWithTag("EventSystem");
         aViewer = eventSystem.GetComponent<AssetViewer>();
 
-        aViewer.place(desiredAsset);
+        aViewer.placeInScene(desiredAsset);
         yield return new WaitForSeconds(1f);
 
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -181,7 +181,7 @@ public class PlayTestSuite
         GameObject eventSystem = GameObject.FindWithTag("EventSystem");
         aViewer = eventSystem.GetComponent<AssetViewer>();
 
-        aViewer.place(desiredAsset);
+        aViewer.placeInScene(desiredAsset);
         yield return new WaitForSeconds(1f);
 
         GameObject asset = GameObject.FindWithTag("Eevee");
@@ -201,7 +201,7 @@ public class PlayTestSuite
         GameObject eventSystem = GameObject.FindWithTag("EventSystem");
         aViewer = eventSystem.GetComponent<AssetViewer>();
 
-        aViewer.place(desiredAsset);
+        aViewer.placeInScene(desiredAsset);
         yield return new WaitForSeconds(1f);
 
         GameObject asset = GameObject.FindWithTag("Eevee");
@@ -261,25 +261,50 @@ public class PlayTestSuite
         Assert.AreEqual("", currentDialogue);
     }
 
+    [UnityTest]
+    public IEnumerator testAssetViewerRemovesAssetFromScene()
+    {
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        aViewer = eventSystem.GetComponent<AssetViewer>();
+
+        aViewer.placeInScene(desiredAsset);
+        yield return new WaitForSeconds(1f);
+
+        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        int numChildren = aPanel.transform.childCount;
+
+        Assert.AreEqual(1, numChildren);
+
+        aViewer.removeFromScene(desiredAsset);
+        yield return new WaitForSeconds(1f);
+
+        numChildren = aPanel.transform.childCount;
+
+        Assert.AreEqual(0, numChildren);
+    }
+
+    [UnityTest]
+    public IEnumerator testClickerSceneRemovesAssetFromScene()
+    {
+        ClickerScene currentScene = new ClickerScene(desiredBackground, assetList);
+
+        currentScene.show();
+        yield return new WaitForSeconds(1f);
+
+        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        int numChildren = aPanel.transform.childCount;
+
+        Assert.AreEqual(1, numChildren);
+
+        currentScene.hide();
+        yield return new WaitForSeconds(1f);
+
+        numChildren = aPanel.transform.childCount;
+
+        Assert.AreEqual(0, numChildren);
+    }
+
     /*
-    [UnityTest]
-    public IEnumerator testAssetIsGlowingWhenNotClickedOnYet()
-    {
-        yield return null;
-
-        Assert.Less(1, 2);
-    }
-
-    [UnityTest]
-    public IEnumerator testAssetStopsGlowingOnClicked()
-    {
-        yield return null;
-
-        Assert.Less(1, 2);
-    }
-
-   
-
     [UnityTest]
     public IEnumerator testAssetTriggersCutsceneOnClicked()
     {
