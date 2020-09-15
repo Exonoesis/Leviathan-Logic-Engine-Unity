@@ -235,6 +235,22 @@ public class PlayTestSuite
     }
 
     [UnityTest]
+    public IEnumerator testDialogueViewerHidesDialoguePanel()
+    {
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        dlViewer = eventSystem.GetComponent<DialogueViewer>();
+
+        dlViewer.PrintDialogue(desiredSpeaker, desiredDialogue);
+        yield return new WaitForSeconds(15f);
+
+        GameObject DialoguePanel = GameObject.FindWithTag("DialoguePanel");
+
+        dlViewer.hideDialoguePanel();
+
+        Assert.IsFalse(DialoguePanel.activeSelf);
+    }
+
+    [UnityTest]
     public IEnumerator testDialogueViewerClearsText()
     {
         GameObject eventSystem = GameObject.FindWithTag("EventSystem");
