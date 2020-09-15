@@ -71,4 +71,20 @@ public class Cutscene : Scene
     {
         dlViewer.PrintDialogue(_speaker, _dialogue);
     }
+
+    public override void hide()
+    {
+        clearDialoguePanel();
+        deactivateDialoguePanel();
+    }
+
+    private void clearDialoguePanel()
+    {
+        dlViewer.PrintDialogue("", "");
+    }
+
+    private void deactivateDialoguePanel()
+    {
+        dlViewer.DialoguePanel.SetActive(false);
+    }
 }

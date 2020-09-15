@@ -217,6 +217,50 @@ public class PlayTestSuite
         Assert.AreEqual(Color.white, assetImage.color);
     }
 
+    [UnityTest]
+    public IEnumerator testCutsceneHidesDialoguePanel()
+    {
+        Cutscene currentScene = new Cutscene();
+        currentScene.setSpeaker(desiredSpeaker);
+        currentScene.setDialogue(desiredDialogue);
+
+        currentScene.show();
+        yield return new WaitForSeconds(15f);
+
+        GameObject DialoguePanel = GameObject.FindWithTag("DialoguePanel");
+
+        currentScene.hide();
+
+        Assert.IsFalse(DialoguePanel.activeSelf);
+    }
+
+    [UnityTest]
+    public IEnumerator testDialogueViewerClearsText()
+    {
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        dlViewer = eventSystem.GetComponent<DialogueViewer>();
+
+        Cutscene currentScene = new Cutscene();
+        currentScene.setSpeaker(desiredSpeaker);
+        currentScene.setDialogue(desiredDialogue);
+
+        currentScene.show();
+        yield return new WaitForSeconds(15f);
+
+        dlViewer.PrintDialogue("", "");
+        yield return new WaitForSeconds(1f);
+
+        GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
+        string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
+
+        Assert.AreEqual("", currentSpeaker);
+
+        GameObject dialogueText = GameObject.FindWithTag("DialogueText");
+        string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
+
+        Assert.AreEqual("", currentDialogue);
+    }
+
     /*
     [UnityTest]
     public IEnumerator testAssetIsGlowingWhenNotClickedOnYet()

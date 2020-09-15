@@ -56,4 +56,9 @@ public class ClickerScene : Scene
             aViewer.place(asset);
         }
     }
+
+    public override void hide()
+    {
+
+    }
 }

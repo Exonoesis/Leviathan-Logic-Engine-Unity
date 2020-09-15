@@ -67,6 +67,10 @@ public class DialogueViewer : MonoBehaviour
                 typingCoroutine = StartCoroutine(Teletype(speaker, text));
             }
         }
+        else
+        {
+            clearTextFields(speaker, text);
+        }
     }
 
     private IEnumerator Teletype(string speaker, string text)
@@ -90,5 +94,11 @@ public class DialogueViewer : MonoBehaviour
         }
 
         isTyping = false;
+    }
+
+    private void clearTextFields(string speaker, string text)
+    {
+        SpeakerName.text = speaker;
+        DialogueText.text = text;
     }
 }
