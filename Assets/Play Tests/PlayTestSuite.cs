@@ -50,7 +50,7 @@ public class PlayTestSuite
     [TearDown]
     public void Teardown()
     {
-        
+
     }
 
     [UnityTest]
@@ -75,13 +75,13 @@ public class PlayTestSuite
         dlViewer = eventSystem.GetComponent<DialogueViewer>();
 
         dlViewer.PrintDialogue(desiredSpeaker, desiredDialogue);
-        yield return new WaitForSeconds(15f);
+        yield return new WaitUntil(() => !dlViewer.getIsTyping());
 
         GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
         string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
-        
+
         Assert.AreEqual(desiredSpeaker, currentSpeaker);
-        
+
         GameObject dialogueText = GameObject.FindWithTag("DialogueText");
         string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
 
@@ -91,21 +91,24 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testCutsceneShowsText()
     {
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        dlViewer = eventSystem.GetComponent<DialogueViewer>();
+
         Cutscene currentScene = new Cutscene();
         currentScene.setSpeaker(desiredSpeaker);
         currentScene.setDialogue(desiredDialogue);
 
         currentScene.show();
-        yield return new WaitForSeconds(15f);
+        yield return new WaitUntil(() => !dlViewer.getIsTyping());
 
         GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
         string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
-        
+
         Assert.AreEqual(desiredSpeaker, currentSpeaker);
-        
+
         GameObject dialogueText = GameObject.FindWithTag("DialogueText");
         string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
-        
+
         Assert.AreEqual(desiredDialogue, currentDialogue);
     }
 
@@ -149,7 +152,7 @@ public class PlayTestSuite
 
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
         var asset = aPanel.transform.GetChild(0);
-                
+
         Assert.AreEqual(desiredAsset.getAssetName() + "(Clone)", asset.name);
 
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().x), Math.Floor(asset.position.x));
@@ -167,9 +170,9 @@ public class PlayTestSuite
 
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
         Transform asset = aPanel.transform.GetChild(0);
-                        
+
         Assert.AreEqual(desiredAsset.getAssetName() + "(Clone)", asset.name);
-       
+
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().x), Math.Floor(asset.position.x));
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().y), Math.Floor(asset.position.y));
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().z), Math.Floor(asset.position.z));
@@ -234,7 +237,7 @@ public class PlayTestSuite
         Assert.Less(1, 2);
     }
 
-   
+
 
     [UnityTest]
     public IEnumerator testAssetTriggersCutsceneOnClicked()

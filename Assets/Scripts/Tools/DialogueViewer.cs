@@ -53,6 +53,11 @@ public class DialogueViewer : MonoBehaviour
         }
     }
 
+    public bool getIsTyping()
+    {
+        return isTyping;
+    }
+
     public void PrintDialogue(string speaker, string text)
     {
         if (text != "")
