@@ -37,7 +37,7 @@ public class AssetViewer : MonoBehaviour
 
     public void removeFromScene(Asset asset)
     {
-        GameObject assetToRemove = GameObject.Find(asset.getAssetName() + "(Clone)");
+        GameObject assetToRemove = GameObject.Find(asset.getPrefab().name + "(Clone)");
 
         Destroy(assetToRemove);
     }

@@ -37,12 +37,10 @@ public class PlayTestSuite
                 "Now I need to make this longer to test other issues and make sure that " +
                 "the line snapping is fixed by this new method. Floccinaucinihilipilification.";
 
-        desiredAsset = new Asset();
-        assetList = new List<Asset>();
-
-        desiredAsset.setAssetName("CA [Eevee]");
         desiredAssetPosition = new Vector3(0, 0, 0);
-        desiredAsset.setPosition(desiredAssetPosition);
+
+        desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, "NextScen");
+        assetList = new List<Asset>();
 
         assetList.Add(desiredAsset);
     }
@@ -153,7 +151,7 @@ public class PlayTestSuite
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
         var asset = aPanel.transform.GetChild(0);
 
-        Assert.AreEqual(desiredAsset.getAssetName() + "(Clone)", asset.name);
+        Assert.AreEqual(desiredAsset.getPrefab().name + "(Clone)", asset.name);
 
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().x), Math.Floor(asset.position.x));
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().y), Math.Floor(asset.position.y));
@@ -171,7 +169,7 @@ public class PlayTestSuite
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
         Transform asset = aPanel.transform.GetChild(0);
 
-        Assert.AreEqual(desiredAsset.getAssetName() + "(Clone)", asset.name);
+        Assert.AreEqual(desiredAsset.getPrefab().name + "(Clone)", asset.name);
 
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().x), Math.Floor(asset.position.x));
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().y), Math.Floor(asset.position.y));
@@ -223,12 +221,15 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testCutsceneHidesDialoguePanel()
     {
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        dlViewer = eventSystem.GetComponent<DialogueViewer>();
+
         Cutscene currentScene = new Cutscene();
         currentScene.setSpeaker(desiredSpeaker);
         currentScene.setDialogue(desiredDialogue);
 
         currentScene.show();
-        yield return new WaitForSeconds(15f);
+        yield return new WaitUntil(() => !dlViewer.getIsTyping());
 
         GameObject DialoguePanel = GameObject.FindWithTag("DialoguePanel");
 
@@ -244,7 +245,7 @@ public class PlayTestSuite
         dlViewer = eventSystem.GetComponent<DialogueViewer>();
 
         dlViewer.PrintDialogue(desiredSpeaker, desiredDialogue);
-        yield return new WaitForSeconds(15f);
+        yield return new WaitUntil(() => !dlViewer.getIsTyping());
 
         GameObject DialoguePanel = GameObject.FindWithTag("DialoguePanel");
 
@@ -264,7 +265,7 @@ public class PlayTestSuite
         currentScene.setDialogue(desiredDialogue);
 
         currentScene.show();
-        yield return new WaitForSeconds(15f);
+        yield return new WaitUntil(() => !dlViewer.getIsTyping());
 
         dlViewer.PrintDialogue("", "");
         yield return new WaitForSeconds(1f);
