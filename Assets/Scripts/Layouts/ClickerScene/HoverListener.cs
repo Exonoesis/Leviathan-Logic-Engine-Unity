@@ -26,7 +26,9 @@ public class HoverListener : MonoBehaviour
             if (Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
             {
                 //methodReference.Invoke();
-                print("Method Call");
+                //increment Asset click counter
+
+                print("Method Call of " + name);
             }
         }
         else

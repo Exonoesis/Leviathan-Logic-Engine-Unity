@@ -4,6 +4,7 @@ public class Asset
 {
     private string _assetName;
     private Vector3 _position;
+    private int _clickedNum;
 
     public string getAssetName()
     {
@@ -23,5 +24,15 @@ public class Asset
     public void setPosition(Vector3 position)
     {
         _position = position;
+    }
+
+    public int getClickedNum()
+    {
+        return _clickedNum;
+    }
+
+    public void incrementClickedNum()
+    {
+        _clickedNum += 1;
     }
 }
