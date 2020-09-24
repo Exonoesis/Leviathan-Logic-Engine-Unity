@@ -28,7 +28,7 @@ public class AssetViewer : MonoBehaviour
 
     public void placeInScene(Asset asset)
     {
-        GameObject prefab = Resources.Load("Prefabs/" + asset.getAssetName()) as GameObject;
+        GameObject prefab = asset.getPrefab();
 
         GameObject prefabObject = Instantiate(prefab, aPanelRT);
 
