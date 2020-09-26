@@ -5,6 +5,7 @@ public class ClickerScene : Scene
 {
     private BackgroundViewer bgViewer;
     private AssetViewer aViewer;
+    private GameObject aPanel;
 
     private List<Asset> _assets;
     private Texture _background;
@@ -33,6 +34,7 @@ public class ClickerScene : Scene
     {
         bgViewer = BackgroundViewer.Instance;
         aViewer = AssetViewer.Instance;
+        aPanel = GameObject.FindWithTag("AssetsPanel");
 
         _assets = assets;
         _background = background;
@@ -64,9 +66,19 @@ public class ClickerScene : Scene
 
     private void removeAssets()
     {
-        foreach (Asset asset in _assets)
+        List<GameObject> childrenToRemove = new List<GameObject>();
+        int numChildren;
+
+        numChildren = aPanel.transform.childCount;
+
+        for (int i = 0; i < numChildren; i++)
         {
-            aViewer.removeFromScene(asset);
+            childrenToRemove.Add(aPanel.transform.GetChild(i).gameObject);
+        }
+
+        foreach (GameObject child in childrenToRemove)
+        {
+            aViewer.removeFromScene(child);
         }
     }
 }

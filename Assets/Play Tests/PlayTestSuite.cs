@@ -39,7 +39,7 @@ public class PlayTestSuite
 
         desiredAssetPosition = new Vector3(0, 0, 0);
 
-        desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, "NextScen");
+        desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, "NextScene");
         assetList = new List<Asset>();
 
         assetList.Add(desiredAsset);
@@ -295,7 +295,7 @@ public class PlayTestSuite
 
         Assert.AreEqual(1, numChildren);
 
-        aViewer.removeFromScene(desiredAsset);
+        aViewer.removeFromScene(aPanel.transform.GetChild(0).gameObject);
         yield return new WaitForSeconds(1f);
 
         numChildren = aPanel.transform.childCount;

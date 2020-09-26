@@ -19,11 +19,14 @@ public class AssetViewer : MonoBehaviour
     }
 
     private RectTransform aPanelRT;
+    private Dictionary<GameObject, Asset> prefabRelations;
 
     void Awake()
     {
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
         aPanelRT = aPanel.GetComponent<RectTransform>();
+
+        prefabRelations = new Dictionary<GameObject, Asset>();
     }
 
     public void placeInScene(Asset asset)
@@ -33,12 +36,23 @@ public class AssetViewer : MonoBehaviour
         GameObject prefabObject = Instantiate(prefab, aPanelRT);
 
         prefabObject.transform.position = asset.getPosition();
+
+        prefabRelations.Add(prefabObject, asset);
     }
 
-    public void removeFromScene(Asset asset)
+    public void removeFromScene(GameObject prefab)
     {
-        GameObject assetToRemove = GameObject.Find(asset.getPrefab().name + "(Clone)");
+        prefabRelations.Remove(prefab);
 
-        Destroy(assetToRemove);
+        Destroy(prefab);
+    }
+
+    public void processClick(GameObject prefab)
+    {
+        /* look up prefabInstance to get Asset 
+         * increment click count of Asset 
+         * get desiredScene from Asset
+         * send desiredScene to Conditional Checker
+         */                       
     }
 }
