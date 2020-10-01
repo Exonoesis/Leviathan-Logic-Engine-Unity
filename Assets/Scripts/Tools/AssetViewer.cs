@@ -41,9 +41,9 @@ public class AssetViewer : MonoBehaviour
 
     public void clearAssets()
     {
-        foreach (KeyValuePair<GameObject,Asset> entry in prefabRelations)
+        foreach (GameObject prefab in prefabRelations.Keys)
         {
-            Destroy(entry.Key);
+            Destroy(prefab);
         }
 
         prefabRelations.Clear();
