@@ -4,15 +4,15 @@ using UnityEngine.Events;
 
 public class HoverListener : MonoBehaviour
 {
-    public UnityEvent methodReference;
-
     private PolygonCollider2D objCollider;
     private Image spriteImage;
+    private AssetViewer aViewer;
 
     void Start()
     {
         objCollider = gameObject.GetComponent<PolygonCollider2D> ();
-        spriteImage = gameObject.GetComponent<Image> ();   
+        spriteImage = gameObject.GetComponent<Image> ();
+        aViewer = AssetViewer.Instance;
     }
 
     void Update()
@@ -25,10 +25,8 @@ public class HoverListener : MonoBehaviour
 
             if (Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
             {
-                //methodReference.Invoke();
-                //increment Asset click counter
-
-                print("Method Call of " + name);
+                print(name);
+                //aViewer.handleClickedPrefab();
             }
         }
         else

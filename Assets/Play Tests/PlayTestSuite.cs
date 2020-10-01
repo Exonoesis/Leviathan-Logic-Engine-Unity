@@ -155,7 +155,6 @@ public class PlayTestSuite
 
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().x), Math.Floor(asset.position.x));
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().y), Math.Floor(asset.position.y));
-        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().z), Math.Floor(asset.position.z));
     }
 
     [UnityTest]
@@ -173,7 +172,6 @@ public class PlayTestSuite
 
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().x), Math.Floor(asset.position.x));
         Assert.AreEqual(Math.Floor(desiredAsset.getPosition().y), Math.Floor(asset.position.y));
-        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().z), Math.Floor(asset.position.z));
     }
 
     [UnityTest]
@@ -295,7 +293,7 @@ public class PlayTestSuite
 
         Assert.AreEqual(1, numChildren);
 
-        aViewer.removeFromScene(aPanel.transform.GetChild(0).gameObject);
+        aViewer.clearAssets();
         yield return new WaitForSeconds(1f);
 
         numChildren = aPanel.transform.childCount;

@@ -40,15 +40,20 @@ public class AssetViewer : MonoBehaviour
         prefabRelations.Add(prefabObject, asset);
     }
 
-    public void removeFromScene(GameObject prefab)
+    public void clearAssets()
     {
-        prefabRelations.Remove(prefab);
+        foreach (KeyValuePair<GameObject,Asset> entry in prefabRelations)
+        {
+            Destroy(entry.Key);
+        }
 
-        Destroy(prefab);
+        prefabRelations.Clear();
     }
 
-    public void processClick(GameObject prefab)
+    public void handleClickedPrefab(GameObject prefab)
     {
+        print(prefab + "has been clicked");
+
         /* look up prefabInstance to get Asset 
          * increment click count of Asset 
          * get desiredScene from Asset
