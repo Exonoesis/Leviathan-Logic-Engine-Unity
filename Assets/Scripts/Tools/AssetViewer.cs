@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AssetViewer : MonoBehaviour
@@ -52,12 +51,12 @@ public class AssetViewer : MonoBehaviour
 
     public void handleClickedPrefab(GameObject prefab)
     {
-        print(prefab + "has been clicked");
+        Asset asset = prefabRelations[prefab];
 
-        /* look up prefabInstance to get Asset 
-         * increment click count of Asset 
-         * get desiredScene from Asset
-         * send desiredScene to Conditional Checker
-         */                       
+        asset.incrementClickedNum();
+
+        print("Clicked number: " + asset.getClickedNum());
+
+        //Send Asset to Conditional Checker                   
     }
 }

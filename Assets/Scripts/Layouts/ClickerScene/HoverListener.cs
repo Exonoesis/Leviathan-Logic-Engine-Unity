@@ -25,8 +25,7 @@ public class HoverListener : MonoBehaviour
 
             if (Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
             {
-                print(name);
-                //aViewer.handleClickedPrefab();
+                aViewer.handleClickedPrefab(transform.parent.gameObject);
             }
         }
         else
