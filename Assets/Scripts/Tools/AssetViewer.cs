@@ -57,6 +57,6 @@ public class AssetViewer : MonoBehaviour
 
         print("Clicked number: " + asset.getClickedNum());
 
-        //Send Asset to Conditional Checker                   
+        //Send Asset to Conditional Checker
     }
 }
