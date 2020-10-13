@@ -16,13 +16,16 @@ public class PlayTestSuite
     private BackgroundViewer bgViewer;
     private DialogueViewer dlViewer;
     private AssetViewer aViewer;
+    private ConditionalChecker cChecker;
 
     private Texture desiredBackground;
     private string desiredSpeaker;
     private string desiredDialogue;
 
     private Asset desiredAsset;
+    private Asset desiredAsset2;
     private Vector3 desiredAssetPosition;
+    private Vector3 desiredAssetPosition2;
     private List<Asset> assetList;
 
     [SetUp]
@@ -37,12 +40,15 @@ public class PlayTestSuite
                 "Now I need to make this longer to test other issues and make sure that " +
                 "the line snapping is fixed by this new method. Floccinaucinihilipilification.";
 
-        desiredAssetPosition = new Vector3(0, 0, 0);
+        desiredAssetPosition = new Vector3(130, 92);
+        desiredAssetPosition2 = new Vector3(275, 147);
 
         desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, "NextScene");
+        desiredAsset2 = new Asset("TestingAsset2", "CA [Eevee]", desiredAssetPosition2, "NextScene2");
         assetList = new List<Asset>();
 
         assetList.Add(desiredAsset);
+        assetList.Add(desiredAsset2);
     }
 
     [TearDown]
@@ -312,7 +318,7 @@ public class PlayTestSuite
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
         int numChildren = aPanel.transform.childCount;
 
-        Assert.AreEqual(1, numChildren);
+        Assert.AreEqual(assetList.Count, numChildren);
 
         currentScene.hide();
         yield return new WaitForSeconds(1f);
@@ -320,6 +326,28 @@ public class PlayTestSuite
         numChildren = aPanel.transform.childCount;
 
         Assert.AreEqual(0, numChildren);
+    }
+
+    [UnityTest]
+    public IEnumerator testHasBeenClickedConditional()
+    {
+        ClickerScene currentScene = new ClickerScene(desiredBackground, assetList);
+
+        currentScene.show();
+        yield return new WaitForSeconds(1f);
+
+        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        GameObject asset1 = aPanel.transform.GetChild(0).gameObject;
+        GameObject asset2 = aPanel.transform.GetChild(1).gameObject;
+
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+        aViewer = eventSystem.GetComponent<AssetViewer>();
+
+        aViewer.handleClickedPrefab(asset1);
+
+        cChecker = eventSystem.GetComponent<ConditionalChecker>();
+
+        Assert.AreSame(asset1, asset2);
     }
 
     /*

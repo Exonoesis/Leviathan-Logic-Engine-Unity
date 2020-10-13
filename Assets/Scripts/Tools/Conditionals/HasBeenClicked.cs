@@ -1,11 +1,14 @@
 ﻿public class HasBeenClicked : Conditional
 {
-    public override bool isMet(Asset asset)
+    private Asset _asset;
+
+    public HasBeenClicked(Asset asset)
     {
-        if (asset.getClickedNum() > 0)
-        {
-            return true;
-        }
-        return false;
+        _asset = asset;
+    }
+
+    public override bool isMet()
+    {
+        return _asset.getClickedNum() > 0;
     }
 }
