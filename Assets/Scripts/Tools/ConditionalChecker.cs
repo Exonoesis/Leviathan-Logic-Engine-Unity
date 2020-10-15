@@ -34,15 +34,17 @@ public class ConditionalChecker : MonoBehaviour
 
     public void changeSceneIfSatisfied(Asset clickedAsset)
     {
-        List<Conditional> conditionsList;
-        conditionsTable.TryGetValue(clickedAsset, out conditionsList);
-
-        foreach (Conditional condition in conditionsList)
+        if (conditionsTable.ContainsKey(clickedAsset))
         {
-            if (!condition.isMet())
+            List<Conditional> conditionsList = conditionsTable[clickedAsset];
+
+            foreach (Conditional condition in conditionsList)
             {
-                showErrorCutscene(clickedAsset);
-                return;
+                if (!condition.isMet())
+                {
+                    showErrorCutscene(clickedAsset);
+                    return;
+                }
             }
         }
         showNextScene(clickedAsset);
