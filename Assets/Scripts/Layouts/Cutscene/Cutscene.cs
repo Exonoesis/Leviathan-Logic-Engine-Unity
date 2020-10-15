@@ -5,55 +5,22 @@ public class Cutscene : Scene
     private BackgroundViewer bgViewer;
     private DialogueViewer dlViewer;
 
-    private string _sceneName;
     private Texture _background;
     private string _speaker;
     private string _dialogue = ""; //Should be an array for additive text?
 
-    public string getSceneName()
-    {
-        return _sceneName;
-    }
-
-    public void setSceneName(string sceneName)
-    { 
-        _sceneName = sceneName; 
-    }
-
-    public Texture getBackground()
-    {
-        return _background;
-    }
-
-    public void setBackground(Texture background)
-    {
-        _background = background;
-    }
-
-    public string getSpeaker()
-    {
-        return _speaker;
-    }
-
-    public void setSpeaker(string speaker)
-    {
-        _speaker = speaker;
-    }
-
-    public string getDialogue()
-    {
-        return _dialogue;
-    }
-
-    public void setDialogue(string dialogue)
-    {
-        _dialogue = dialogue;
-    }
-
-    public Cutscene()
+    public Cutscene(string speaker, string dialogue, Texture background = null)
     {
         bgViewer = BackgroundViewer.Instance;
         dlViewer = DialogueViewer.Instance;
+
+        _speaker = speaker;
+        _dialogue = dialogue;
+
+        if (background)
+        {
+            _background = background;
+        }
     }
 
     public override void show()

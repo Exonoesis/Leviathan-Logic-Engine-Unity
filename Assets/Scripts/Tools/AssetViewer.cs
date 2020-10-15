@@ -18,12 +18,15 @@ public class AssetViewer : MonoBehaviour
     }
 
     private RectTransform aPanelRT;
+    private ConditionalChecker cChecker;
     private Dictionary<GameObject, Asset> prefabRelations;
 
     void Awake()
     {
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        cChecker = ConditionalChecker.Instance;
         aPanelRT = aPanel.GetComponent<RectTransform>();
+        
 
         prefabRelations = new Dictionary<GameObject, Asset>();
     }
@@ -57,6 +60,6 @@ public class AssetViewer : MonoBehaviour
 
         print("Clicked number: " + asset.getClickedNum());
 
-        //Send Asset to Conditional Checker
+        //cChecker.changeSceneIfSatisfied(asset);
     }
 }

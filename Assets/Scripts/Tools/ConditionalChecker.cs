@@ -26,11 +26,6 @@ public class ConditionalChecker : MonoBehaviour
         return _currentScene;
     }
 
-    public void setCurrentScene(Scene scene)
-    {
-        _currentScene = scene;
-    }
-
     void Awake()
     {
         conditionsTable = new Dictionary<Asset, List<Conditional>>();
@@ -39,26 +34,18 @@ public class ConditionalChecker : MonoBehaviour
 
     public void changeSceneIfSatisfied(Asset clickedAsset)
     {
-        if (conditionsTable.ContainsKey(clickedAsset))
+        List<Conditional> conditionsList;
+        conditionsTable.TryGetValue(clickedAsset, out conditionsList);
+
+        foreach (Conditional condition in conditionsList)
         {
-            List<Conditional> conditionsList = new List<Conditional>();
-
-            conditionsList = conditionsTable[clickedAsset];
-
-            foreach (Conditional condition in conditionsList)
+            if (!condition.isMet())
             {
-                if (condition.isMet())
-                {
-                    continue;
-                }
                 showErrorCutscene(clickedAsset);
-                break;
+                return;
             }
         }
-        else
-        {
-            showNextScene(clickedAsset);
-        }
+        showNextScene(clickedAsset);
     }
 
     private void showErrorCutscene(Asset clickedAsset)
@@ -71,10 +58,9 @@ public class ConditionalChecker : MonoBehaviour
 
     private void showNextScene(Asset clickedAsset)
     {
-        //Dictionary? | Key = string sceneName, Value = Scene
-        //Scene sceneToShow = clickedAsset.getDesiredScene();
+        Scene sceneToShow = clickedAsset.getDesiredScene();
 
         _currentScene.hide();
-        //sceneToShow.show();
+        sceneToShow.show();
     }
 }

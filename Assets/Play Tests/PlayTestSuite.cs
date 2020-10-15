@@ -19,36 +19,61 @@ public class PlayTestSuite
     private ConditionalChecker cChecker;
 
     private Texture desiredBackground;
+    private Texture desiredBackground2;
+
     private string desiredSpeaker;
+    private string desiredSpeaker2;
+
     private string desiredDialogue;
+    private string desiredDialogue2;
 
     private Asset desiredAsset;
     private Asset desiredAsset2;
+    private Asset desiredAsset3;
+
     private Vector3 desiredAssetPosition;
     private Vector3 desiredAssetPosition2;
+    private Vector3 desiredAssetPosition3;
+
     private List<Asset> assetList;
+    private List<Asset> assetList2;
+
+    private Cutscene desiredScene1;
+    private ClickerScene desiredScene2;
 
     [SetUp]
     public void Setup()
     {
         SceneManager.LoadScene(0);
 
-        desiredBackground = Resources.Load<Texture>("Images/BG/AXt4WfZ");
+        desiredBackground = Resources.Load<Texture>("Images/BG/Stairs");
+        desiredBackground2 = Resources.Load<Texture>("Images/BG/Trees");
         desiredSpeaker = "Jesse";
         desiredDialogue = "This is a test of the <color=purple>color " +
                 "changing system</color>. It's <b>built-in</b>, and that's real <i>fancy</i>. " +
                 "Now I need to make this longer to test other issues and make sure that " +
                 "the line snapping is fixed by this new method. Floccinaucinihilipilification.";
+        desiredSpeaker2 = "Eevee";
+        desiredDialogue2 = "How did I get here?";
 
         desiredAssetPosition = new Vector3(130, 92);
         desiredAssetPosition2 = new Vector3(275, 147);
 
-        desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, "NextScene");
-        desiredAsset2 = new Asset("TestingAsset2", "CA [Eevee]", desiredAssetPosition2, "NextScene2");
+        desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, desiredScene1);
+        desiredAsset2 = new Asset("TestingAsset2", "CA [Eevee]", desiredAssetPosition2, desiredScene2);
         assetList = new List<Asset>();
 
         assetList.Add(desiredAsset);
         assetList.Add(desiredAsset2);
+
+        desiredAssetPosition3 = new Vector3(200, 150);
+        desiredAsset3 = new Asset("TestingAsset3", "CA [Gem]", desiredAssetPosition3, desiredScene2);
+        assetList2 = new List<Asset>();
+
+        assetList2.Add(desiredAsset3);
+
+        desiredScene1 = new Cutscene(desiredSpeaker2, desiredDialogue2, desiredBackground2);
+        desiredScene2 = new ClickerScene(assetList2, desiredBackground2);
     }
 
     [TearDown]
@@ -98,9 +123,7 @@ public class PlayTestSuite
         GameObject eventSystem = GameObject.FindWithTag("EventSystem");
         dlViewer = eventSystem.GetComponent<DialogueViewer>();
 
-        Cutscene currentScene = new Cutscene();
-        currentScene.setSpeaker(desiredSpeaker);
-        currentScene.setDialogue(desiredDialogue);
+        Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
 
         currentScene.show();
         yield return new WaitUntil(() => !dlViewer.getIsTyping());
@@ -119,8 +142,7 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testCutsceneShowsBackground()
     {
-        Cutscene currentScene = new Cutscene();
-        currentScene.setBackground(desiredBackground);
+        Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue, desiredBackground);
 
         currentScene.show();
         yield return new WaitForSeconds(1f);
@@ -134,7 +156,7 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testClickerSceneShowsBackground()
     {
-        ClickerScene currentScene = new ClickerScene(desiredBackground, assetList);
+        ClickerScene currentScene = new ClickerScene(assetList, desiredBackground);
 
         currentScene.show();
         yield return new WaitForSeconds(1f);
@@ -166,7 +188,7 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testClickerSceneShowsAssets()
     {
-        ClickerScene currentScene = new ClickerScene(desiredBackground, assetList);
+        ClickerScene currentScene = new ClickerScene(assetList);
 
         currentScene.show();
         yield return new WaitForSeconds(1f);
@@ -228,9 +250,7 @@ public class PlayTestSuite
         GameObject eventSystem = GameObject.FindWithTag("EventSystem");
         dlViewer = eventSystem.GetComponent<DialogueViewer>();
 
-        Cutscene currentScene = new Cutscene();
-        currentScene.setSpeaker(desiredSpeaker);
-        currentScene.setDialogue(desiredDialogue);
+        Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
 
         currentScene.show();
         yield return new WaitUntil(() => !dlViewer.getIsTyping());
@@ -264,9 +284,7 @@ public class PlayTestSuite
         GameObject eventSystem = GameObject.FindWithTag("EventSystem");
         dlViewer = eventSystem.GetComponent<DialogueViewer>();
 
-        Cutscene currentScene = new Cutscene();
-        currentScene.setSpeaker(desiredSpeaker);
-        currentScene.setDialogue(desiredDialogue);
+        Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
 
         currentScene.show();
         yield return new WaitUntil(() => !dlViewer.getIsTyping());
@@ -310,7 +328,7 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testClickerSceneRemovesAssetFromScene()
     {
-        ClickerScene currentScene = new ClickerScene(desiredBackground, assetList);
+        ClickerScene currentScene = new ClickerScene(assetList);
 
         currentScene.show();
         yield return new WaitForSeconds(1f);
@@ -331,7 +349,7 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testHasBeenClickedConditional()
     {
-        ClickerScene currentScene = new ClickerScene(desiredBackground, assetList);
+        ClickerScene currentScene = new ClickerScene(assetList);
 
         currentScene.show();
         yield return new WaitForSeconds(1f);
@@ -347,7 +365,7 @@ public class PlayTestSuite
 
         cChecker = eventSystem.GetComponent<ConditionalChecker>();
 
-        Assert.AreSame(asset1, asset2);
+        Assert.AreNotSame(asset1, asset2);
     }
 
     /*
