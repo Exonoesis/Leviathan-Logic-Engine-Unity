@@ -58,8 +58,13 @@ public class AssetViewer : MonoBehaviour
 
         asset.incrementClickedNum();
 
-        print("Clicked number: " + asset.getClickedNum());
-
         //cChecker.changeSceneIfSatisfied(asset);
+    }
+
+    public Asset getAsset(GameObject prefab)
+    {
+        Asset asset = prefabRelations[prefab];
+
+        return asset;
     }
 }

@@ -74,6 +74,7 @@ public class PlayTestSuite
 
         desiredScene1 = new Cutscene(desiredSpeaker2, desiredDialogue2, desiredBackground2);
         desiredScene2 = new ClickerScene(assetList2, desiredBackground2);
+
     }
 
     [TearDown]
@@ -355,17 +356,61 @@ public class PlayTestSuite
         yield return new WaitForSeconds(1f);
 
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
-        GameObject asset1 = aPanel.transform.GetChild(0).gameObject;
-        GameObject asset2 = aPanel.transform.GetChild(1).gameObject;
+        GameObject asset1Object = aPanel.transform.GetChild(0).gameObject;
+        GameObject asset2Object = aPanel.transform.GetChild(1).gameObject;
 
         GameObject eventSystem = GameObject.FindWithTag("EventSystem");
         aViewer = eventSystem.GetComponent<AssetViewer>();
 
-        aViewer.handleClickedPrefab(asset1);
+        aViewer.handleClickedPrefab(asset1Object);
 
         cChecker = eventSystem.GetComponent<ConditionalChecker>();
 
-        Assert.AreNotSame(asset1, asset2);
+        Assert.AreNotSame(asset1Object, asset2Object);
+
+        Asset asset1Asset = aViewer.getAsset(asset1Object);
+        Asset asset2Asset = aViewer.getAsset(asset2Object);
+
+        Assert.AreEqual(1, asset1Asset.getClickedNum());
+        Assert.AreEqual(0, asset2Asset.getClickedNum());
+
+        HasBeenClicked conditional1 = new HasBeenClicked(asset1Asset);
+        HasBeenClicked conditional2 = new HasBeenClicked(asset2Asset);
+
+        Assert.IsTrue(conditional1.isMet());
+        Assert.IsFalse(conditional2.isMet());
+    }
+
+    [UnityTest]
+    public IEnumerator testConditionalChecker0Conditionals()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
+    }
+
+    [UnityTest]
+    public IEnumerator testConditionalChecker1ConditionalPass()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
+    }
+
+    [UnityTest]
+    public IEnumerator testConditionalChecker1ConditionalFail()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
+    }
+
+    [UnityTest]
+    public IEnumerator testConditionalChecker2Conditionals()
+    {
+        yield return null;
+
+        Assert.Less(1, 2);
     }
 
     /*

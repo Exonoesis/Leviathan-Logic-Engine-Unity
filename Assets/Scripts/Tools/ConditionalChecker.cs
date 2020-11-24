@@ -18,8 +18,8 @@ public class ConditionalChecker : MonoBehaviour
     }
 
     private Scene _currentScene;
-    private Dictionary<Asset, List<Conditional>> conditionsTable;
-    private Dictionary<Asset, Cutscene> errorSceneTable;
+    private Dictionary<Asset, List<Conditional>> _conditionsTable;
+    private Dictionary<(Asset, Conditional), Cutscene> _errorSceneTable;
 
     public Scene getCurrentScene()
     {
@@ -28,21 +28,21 @@ public class ConditionalChecker : MonoBehaviour
 
     void Awake()
     {
-        conditionsTable = new Dictionary<Asset, List<Conditional>>();
-        errorSceneTable = new Dictionary<Asset, Cutscene>();
+        _conditionsTable = new Dictionary<Asset, List<Conditional>>();
+        _errorSceneTable = new Dictionary<(Asset, Conditional), Cutscene>();
     }
 
     public void changeSceneIfSatisfied(Asset clickedAsset)
     {
-        if (conditionsTable.ContainsKey(clickedAsset))
+        if (_conditionsTable.ContainsKey(clickedAsset))
         {
-            List<Conditional> conditionsList = conditionsTable[clickedAsset];
+            List<Conditional> conditionsList = _conditionsTable[clickedAsset];
 
             foreach (Conditional condition in conditionsList)
             {
                 if (!condition.isMet())
                 {
-                    showErrorCutscene(clickedAsset);
+                    showErrorScene(clickedAsset, condition);
                     return;
                 }
             }
@@ -50,9 +50,9 @@ public class ConditionalChecker : MonoBehaviour
         showNextScene(clickedAsset);
     }
 
-    private void showErrorCutscene(Asset clickedAsset)
+    private void showErrorScene(Asset clickedAsset, Conditional failedCondition)
     {
-        Cutscene errorToShow = errorSceneTable[clickedAsset];
+        Cutscene errorToShow = _errorSceneTable[(clickedAsset, failedCondition)];
 
         _currentScene.hide();
         errorToShow.show();
@@ -64,5 +64,21 @@ public class ConditionalChecker : MonoBehaviour
 
         _currentScene.hide();
         sceneToShow.show();
+        setCurrentScene(sceneToShow);
+    }
+
+    private void setCurrentScene(Scene newScene)
+    {
+        _currentScene = newScene;
+    }
+
+    private void setConditionsTable(Dictionary<Asset, List<Conditional>> conditionsTable)
+    {
+        _conditionsTable = conditionsTable;
+    }
+
+    private void setErrorSceneTable(Dictionary<(Asset, Conditional), Cutscene> errorSceneTable)
+    {
+        _errorSceneTable = errorSceneTable;
     }
 }
