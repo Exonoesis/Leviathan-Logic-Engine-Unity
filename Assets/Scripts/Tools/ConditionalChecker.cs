@@ -63,21 +63,21 @@ public class ConditionalChecker : MonoBehaviour
         Scene sceneToShow = clickedAsset.getDesiredScene();
 
         _currentScene.hide();
-        sceneToShow.show();
         setCurrentScene(sceneToShow);
+        sceneToShow.show();
     }
 
-    private void setCurrentScene(Scene newScene)
+    public void setCurrentScene(Scene newScene)
     {
         _currentScene = newScene;
     }
 
-    private void setConditionsTable(Dictionary<Asset, List<Conditional>> conditionsTable)
+    public void setConditionsTable(Dictionary<Asset, List<Conditional>> conditionsTable)
     {
         _conditionsTable = conditionsTable;
     }
 
-    private void setErrorSceneTable(Dictionary<(Asset, Conditional), Cutscene> errorSceneTable)
+    public void setErrorSceneTable(Dictionary<(Asset, Conditional), Cutscene> errorSceneTable)
     {
         _errorSceneTable = errorSceneTable;
     }

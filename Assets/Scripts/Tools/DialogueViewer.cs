@@ -33,7 +33,7 @@ public class DialogueViewer : MonoBehaviour
 
     void Awake()
     {
-        //DontDestroyOnLoad(this.gameObject);
+
     }
 
     void Update()

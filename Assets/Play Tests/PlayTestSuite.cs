@@ -58,23 +58,22 @@ public class PlayTestSuite
 
         desiredAssetPosition = new Vector3(130, 92);
         desiredAssetPosition2 = new Vector3(275, 147);
-
-        desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, desiredScene1);
-        desiredAsset2 = new Asset("TestingAsset2", "CA [Eevee]", desiredAssetPosition2, desiredScene2);
-        assetList = new List<Asset>();
-
-        assetList.Add(desiredAsset);
-        assetList.Add(desiredAsset2);
-
         desiredAssetPosition3 = new Vector3(200, 150);
-        desiredAsset3 = new Asset("TestingAsset3", "CA [Gem]", desiredAssetPosition3, desiredScene2);
-        assetList2 = new List<Asset>();
-
-        assetList2.Add(desiredAsset3);
 
         desiredScene1 = new Cutscene(desiredSpeaker2, desiredDialogue2, desiredBackground2);
-        desiredScene2 = new ClickerScene(assetList2, desiredBackground2);
 
+        desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, desiredScene1);
+
+        assetList = new List<Asset>();
+        assetList2 = new List<Asset>();
+
+        assetList.Add(desiredAsset);
+
+        desiredAsset2 = new Asset("TestingAsset2", "CA [Eevee]", desiredAssetPosition2, desiredScene2);
+        desiredAsset3 = new Asset("TestingAsset3", "CA [Gem]", desiredAssetPosition3, desiredScene2);
+
+        assetList.Add(desiredAsset2);
+        assetList2.Add(desiredAsset3);
     }
 
     [TearDown]
@@ -353,22 +352,20 @@ public class PlayTestSuite
         ClickerScene currentScene = new ClickerScene(assetList);
 
         currentScene.show();
+
         yield return new WaitForSeconds(1f);
 
         GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+
+        aViewer = eventSystem.GetComponent<AssetViewer>();
+
         GameObject asset1Object = aPanel.transform.GetChild(0).gameObject;
         GameObject asset2Object = aPanel.transform.GetChild(1).gameObject;
 
-        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
-        aViewer = eventSystem.GetComponent<AssetViewer>();
-
-        aViewer.handleClickedPrefab(asset1Object);
-
-        cChecker = eventSystem.GetComponent<ConditionalChecker>();
-
-        Assert.AreNotSame(asset1Object, asset2Object);
-
         Asset asset1Asset = aViewer.getAsset(asset1Object);
+        asset1Asset.incrementClickedNum();
+
         Asset asset2Asset = aViewer.getAsset(asset2Object);
 
         Assert.AreEqual(1, asset1Asset.getClickedNum());
@@ -384,9 +381,33 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testConditionalChecker0Conditionals()
     {
-        yield return null;
+        desiredScene1 = new Cutscene(desiredSpeaker2, desiredDialogue2, desiredBackground2);
 
-        Assert.Less(1, 2);
+        desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, desiredScene1);
+
+        assetList = new List<Asset>();
+        assetList.Add(desiredAsset);
+
+        ClickerScene currentScene = new ClickerScene(assetList, desiredBackground);
+
+        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+
+        cChecker = eventSystem.GetComponent<ConditionalChecker>();
+        aViewer = eventSystem.GetComponent<AssetViewer>();
+
+        currentScene.show();
+        cChecker.setCurrentScene(currentScene);
+
+        yield return new WaitForSeconds(1f);
+
+        GameObject asset1Object = aPanel.transform.GetChild(0).gameObject;
+
+        aViewer.handleClickedPrefab(asset1Object);
+
+        //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.N));
+
+        Assert.AreEqual(cChecker.getCurrentScene(), desiredScene1);
     }
 
     [UnityTest]
@@ -408,6 +429,8 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testConditionalChecker2Conditionals()
     {
+        //desiredScene2 = new ClickerScene(assetList2, desiredBackground2);
+
         yield return null;
 
         Assert.Less(1, 2);
