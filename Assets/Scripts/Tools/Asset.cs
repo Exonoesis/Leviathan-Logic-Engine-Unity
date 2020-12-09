@@ -8,7 +8,7 @@ public class Asset
 
     private int _clickedNum;
 
-    public Asset(string assetName, string prefabName, Vector3 position, Scene desiredScene)
+    public Asset(string prefabName, Vector3 position, Scene desiredScene)
     {
         _position = position;
         _desiredScene = desiredScene;

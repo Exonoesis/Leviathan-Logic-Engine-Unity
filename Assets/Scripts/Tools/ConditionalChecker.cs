@@ -19,7 +19,7 @@ public class ConditionalChecker : MonoBehaviour
 
     private Scene _currentScene;
     private Dictionary<Asset, List<Conditional>> _conditionsTable;
-    private Dictionary<(Asset, Conditional), Cutscene> _errorSceneTable;
+    private Dictionary<(Asset, Conditional), Scene> _errorSceneTable;
 
     public Scene getCurrentScene()
     {
@@ -29,7 +29,7 @@ public class ConditionalChecker : MonoBehaviour
     void Awake()
     {
         _conditionsTable = new Dictionary<Asset, List<Conditional>>();
-        _errorSceneTable = new Dictionary<(Asset, Conditional), Cutscene>();
+        _errorSceneTable = new Dictionary<(Asset, Conditional), Scene>();
     }
 
     public void changeSceneIfSatisfied(Asset clickedAsset)
@@ -52,9 +52,10 @@ public class ConditionalChecker : MonoBehaviour
 
     private void showErrorScene(Asset clickedAsset, Conditional failedCondition)
     {
-        Cutscene errorToShow = _errorSceneTable[(clickedAsset, failedCondition)];
+        Scene errorToShow = _errorSceneTable[(clickedAsset, failedCondition)];
 
         _currentScene.hide();
+        setCurrentScene(errorToShow);
         errorToShow.show();
     }
 
@@ -77,7 +78,7 @@ public class ConditionalChecker : MonoBehaviour
         _conditionsTable = conditionsTable;
     }
 
-    public void setErrorSceneTable(Dictionary<(Asset, Conditional), Cutscene> errorSceneTable)
+    public void setErrorSceneTable(Dictionary<(Asset, Conditional), Scene> errorSceneTable)
     {
         _errorSceneTable = errorSceneTable;
     }

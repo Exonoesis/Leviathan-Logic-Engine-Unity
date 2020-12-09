@@ -26,6 +26,7 @@ public class PlayTestSuite
 
     private string desiredDialogue;
     private string desiredDialogue2;
+    private string desiredDialogue3;
 
     private Asset desiredAsset;
     private Asset desiredAsset2;
@@ -40,6 +41,7 @@ public class PlayTestSuite
 
     private Cutscene desiredScene1;
     private ClickerScene desiredScene2;
+    private Cutscene errorScene1;
 
     [SetUp]
     public void Setup()
@@ -55,6 +57,7 @@ public class PlayTestSuite
                 "the line snapping is fixed by this new method. Floccinaucinihilipilification.";
         desiredSpeaker2 = "Eevee";
         desiredDialogue2 = "How did I get here?";
+        desiredDialogue3 = "We're missing an important item.";
 
         desiredAssetPosition = new Vector3(130, 92);
         desiredAssetPosition2 = new Vector3(275, 147);
@@ -62,15 +65,15 @@ public class PlayTestSuite
 
         desiredScene1 = new Cutscene(desiredSpeaker2, desiredDialogue2, desiredBackground2);
 
-        desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, desiredScene1);
+        desiredAsset = new Asset("CA [Eevee]", desiredAssetPosition, desiredScene1);
 
         assetList = new List<Asset>();
         assetList2 = new List<Asset>();
 
         assetList.Add(desiredAsset);
 
-        desiredAsset2 = new Asset("TestingAsset2", "CA [Eevee]", desiredAssetPosition2, desiredScene2);
-        desiredAsset3 = new Asset("TestingAsset3", "CA [Gem]", desiredAssetPosition3, desiredScene2);
+        desiredAsset2 = new Asset("CA [Eevee]", desiredAssetPosition2, desiredScene2);
+        desiredAsset3 = new Asset("CA [Gem]", desiredAssetPosition3, desiredScene2);
 
         assetList.Add(desiredAsset2);
         assetList2.Add(desiredAsset3);
@@ -383,7 +386,7 @@ public class PlayTestSuite
     {
         desiredScene1 = new Cutscene(desiredSpeaker2, desiredDialogue2, desiredBackground2);
 
-        desiredAsset = new Asset("TestingAsset", "CA [Eevee]", desiredAssetPosition, desiredScene1);
+        desiredAsset = new Asset("CA [Eevee]", desiredAssetPosition, desiredScene1);
 
         assetList = new List<Asset>();
         assetList.Add(desiredAsset);
@@ -405,7 +408,7 @@ public class PlayTestSuite
 
         aViewer.handleClickedPrefab(asset1Object);
 
-        //yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.N));
+        yield return new WaitForSeconds(3f);
 
         Assert.AreEqual(cChecker.getCurrentScene(), desiredScene1);
     }
@@ -413,27 +416,141 @@ public class PlayTestSuite
     [UnityTest]
     public IEnumerator testConditionalChecker1ConditionalPass()
     {
-        yield return null;
+        desiredScene1 = new Cutscene(desiredSpeaker2, desiredDialogue2, desiredBackground2);
 
-        Assert.Less(1, 2);
+        desiredAsset = new Asset("CA [Eevee]", desiredAssetPosition, desiredScene1);
+
+        assetList = new List<Asset>();
+        assetList.Add(desiredAsset);
+
+        ClickerScene currentScene = new ClickerScene(assetList, desiredBackground);
+
+        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+
+        cChecker = eventSystem.GetComponent<ConditionalChecker>();
+        aViewer = eventSystem.GetComponent<AssetViewer>();
+
+        currentScene.show();
+        cChecker.setCurrentScene(currentScene);
+
+        HasBeenClicked condition1 = new HasBeenClicked(desiredAsset);
+        List<Conditional> conditionList = new List<Conditional>();
+        conditionList.Add(condition1);
+        Dictionary<Asset, List<Conditional>> conditionDict = new Dictionary<Asset, List<Conditional>>();
+        conditionDict.Add(desiredAsset, conditionList);
+
+        cChecker.setConditionsTable(conditionDict);
+
+        yield return new WaitForSeconds(1f);
+
+        GameObject asset1Object = aPanel.transform.GetChild(0).gameObject;
+
+        aViewer.handleClickedPrefab(asset1Object);
+
+        yield return new WaitForSeconds(3f);
+
+        Assert.AreEqual(cChecker.getCurrentScene(), desiredScene1);
     }
 
     [UnityTest]
     public IEnumerator testConditionalChecker1ConditionalFail()
     {
-        yield return null;
+        desiredScene1 = new Cutscene(desiredSpeaker2, desiredDialogue2, desiredBackground2);
+        errorScene1 = new Cutscene(desiredSpeaker2, desiredDialogue3, desiredBackground2);
 
-        Assert.Less(1, 2);
+        desiredAsset = new Asset("CA [Eevee]", desiredAssetPosition, desiredScene1);
+        desiredAsset2 = new Asset("CA [Eevee]", desiredAssetPosition2, desiredScene1);
+
+        assetList = new List<Asset>();
+        assetList.Add(desiredAsset);
+        assetList.Add(desiredAsset2);
+
+        ClickerScene currentScene = new ClickerScene(assetList, desiredBackground);
+
+        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+
+        cChecker = eventSystem.GetComponent<ConditionalChecker>();
+        aViewer = eventSystem.GetComponent<AssetViewer>();
+
+        currentScene.show();
+        cChecker.setCurrentScene(currentScene);
+
+        HasBeenClicked condition1 = new HasBeenClicked(desiredAsset2);
+        List<Conditional> conditionList = new List<Conditional>();
+        conditionList.Add(condition1);
+        Dictionary<Asset, List<Conditional>> conditionDict = new Dictionary<Asset, List<Conditional>>();
+        conditionDict.Add(desiredAsset, conditionList);
+
+        cChecker.setConditionsTable(conditionDict);
+
+        Dictionary<(Asset, Conditional), Scene> errorDict = new Dictionary<(Asset, Conditional), Scene>();
+        errorDict.Add((desiredAsset, condition1),errorScene1);
+
+        cChecker.setErrorSceneTable(errorDict);
+
+        yield return new WaitForSeconds(1f);
+
+        GameObject asset1Object = aPanel.transform.GetChild(0).gameObject;
+
+        aViewer.handleClickedPrefab(asset1Object);
+
+        yield return new WaitForSeconds(3f);
+
+        Assert.AreEqual(cChecker.getCurrentScene(), errorScene1);
     }
 
     [UnityTest]
     public IEnumerator testConditionalChecker2Conditionals()
     {
-        //desiredScene2 = new ClickerScene(assetList2, desiredBackground2);
+        desiredScene1 = new Cutscene(desiredSpeaker2, desiredDialogue2, desiredBackground2);
+        errorScene1 = new Cutscene(desiredSpeaker2, desiredDialogue3, desiredBackground2);
+        desiredScene2 = new ClickerScene(assetList2, desiredBackground2);
 
-        yield return null;
+        desiredAsset = new Asset("CA [Eevee]", desiredAssetPosition, desiredScene1);
+        desiredAsset2 = new Asset("CA [Eevee]", desiredAssetPosition2, desiredScene1);
 
-        Assert.Less(1, 2);
+        assetList = new List<Asset>();
+        assetList.Add(desiredAsset);
+        assetList.Add(desiredAsset2);
+
+        ClickerScene currentScene = new ClickerScene(assetList, desiredBackground);
+
+        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+
+        cChecker = eventSystem.GetComponent<ConditionalChecker>();
+        aViewer = eventSystem.GetComponent<AssetViewer>();
+
+        currentScene.show();
+        cChecker.setCurrentScene(currentScene);
+
+        HasBeenClicked condition1 = new HasBeenClicked(desiredAsset);
+        HasBeenClicked condition2 = new HasBeenClicked(desiredAsset2);
+        List<Conditional> conditionList = new List<Conditional>();
+        conditionList.Add(condition1);
+        conditionList.Add(condition2);
+        Dictionary<Asset, List<Conditional>> conditionDict = new Dictionary<Asset, List<Conditional>>();
+        conditionDict.Add(desiredAsset, conditionList);
+
+        cChecker.setConditionsTable(conditionDict);
+
+        Dictionary<(Asset, Conditional), Scene> errorDict = new Dictionary<(Asset, Conditional), Scene>();
+        errorDict.Add((desiredAsset, condition1), errorScene1);
+        errorDict.Add((desiredAsset, condition2), desiredScene2);
+
+        cChecker.setErrorSceneTable(errorDict);
+
+        yield return new WaitForSeconds(1f);
+
+        GameObject asset1Object = aPanel.transform.GetChild(0).gameObject;
+
+        aViewer.handleClickedPrefab(asset1Object);
+
+        yield return new WaitForSeconds(3f);
+
+        Assert.AreEqual(cChecker.getCurrentScene(), desiredScene2);
     }
 
     /*
