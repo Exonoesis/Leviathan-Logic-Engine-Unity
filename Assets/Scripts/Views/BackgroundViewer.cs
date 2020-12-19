@@ -36,8 +36,6 @@ public class BackgroundViewer : MonoBehaviour
 
         dynamicImage = BGDynamic.GetComponent<RawImage>();
         staticImage = BGStatic.GetComponent<RawImage>();
-
-        //DontDestroyOnLoad(this.gameObject);
     }
 
     public void Update()

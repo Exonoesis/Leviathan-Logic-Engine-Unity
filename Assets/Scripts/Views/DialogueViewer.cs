@@ -18,9 +18,9 @@ public class DialogueViewer : MonoBehaviour
         }
     }
 
-    public GameObject DialoguePanel;
-    public TextMeshProUGUI SpeakerName;
-    public TextMeshProUGUI DialogueText;
+    private GameObject DialoguePanel;
+    private TextMeshProUGUI SpeakerName;
+    private TextMeshProUGUI DialogueText;
 
     public float charPrintDelay = 0.05f;
 
@@ -33,7 +33,11 @@ public class DialogueViewer : MonoBehaviour
 
     void Awake()
     {
-        //DontDestroyOnLoad(this.gameObject);
+        DialoguePanel = GameObject.FindWithTag("DialoguePanel");
+        SpeakerName = GameObject.FindWithTag("SpeakerNameText").GetComponent<TextMeshProUGUI>();
+        DialogueText = GameObject.FindWithTag("DialogueText").GetComponent<TextMeshProUGUI>();
+
+        DialoguePanel.SetActive(false);
     }
 
     void Update()
@@ -60,17 +64,14 @@ public class DialogueViewer : MonoBehaviour
 
     public void PrintDialogue(string speaker, string text)
     {
-        if (text != "")
+        if (!DialoguePanel.activeSelf)
         {
-            if (!DialoguePanel.activeSelf)
-            {
-                DialoguePanel.SetActive(true);
-            }
+            DialoguePanel.SetActive(true);
+        }
 
-            if (!isTyping && !isHoldingText)
-            {
-                typingCoroutine = StartCoroutine(Teletype(speaker, text));
-            }
+        if (!isTyping && !isHoldingText)
+        {
+            typingCoroutine = StartCoroutine(Teletype(speaker, text));
         }
     }
 
@@ -95,5 +96,16 @@ public class DialogueViewer : MonoBehaviour
         }
 
         isTyping = false;
+    }
+
+    public void clearTextFields()
+    {
+        SpeakerName.text = "";
+        DialogueText.text = "";
+    }
+
+    public void hideDialoguePanel()
+    {
+        DialoguePanel.SetActive(false);
     }
 }

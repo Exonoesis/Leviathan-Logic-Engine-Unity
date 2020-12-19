@@ -9,27 +9,7 @@ public class ClickerScene : Scene
     private List<Asset> _assets;
     private Texture _background;
 
-    public Texture getBackground()
-    {
-        return _background;
-    }
-
-    public void setBackground(Texture background)
-    {
-        _background = background;
-    }
-
-    public List<Asset> getAssets()
-    {
-        return _assets;
-    }
-
-    public void setAssets(List<Asset> assetNames)
-    {
-        _assets = assetNames;
-    }
-
-    public ClickerScene(Texture background, List<Asset> assets)
+    public ClickerScene(List<Asset> assets, Texture background = null)
     {
         bgViewer = BackgroundViewer.Instance;
         aViewer = AssetViewer.Instance;
@@ -53,7 +33,12 @@ public class ClickerScene : Scene
     {
         foreach (Asset asset in _assets)
         {
-            aViewer.place(asset);
+            aViewer.placeInScene(asset);
         }
+    }
+
+    public override void hide()
+    {
+        aViewer.clearAssets();
     }
 }
