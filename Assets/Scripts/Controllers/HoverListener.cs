@@ -20,7 +20,7 @@ public class HoverListener : MonoBehaviour
 
         if (objCollider.bounds.Contains(mPos))
         {
-            aViewer.Darken(spriteImage);
+            aViewer.Darken(gameObject);
 
             if (Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
             {
@@ -29,7 +29,7 @@ public class HoverListener : MonoBehaviour
         }
         else
         {
-            aViewer.Lighten(spriteImage);
+            aViewer.Lighten(gameObject);
         }
     }
 }

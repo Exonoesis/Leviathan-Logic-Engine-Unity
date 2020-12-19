@@ -220,7 +220,7 @@ public class PlayTestSuite
 
         Assert.AreEqual(Color.white, assetImage.color);
 
-        aViewer.Darken(assetImage);
+        aViewer.Darken(asset);
 
         Assert.AreEqual(Color.grey, assetImage.color);
     }
@@ -237,11 +237,11 @@ public class PlayTestSuite
         GameObject asset = GameObject.FindWithTag("Eevee");
         Image assetImage = asset.GetComponent<Image>();
 
-        aViewer.Darken(assetImage);
+        aViewer.Darken(asset);
 
         Assert.AreEqual(Color.grey, assetImage.color);
 
-        aViewer.Lighten(assetImage);
+        aViewer.Lighten(asset);
 
         Assert.AreEqual(Color.white, assetImage.color);
     }
@@ -524,6 +524,7 @@ public class PlayTestSuite
         conditionList.Add(condition2);
 
         cChecker.addConditions(desiredAsset, conditionList);
+
 
         cChecker.addErrorScene(desiredAsset, condition1, errorScene1);
         cChecker.addErrorScene(desiredAsset, condition2, desiredScene2);

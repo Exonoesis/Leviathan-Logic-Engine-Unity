@@ -69,13 +69,15 @@ public class AssetViewer : MonoBehaviour
         return asset;
     }
 
-    public void Darken(Image image)
+    public void Darken(GameObject prefab)
     {
+        Image image = prefab.GetComponent<Image>();
         image.color = Color.grey;
     }
 
-    public void Lighten(Image image)
+    public void Lighten(GameObject prefab)
     {
+        Image image = prefab.GetComponent<Image>();
         image.color = Color.white;
     }
 }
