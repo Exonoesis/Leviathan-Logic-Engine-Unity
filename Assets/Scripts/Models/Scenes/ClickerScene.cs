@@ -15,11 +15,7 @@ public class ClickerScene : Scene
         aViewer = AssetViewer.Instance;
 
         _assets = assets;
-
-        if (background)
-        {
-            _background = background;
-        }
+        _background = background;
     }
 
     public override void show()

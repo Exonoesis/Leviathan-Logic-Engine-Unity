@@ -571,7 +571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1149919431
 RectTransform:
   m_ObjectHideFlags: 0
@@ -860,9 +860,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d88303ebea06e4f4680f193b1c67c8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialoguePanel: {fileID: 1149919430}
-  SpeakerName: {fileID: 272830267}
-  DialogueText: {fileID: 1961565847}
   charPrintDelay: 0.05
 --- !u!114 &1493621224
 MonoBehaviour:

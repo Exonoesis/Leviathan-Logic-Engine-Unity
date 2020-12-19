@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AssetViewer : MonoBehaviour
 {
@@ -66,5 +67,15 @@ public class AssetViewer : MonoBehaviour
         Asset asset = prefabRelations[prefab];
 
         return asset;
+    }
+
+    public void Darken(Image image)
+    {
+        image.color = Color.grey;
+    }
+
+    public void Lighten(Image image)
+    {
+        image.color = Color.white;
     }
 }

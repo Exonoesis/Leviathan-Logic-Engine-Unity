@@ -220,7 +220,7 @@ public class PlayTestSuite
 
         Assert.AreEqual(Color.white, assetImage.color);
 
-        assetHoverListener.Darken(assetImage);
+        aViewer.Darken(assetImage);
 
         Assert.AreEqual(Color.grey, assetImage.color);
     }
@@ -236,13 +236,12 @@ public class PlayTestSuite
 
         GameObject asset = GameObject.FindWithTag("Eevee");
         Image assetImage = asset.GetComponent<Image>();
-        HoverListener assetHoverListener = asset.GetComponent<HoverListener>();
 
-        assetHoverListener.Darken(assetImage);
+        aViewer.Darken(assetImage);
 
         Assert.AreEqual(Color.grey, assetImage.color);
 
-        assetHoverListener.Lighten(assetImage);
+        aViewer.Lighten(assetImage);
 
         Assert.AreEqual(Color.white, assetImage.color);
     }
@@ -437,10 +436,8 @@ public class PlayTestSuite
         HasBeenClicked condition1 = new HasBeenClicked(desiredAsset);
         List<Conditional> conditionList = new List<Conditional>();
         conditionList.Add(condition1);
-        Dictionary<Asset, List<Conditional>> conditionDict = new Dictionary<Asset, List<Conditional>>();
-        conditionDict.Add(desiredAsset, conditionList);
 
-        cChecker.setConditionsTable(conditionDict);
+        cChecker.addConditions(desiredAsset, conditionList);
 
         yield return new WaitForSeconds(1f);
 
@@ -480,15 +477,9 @@ public class PlayTestSuite
         HasBeenClicked condition1 = new HasBeenClicked(desiredAsset2);
         List<Conditional> conditionList = new List<Conditional>();
         conditionList.Add(condition1);
-        Dictionary<Asset, List<Conditional>> conditionDict = new Dictionary<Asset, List<Conditional>>();
-        conditionDict.Add(desiredAsset, conditionList);
 
-        cChecker.setConditionsTable(conditionDict);
-
-        Dictionary<(Asset, Conditional), Scene> errorDict = new Dictionary<(Asset, Conditional), Scene>();
-        errorDict.Add((desiredAsset, condition1),errorScene1);
-
-        cChecker.setErrorSceneTable(errorDict);
+        cChecker.addConditions(desiredAsset, conditionList);
+        cChecker.addErrorScene(desiredAsset, condition1,errorScene1);
 
         yield return new WaitForSeconds(1f);
 
@@ -531,16 +522,11 @@ public class PlayTestSuite
         List<Conditional> conditionList = new List<Conditional>();
         conditionList.Add(condition1);
         conditionList.Add(condition2);
-        Dictionary<Asset, List<Conditional>> conditionDict = new Dictionary<Asset, List<Conditional>>();
-        conditionDict.Add(desiredAsset, conditionList);
 
-        cChecker.setConditionsTable(conditionDict);
+        cChecker.addConditions(desiredAsset, conditionList);
 
-        Dictionary<(Asset, Conditional), Scene> errorDict = new Dictionary<(Asset, Conditional), Scene>();
-        errorDict.Add((desiredAsset, condition1), errorScene1);
-        errorDict.Add((desiredAsset, condition2), desiredScene2);
-
-        cChecker.setErrorSceneTable(errorDict);
+        cChecker.addErrorScene(desiredAsset, condition1, errorScene1);
+        cChecker.addErrorScene(desiredAsset, condition2, desiredScene2);
 
         yield return new WaitForSeconds(1f);
 

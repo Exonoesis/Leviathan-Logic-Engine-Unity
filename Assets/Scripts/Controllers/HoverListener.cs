@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
 public class HoverListener : MonoBehaviour
 {
@@ -21,7 +20,7 @@ public class HoverListener : MonoBehaviour
 
         if (objCollider.bounds.Contains(mPos))
         {
-            Darken(spriteImage);
+            aViewer.Darken(spriteImage);
 
             if (Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
             {
@@ -30,17 +29,7 @@ public class HoverListener : MonoBehaviour
         }
         else
         {
-            Lighten(spriteImage);
+            aViewer.Lighten(spriteImage);
         }
-    }
-
-    public void Darken(Image image)
-    {
-        image.color = Color.grey;
-    }
-
-    public void Lighten(Image image)
-    {
-        image.color = Color.white;
     }
 }

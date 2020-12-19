@@ -73,13 +73,13 @@ public class ConditionalChecker : MonoBehaviour
         _currentScene = newScene;
     }
 
-    public void setConditionsTable(Dictionary<Asset, List<Conditional>> conditionsTable)
+    public void addConditions(Asset asset, List<Conditional> conditionList)
     {
-        _conditionsTable = conditionsTable;
+        _conditionsTable.Add(asset, conditionList);
     }
 
-    public void setErrorSceneTable(Dictionary<(Asset, Conditional), Scene> errorSceneTable)
+    public void addErrorScene(Asset asset, Conditional condition, Scene errorScene)
     {
-        _errorSceneTable = errorSceneTable;
+        _errorSceneTable.Add((asset, condition), errorScene);
     }
 }

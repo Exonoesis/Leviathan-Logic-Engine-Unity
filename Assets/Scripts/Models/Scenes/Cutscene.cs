@@ -16,11 +16,7 @@ public class Cutscene : Scene
 
         _speaker = speaker;
         _dialogue = dialogue;
-
-        if (background)
-        {
-            _background = background;
-        }
+        _background = background;
     }
 
     public override void show()
@@ -47,7 +43,7 @@ public class Cutscene : Scene
 
     private void clearDialoguePanel()
     {
-        dlViewer.PrintDialogue("", "");
+        dlViewer.clearTextFields();
     }
 
     private void deactivateDialoguePanel()
