@@ -48,34 +48,34 @@ public class PlayTestSuite
     {
         SceneManager.LoadScene(0);
 
-        desiredBackground = Resources.Load<Texture>("Images/BG/Stairs");
-        desiredBackground2 = Resources.Load<Texture>("Images/BG/Trees");
-        desiredSpeaker = "Jesse";
-        desiredDialogue = "This is a test of the <color=purple>color " +
-                "changing system</color>. It's <b>built-in</b>, and that's real <i>fancy</i>. " +
-                "Now I need to make this longer to test other issues and make sure that " +
-                "the line snapping is fixed by this new method. Floccinaucinihilipilification.";
-        desiredSpeaker2 = "Eevee";
-        desiredDialogue2 = "How did I get here?";
+        
+        
+        
         desiredDialogue3 = "We're missing an important item.";
 
-        desiredAssetPosition = new Vector3(130, 92);
+        
         desiredAssetPosition2 = new Vector3(275, 147);
         desiredAssetPosition3 = new Vector3(200, 150);
 
-        desiredScene1 = new Cutscene(desiredSpeaker2, desiredDialogue2, desiredBackground2);
+        string desiredSpeaker = "Eevee";
+        string desiredDialogue = "How did I get here?";
+        List<Texture> backgrounds = new List<Texture>
+        {
+            Resources.Load<Texture>("Images/BG/Stairs"),
+            Resources.Load<Texture>("Images/BG/Trees")
+        };
+        Scene desiredScene = new Cutscene(desiredSpeaker, desiredDialogue, backgrounds[1]);
+        
 
-        desiredAsset = new Asset("CA [Eevee]", desiredAssetPosition, desiredScene1);
-
-        assetList = new List<Asset>();
+        assetList.Add(desiredAsset2);
         assetList2 = new List<Asset>();
 
-        assetList.Add(desiredAsset);
+        
 
         desiredAsset2 = new Asset("CA [Eevee]", desiredAssetPosition2, desiredScene2);
         desiredAsset3 = new Asset("CA [Gem]", desiredAssetPosition3, desiredScene2);
 
-        assetList.Add(desiredAsset2);
+        
         assetList2.Add(desiredAsset3);
     }
 
@@ -85,125 +85,17 @@ public class PlayTestSuite
 
     }
 
-    [UnityTest]
-    public IEnumerator testBackgroundViewerTransition()
-    {
-        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
-        bgViewer = eventSystem.GetComponent<BackgroundViewer>();
+    
 
-        bgViewer.Transition(desiredBackground);
-        yield return new WaitForSeconds(1f);
+    
 
-        GameObject staticPanel = GameObject.FindWithTag("BGPanelStatic");
-        Texture currentBackground = staticPanel.GetComponent<RawImage>().texture;
+    
 
-        Assert.AreEqual(desiredBackground, currentBackground);
-    }
+    
 
-    [UnityTest]
-    public IEnumerator testDialogueViewerPrintsDialogue()
-    {
-        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
-        dlViewer = eventSystem.GetComponent<DialogueViewer>();
+    
 
-        dlViewer.PrintDialogue(desiredSpeaker, desiredDialogue);
-        yield return new WaitUntil(() => !dlViewer.getIsTyping());
-
-        GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
-        string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
-
-        Assert.AreEqual(desiredSpeaker, currentSpeaker);
-
-        GameObject dialogueText = GameObject.FindWithTag("DialogueText");
-        string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
-
-        Assert.AreEqual(desiredDialogue, currentDialogue);
-    }
-
-    [UnityTest]
-    public IEnumerator testCutsceneShowsText()
-    {
-        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
-        dlViewer = eventSystem.GetComponent<DialogueViewer>();
-
-        Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
-
-        currentScene.show();
-        yield return new WaitUntil(() => !dlViewer.getIsTyping());
-
-        GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
-        string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
-
-        Assert.AreEqual(desiredSpeaker, currentSpeaker);
-
-        GameObject dialogueText = GameObject.FindWithTag("DialogueText");
-        string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
-
-        Assert.AreEqual(desiredDialogue, currentDialogue);
-    }
-
-    [UnityTest]
-    public IEnumerator testCutsceneShowsBackground()
-    {
-        Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue, desiredBackground);
-
-        currentScene.show();
-        yield return new WaitForSeconds(1f);
-
-        GameObject staticPanel = GameObject.FindWithTag("BGPanelStatic");
-        Texture currentBackground = staticPanel.GetComponent<RawImage>().texture;
-
-        Assert.AreEqual(desiredBackground, currentBackground);
-    }
-
-    [UnityTest]
-    public IEnumerator testClickerSceneShowsBackground()
-    {
-        ClickerScene currentScene = new ClickerScene(assetList, desiredBackground);
-
-        currentScene.show();
-        yield return new WaitForSeconds(1f);
-
-        GameObject staticPanel = GameObject.FindWithTag("BGPanelStatic");
-        Texture currentBackground = staticPanel.GetComponent<RawImage>().texture;
-
-        Assert.AreEqual(desiredBackground, currentBackground);
-    }
-
-    [UnityTest]
-    public IEnumerator testAssetViewerPlacesAsset()
-    {
-        GameObject eventSystem = GameObject.FindWithTag("EventSystem");
-        aViewer = eventSystem.GetComponent<AssetViewer>();
-
-        aViewer.placeInScene(desiredAsset);
-        yield return new WaitForSeconds(1f);
-
-        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
-        var asset = aPanel.transform.GetChild(0);
-
-        Assert.AreEqual(desiredAsset.getPrefab().name + "(Clone)", asset.name);
-
-        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().x), Math.Floor(asset.position.x));
-        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().y), Math.Floor(asset.position.y));
-    }
-
-    [UnityTest]
-    public IEnumerator testClickerSceneShowsAssets()
-    {
-        ClickerScene currentScene = new ClickerScene(assetList);
-
-        currentScene.show();
-        yield return new WaitForSeconds(1f);
-
-        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
-        Transform asset = aPanel.transform.GetChild(0);
-
-        Assert.AreEqual(desiredAsset.getPrefab().name + "(Clone)", asset.name);
-
-        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().x), Math.Floor(asset.position.x));
-        Assert.AreEqual(Math.Floor(desiredAsset.getPosition().y), Math.Floor(asset.position.y));
-    }
+    
 
     [UnityTest]
     public IEnumerator testAssetDimsOnHover()
