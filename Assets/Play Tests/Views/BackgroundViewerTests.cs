@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,8 +18,9 @@ namespace Visual
         [UnityTest]
         public IEnumerator ShowsTransition()
         {
-            GameObject eventSystem = GameObject.FindWithTag("EventSystem");
-            BackgroundViewer bgViewer = eventSystem.GetComponent<BackgroundViewer>();
+            BackgroundViewer bgViewer = GameObject
+                .FindWithTag("EventSystem")
+                .GetComponent<BackgroundViewer>();
             
             Texture desiredBackground = Resources.Load<Texture>("Images/BG/Stairs");
 

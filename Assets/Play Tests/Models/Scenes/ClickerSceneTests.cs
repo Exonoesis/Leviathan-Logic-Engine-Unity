@@ -42,9 +42,9 @@ namespace Visual
         [UnityTest]
         public IEnumerator ShowsAssets()
         {
-            ClickerScene currentScene = new ClickerScene(assets);
-
-            currentScene.show();
+            ClickerScene assetOnlyScene = new ClickerScene(assets);
+            
+            assetOnlyScene.show();
             yield return new WaitForSeconds(1f);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -55,6 +55,27 @@ namespace Visual
             Vector3 position = asset.position;
             Assert.AreEqual(Math.Floor(assets[0].getPosition().x), Math.Floor(position.x));
             Assert.AreEqual(Math.Floor(assets[0].getPosition().y), Math.Floor(position.y));
+        }
+        
+        [UnityTest]
+        public IEnumerator RemovesAssetsFromScene()
+        {
+            ClickerScene assetOnlyScene = new ClickerScene(assets);
+            
+            assetOnlyScene.show();
+            yield return new WaitForSeconds(1f);
+
+            GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
+            int numAssets = aPanel.transform.childCount;
+
+            Assert.AreEqual(assets.Count, numAssets);
+
+            assetOnlyScene.hide();
+            yield return new WaitForSeconds(1f);
+
+            numAssets = aPanel.transform.childCount;
+
+            Assert.AreEqual(0, numAssets);
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,8 +24,9 @@ namespace Visual
         [UnityTest]
         public IEnumerator ShowsText()
         {
-            GameObject eventSystem = GameObject.FindWithTag("EventSystem");
-            DialogueViewer dlViewer = eventSystem.GetComponent<DialogueViewer>();
+            DialogueViewer dlViewer = GameObject
+                .FindWithTag("EventSystem")
+                .GetComponent<DialogueViewer>();
             
             Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
 
@@ -58,6 +58,25 @@ namespace Visual
             Texture currentBackground = staticPanel.GetComponent<RawImage>().texture;
 
             Assert.AreEqual(desiredBackground, currentBackground);
+        }
+        
+        [UnityTest]
+        public IEnumerator HidesDialoguePanel()
+        {
+            DialogueViewer dlViewer = GameObject
+                .FindWithTag("EventSystem")
+                .GetComponent<DialogueViewer>();
+
+            Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
+
+            currentScene.show();
+            yield return new WaitUntil(() => !dlViewer.getIsTyping());
+
+            GameObject DialoguePanel = GameObject.FindWithTag("DialoguePanel");
+
+            currentScene.hide();
+
+            Assert.IsFalse(DialoguePanel.activeSelf);
         }
     }
 }
