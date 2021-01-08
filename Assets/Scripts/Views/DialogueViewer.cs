@@ -34,8 +34,12 @@ public class DialogueViewer : MonoBehaviour
     void Awake()
     {
         DialoguePanel = GameObject.FindWithTag("DialoguePanel");
-        SpeakerName = GameObject.FindWithTag("SpeakerNameText").GetComponent<TextMeshProUGUI>();
-        DialogueText = GameObject.FindWithTag("DialogueText").GetComponent<TextMeshProUGUI>();
+        SpeakerName = GameObject
+            .FindWithTag("SpeakerNameText")
+            .GetComponent<TextMeshProUGUI>();
+        DialogueText = GameObject
+            .FindWithTag("DialogueText")
+            .GetComponent<TextMeshProUGUI>();
 
         DialoguePanel.SetActive(false);
     }
@@ -94,7 +98,6 @@ public class DialogueViewer : MonoBehaviour
 
             yield return new WaitForSeconds (charPrintDelay);
         }
-
         isTyping = false;
     }
 
