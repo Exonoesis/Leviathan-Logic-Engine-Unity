@@ -12,7 +12,6 @@ public class ConditionalChecker : MonoBehaviour
             {
                 _instance = FindObjectOfType<ConditionalChecker>();
             }
-
             return _instance;
         }
     }

@@ -13,7 +13,6 @@ public class DialogueViewer : MonoBehaviour
             {
                 _instance = FindObjectOfType<DialogueViewer>();
             }
-
             return _instance;
         }
     }

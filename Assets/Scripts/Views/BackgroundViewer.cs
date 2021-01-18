@@ -12,7 +12,6 @@ public class BackgroundViewer : MonoBehaviour
             {
                 _instance = FindObjectOfType<BackgroundViewer>();
             }
-
             return _instance;
         }
     }
@@ -43,7 +42,10 @@ public class BackgroundViewer : MonoBehaviour
         if (isTransitioning)
         {
             dynamicImage.color = ToAlpha(dynamicImage.color,
-                Mathf.MoveTowards(dynamicImage.color.a, 0f, speed));
+                Mathf.MoveTowards(
+                    dynamicImage.color.a,
+                    0f, 
+                    speed));
 
             if (dynamicImage.color.a <= 0)
             {

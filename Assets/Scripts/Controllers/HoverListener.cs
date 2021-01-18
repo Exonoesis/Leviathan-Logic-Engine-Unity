@@ -1,16 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class HoverListener : MonoBehaviour
 {
     private PolygonCollider2D objCollider;
-    private Image spriteImage;
     private AssetViewer aViewer;
 
     void Start()
     {
         objCollider = gameObject.GetComponent<PolygonCollider2D> ();
-        spriteImage = gameObject.GetComponent<Image> ();
         aViewer = AssetViewer.Instance;
     }
 

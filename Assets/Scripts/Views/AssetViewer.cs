@@ -13,7 +13,6 @@ public class AssetViewer : MonoBehaviour
             {
                 _instance = FindObjectOfType<AssetViewer>();
             }
-
             return _instance;
         }
     }
@@ -24,19 +23,16 @@ public class AssetViewer : MonoBehaviour
 
     void Awake()
     {
-        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
         cChecker = ConditionalChecker.Instance;
-        aPanelRT = aPanel.GetComponent<RectTransform>();
+        aPanelRT = GameObject.FindWithTag("AssetsPanel")
+            .GetComponent<RectTransform>();
         
-
         prefabRelations = new Dictionary<GameObject, Asset>();
     }
 
     public void placeInScene(Asset asset)
     {
-        GameObject prefab = asset.getPrefab();
-
-        GameObject prefabObject = Instantiate(prefab, aPanelRT);
+        GameObject prefabObject = Instantiate(asset.getPrefab(), aPanelRT);
 
         prefabObject.transform.position = asset.getPosition();
 
@@ -64,20 +60,16 @@ public class AssetViewer : MonoBehaviour
 
     public Asset getAsset(GameObject prefab)
     {
-        Asset asset = prefabRelations[prefab];
-
-        return asset;
+        return prefabRelations[prefab];
     }
 
     public void Darken(GameObject prefab)
     {
-        Image image = prefab.GetComponent<Image>();
-        image.color = Color.grey;
+        prefab.GetComponent<Image>().color = Color.grey;
     }
 
     public void Lighten(GameObject prefab)
     {
-        Image image = prefab.GetComponent<Image>();
-        image.color = Color.white;
+        prefab.GetComponent<Image>().color = Color.white;
     }
 }
