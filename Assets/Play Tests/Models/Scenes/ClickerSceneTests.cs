@@ -12,9 +12,9 @@ namespace Visual
     public class ClickerSceneTests
     {
         private Texture background = Resources.Load<Texture>("Images/BG/Stairs");
-        private List<Asset> assets = new List<Asset> 
+        private List<ClickerSceneAsset> assets = new List<ClickerSceneAsset> 
         {
-            new Asset("CA [Eevee]",
+            new ClickerSceneAsset("CA [Eevee]",
             new Vector3(130, 92), 
             null)
         };

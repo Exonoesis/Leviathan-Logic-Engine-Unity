@@ -46,9 +46,9 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene);
+            ClickerSceneAsset clickerSceneAsset = new ClickerSceneAsset(assetName, assetPosition, nextScene);
             
-            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, backgrounds[1]
+            ClickerScene currentScene = new ClickerScene(new List<ClickerSceneAsset>{clickerSceneAsset}, backgrounds[1]
                 );
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -74,9 +74,9 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene);
+            ClickerSceneAsset clickerSceneAsset = new ClickerSceneAsset(assetName, assetPosition, nextScene);
 
-            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, 
+            ClickerScene currentScene = new ClickerScene(new List<ClickerSceneAsset>{clickerSceneAsset}, 
                 backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -88,10 +88,10 @@ namespace Interactive
             currentScene.show();
             cChecker.setCurrentScene(currentScene);
             
-            cChecker.addConditions(asset, 
+            cChecker.addConditions(clickerSceneAsset, 
                 new List<Conditional>
                 {
-                    new HasBeenClicked(asset)
+                    new HasBeenClicked(clickerSceneAsset)
                 });
 
             yield return new WaitForSeconds(1f);
@@ -109,9 +109,9 @@ namespace Interactive
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
             Cutscene errorScene = new Cutscene(speaker, failDialogue, backgrounds[1]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene);
+            ClickerSceneAsset clickerSceneAsset = new ClickerSceneAsset(assetName, assetPosition, nextScene);
             
-            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, 
+            ClickerScene currentScene = new ClickerScene(new List<ClickerSceneAsset>{clickerSceneAsset}, 
                 backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -123,11 +123,11 @@ namespace Interactive
             currentScene.show();
             cChecker.setCurrentScene(currentScene);
 
-            HasBeenClicked clickedCondition = new HasBeenClicked(asset);
+            HasBeenClicked clickedCondition = new HasBeenClicked(clickerSceneAsset);
             List<Conditional> conditionals = new List<Conditional>{clickedCondition};
 
-            cChecker.addConditions(asset, conditionals);
-            cChecker.addErrorScene(asset, clickedCondition, errorScene);
+            cChecker.addConditions(clickerSceneAsset, conditionals);
+            cChecker.addErrorScene(clickerSceneAsset, clickedCondition, errorScene);
 
             yield return new WaitForSeconds(1f);
             
@@ -147,13 +147,13 @@ namespace Interactive
                 new Cutscene(speaker, "Oops", backgrounds[1])
             };
             
-            Asset passingAsset = new Asset(assetName, assetPosition, null);
-            Asset placeholderAsset = new Asset(assetName, new Vector3(275,147), null);
+            ClickerSceneAsset passingClickerSceneAsset = new ClickerSceneAsset(assetName, assetPosition, null);
+            ClickerSceneAsset placeholderClickerSceneAsset = new ClickerSceneAsset(assetName, new Vector3(275,147), null);
 
-            List<Asset> assets = new List<Asset>()
+            List<ClickerSceneAsset> assets = new List<ClickerSceneAsset>()
             {
-                passingAsset,
-                placeholderAsset
+                passingClickerSceneAsset,
+                placeholderClickerSceneAsset
             };
             
             ClickerScene currentScene = new ClickerScene(assets, backgrounds[1]);
@@ -167,18 +167,18 @@ namespace Interactive
             currentScene.show();
             cChecker.setCurrentScene(currentScene);
 
-            HasBeenClicked passingCondition = new HasBeenClicked(passingAsset);
-            HasBeenClicked failingCondition = new HasBeenClicked(placeholderAsset);
+            HasBeenClicked passingCondition = new HasBeenClicked(passingClickerSceneAsset);
+            HasBeenClicked failingCondition = new HasBeenClicked(placeholderClickerSceneAsset);
             List<Conditional> conditionals = new List<Conditional>
             {
                 passingCondition,
                 failingCondition
             };
 
-            cChecker.addConditions(passingAsset, conditionals);
+            cChecker.addConditions(passingClickerSceneAsset, conditionals);
             
-            cChecker.addErrorScene(passingAsset, passingCondition, errorScenes[0]);
-            cChecker.addErrorScene(passingAsset, failingCondition, errorScenes[1]);
+            cChecker.addErrorScene(passingClickerSceneAsset, passingCondition, errorScenes[0]);
+            cChecker.addErrorScene(passingClickerSceneAsset, failingCondition, errorScenes[1]);
 
             yield return new WaitForSeconds(1f);
             

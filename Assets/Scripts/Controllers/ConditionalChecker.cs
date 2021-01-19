@@ -60,7 +60,7 @@ public class ConditionalChecker : MonoBehaviour
 
     private void showNextScene(Asset clickedAsset)
     {
-        Scene sceneToShow = clickedAsset.getDesiredScene();
+        Scene sceneToShow = clickedAsset.getNextScene();
 
         _currentScene.hide();
         setCurrentScene(sceneToShow);

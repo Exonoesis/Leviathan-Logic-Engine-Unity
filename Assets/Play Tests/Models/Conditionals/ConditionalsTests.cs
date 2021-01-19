@@ -9,9 +9,9 @@ namespace Interactive
 {
     public class ConditionalsTests
     {
-        private List<Asset> assets = new List<Asset> 
+        private List<ClickerSceneAsset> assets = new List<ClickerSceneAsset> 
         {
-            new Asset("CA [Eevee]",
+            new ClickerSceneAsset("CA [Eevee]",
                 new Vector3(130, 92), 
                 null)
         };
@@ -35,12 +35,12 @@ namespace Interactive
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            Asset asset = aViewer.getAsset(aPanel.transform.GetChild(0).gameObject);
-            asset.incrementClickedNum();
+            ClickerSceneAsset clickerSceneAsset = (ClickerSceneAsset) aViewer.getAsset(aPanel.transform.GetChild(0).gameObject);
+            clickerSceneAsset.incrementClickedNum();
             
-            Assert.AreEqual(1, asset.getClickedNum());
+            Assert.AreEqual(1, clickerSceneAsset.getClickedNum());
 
-            HasBeenClicked clickedConditional = new HasBeenClicked(asset);
+            HasBeenClicked clickedConditional = new HasBeenClicked(clickerSceneAsset);
             
             Assert.IsTrue(clickedConditional.isMet());
         }
@@ -58,11 +58,11 @@ namespace Interactive
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            Asset asset = aViewer.getAsset(aPanel.transform.GetChild(0).gameObject);
+            ClickerSceneAsset clickerSceneAsset = (ClickerSceneAsset) aViewer.getAsset(aPanel.transform.GetChild(0).gameObject);
             
-            Assert.AreEqual(0, asset.getClickedNum());
+            Assert.AreEqual(0, clickerSceneAsset.getClickedNum());
             
-            HasBeenClicked clickedConditional = new HasBeenClicked(asset);
+            HasBeenClicked clickedConditional = new HasBeenClicked(clickerSceneAsset);
 
             Assert.IsFalse(clickedConditional.isMet());
         }
