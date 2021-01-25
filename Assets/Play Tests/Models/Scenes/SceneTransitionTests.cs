@@ -18,24 +18,28 @@ namespace Visual
         public IEnumerator CutsceneCutscene()
         {
             yield return new WaitForSeconds(1f);
+            Assert.Inconclusive("Does the transition look smooth?");
         }
         
         [UnityTest]
         public IEnumerator CutsceneClicker()
         {
             yield return new WaitForSeconds(1f);
+            Assert.Inconclusive("Does the transition look smooth?");
         }
         
         [UnityTest]
         public IEnumerator ClickerCutscene()
         {
             yield return new WaitForSeconds(1f);
+            Assert.Inconclusive("Does the transition look smooth?");
         }
         
         [UnityTest]
         public IEnumerator ClickerClicker()
         {
             yield return new WaitForSeconds(1f);
+            Assert.Inconclusive("Does the transition look smooth?");
         }
     }
 }

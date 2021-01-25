@@ -53,14 +53,17 @@ public class AssetViewer : MonoBehaviour
     {
         Asset rawAsset = prefabRelations[prefab];
         
-        //Check for Asset Type 
-        
-        //If ClickerSceneAsset
-        ClickerSceneAsset asset = (ClickerSceneAsset) rawAsset;
-        asset.incrementClickedNum();
-        //
-        
-        cChecker.changeSceneIfSatisfied(asset);
+        if (rawAsset is ClickerSceneAsset)
+        {
+            print("ClickerSceneAsset");
+            ClickerSceneAsset asset = (ClickerSceneAsset) rawAsset;
+            asset.incrementClickedNum();
+            cChecker.changeSceneIfSatisfied(asset);
+        }
+        else if (rawAsset is ButtonAsset)
+        {
+            cChecker.changeSceneIfSatisfied(rawAsset);
+        }
     }
 
     public Asset getAsset(GameObject prefab)
