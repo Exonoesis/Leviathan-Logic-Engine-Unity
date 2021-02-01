@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ConditionalChecker : MonoBehaviour
+public class SceneNavigator : MonoBehaviour
 {
-    private static ConditionalChecker _instance;
-    public static ConditionalChecker Instance
+    private static SceneNavigator _instance;
+    public static SceneNavigator Instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = FindObjectOfType<ConditionalChecker>();
+                _instance = FindObjectOfType<SceneNavigator>();
             }
             return _instance;
         }

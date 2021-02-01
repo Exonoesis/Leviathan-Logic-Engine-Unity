@@ -10,7 +10,7 @@ namespace Visual
 {
     public class AssetViewerTests
     {
-        private ClickerSceneAsset _desiredClickerSceneAsset = new ClickerSceneAsset(
+        private Asset _desiredAsset = new Asset(
             "CA [Eevee]", 
             new Vector3(130, 92), 
             null);
@@ -28,17 +28,17 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            aViewer.placeInScene(_desiredClickerSceneAsset);
+            aViewer.placeInScene(_desiredAsset);
             yield return new WaitForSeconds(1f);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             var asset = aPanel.transform.GetChild(0);
 
-            Assert.AreEqual(_desiredClickerSceneAsset.getPrefab().name + "(Clone)", asset.name);
+            Assert.AreEqual(_desiredAsset.getPrefab().name + "(Clone)", asset.name);
 
             Vector3 position = asset.position;
-            Assert.AreEqual(Math.Floor(_desiredClickerSceneAsset.getPosition().x), Math.Floor(position.x));
-            Assert.AreEqual(Math.Floor(_desiredClickerSceneAsset.getPosition().y), Math.Floor(position.y));
+            Assert.AreEqual(Math.Floor(_desiredAsset.getPosition().x), Math.Floor(position.x));
+            Assert.AreEqual(Math.Floor(_desiredAsset.getPosition().y), Math.Floor(position.y));
         }
         
         [UnityTest]
@@ -48,7 +48,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            aViewer.placeInScene(_desiredClickerSceneAsset);
+            aViewer.placeInScene(_desiredAsset);
             yield return new WaitForSeconds(1f);
 
             GameObject asset = GameObject.FindWithTag("Eevee");
@@ -68,7 +68,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
 
-            aViewer.placeInScene(_desiredClickerSceneAsset);
+            aViewer.placeInScene(_desiredAsset);
             yield return new WaitForSeconds(1f);
 
             GameObject asset = GameObject.FindWithTag("Eevee");
@@ -90,7 +90,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
 
-            aViewer.placeInScene(_desiredClickerSceneAsset);
+            aViewer.placeInScene(_desiredAsset);
             yield return new WaitForSeconds(1f);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");

@@ -1,14 +1,14 @@
 ﻿public class HasBeenClicked : Conditional
 {
-    private ClickerSceneAsset _clickerSceneAsset;
+    private Asset _asset;
 
-    public HasBeenClicked(ClickerSceneAsset clickerSceneAsset)
+    public HasBeenClicked(Asset asset)
     {
-        _clickerSceneAsset = clickerSceneAsset;
+        _asset = asset;
     }
 
     public override bool isMet()
     {
-        return _clickerSceneAsset.getClickedNum() > 0;
+        return _asset.getClickedNum() > 0;
     }
 }

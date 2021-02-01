@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Interactive
 {
-    public class ConditionalCheckerTests
+    public class SceneNavigatorTests
     {
         private string speaker = "Eevee";
         private string passDialogue = "How did I get here?";
@@ -46,19 +46,19 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
-            ClickerSceneAsset clickerSceneAsset = new ClickerSceneAsset(assetName, assetPosition, nextScene);
+            Asset asset = new Asset(assetName, assetPosition, nextScene);
             
-            ClickerScene currentScene = new ClickerScene(new List<ClickerSceneAsset>{clickerSceneAsset}, backgrounds[1]
+            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, backgrounds[1]
                 );
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
 
-            ConditionalChecker cChecker = eventSystem.GetComponent<ConditionalChecker>();
+            SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             AssetViewer aViewer = eventSystem.GetComponent<AssetViewer>();
 
             currentScene.show();
-            cChecker.setCurrentScene(currentScene);
+            sNavi.setCurrentScene(currentScene);
 
             yield return new WaitForSeconds(1f);
 
@@ -66,7 +66,7 @@ namespace Interactive
 
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(cChecker.getCurrentScene(), nextScene);
+            Assert.AreEqual(sNavi.getCurrentScene(), nextScene);
         }
         
         [UnityTest]
@@ -74,24 +74,24 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
-            ClickerSceneAsset clickerSceneAsset = new ClickerSceneAsset(assetName, assetPosition, nextScene);
+            Asset asset = new Asset(assetName, assetPosition, nextScene);
 
-            ClickerScene currentScene = new ClickerScene(new List<ClickerSceneAsset>{clickerSceneAsset}, 
+            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, 
                 backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
 
-            ConditionalChecker cChecker = eventSystem.GetComponent<ConditionalChecker>();
+            SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             AssetViewer aViewer = eventSystem.GetComponent<AssetViewer>();
 
             currentScene.show();
-            cChecker.setCurrentScene(currentScene);
+            sNavi.setCurrentScene(currentScene);
             
-            cChecker.addConditions(clickerSceneAsset, 
+            sNavi.addConditions(asset, 
                 new List<Conditional>
                 {
-                    new HasBeenClicked(clickerSceneAsset)
+                    new HasBeenClicked(asset)
                 });
 
             yield return new WaitForSeconds(1f);
@@ -100,7 +100,7 @@ namespace Interactive
 
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(cChecker.getCurrentScene(), nextScene);
+            Assert.AreEqual(sNavi.getCurrentScene(), nextScene);
         }
         
         [UnityTest]
@@ -109,33 +109,33 @@ namespace Interactive
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
             Cutscene errorScene = new Cutscene(speaker, failDialogue, backgrounds[1]);
 
-            ClickerSceneAsset clickerSceneAsset = new ClickerSceneAsset(assetName, assetPosition, nextScene);
+            Asset asset = new Asset(assetName, assetPosition, nextScene);
             
-            ClickerScene currentScene = new ClickerScene(new List<ClickerSceneAsset>{clickerSceneAsset}, 
+            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, 
                 backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
 
-            ConditionalChecker cChecker = eventSystem.GetComponent<ConditionalChecker>();
+            SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             AssetViewer aViewer = eventSystem.GetComponent<AssetViewer>();
 
             currentScene.show();
-            cChecker.setCurrentScene(currentScene);
+            sNavi.setCurrentScene(currentScene);
 
-            HasBeenClicked clickedCondition = new HasBeenClicked(clickerSceneAsset);
+            HasBeenClicked clickedCondition = new HasBeenClicked(asset);
             List<Conditional> conditionals = new List<Conditional>{clickedCondition};
 
-            cChecker.addConditions(clickerSceneAsset, conditionals);
-            cChecker.addErrorScene(clickerSceneAsset, clickedCondition, errorScene);
+            sNavi.addConditions(asset, conditionals);
+            sNavi.addErrorScene(asset, clickedCondition, errorScene);
 
             yield return new WaitForSeconds(1f);
             
-            cChecker.changeSceneIfSatisfied(aViewer.getAsset(aPanel.transform.GetChild(0).gameObject));
+            sNavi.changeSceneIfSatisfied(aViewer.getAsset(aPanel.transform.GetChild(0).gameObject));
 
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(cChecker.getCurrentScene(), errorScene);
+            Assert.AreEqual(sNavi.getCurrentScene(), errorScene);
         }
         
         [UnityTest]
@@ -147,13 +147,13 @@ namespace Interactive
                 new Cutscene(speaker, "Oops", backgrounds[1])
             };
             
-            ClickerSceneAsset passingClickerSceneAsset = new ClickerSceneAsset(assetName, assetPosition, null);
-            ClickerSceneAsset placeholderClickerSceneAsset = new ClickerSceneAsset(assetName, new Vector3(275,147), null);
+            Asset passingAsset = new Asset(assetName, assetPosition, null);
+            Asset placeholderAsset = new Asset(assetName, new Vector3(275,147), null);
 
-            List<ClickerSceneAsset> assets = new List<ClickerSceneAsset>()
+            List<Asset> assets = new List<Asset>()
             {
-                passingClickerSceneAsset,
-                placeholderClickerSceneAsset
+                passingAsset,
+                placeholderAsset
             };
             
             ClickerScene currentScene = new ClickerScene(assets, backgrounds[1]);
@@ -161,24 +161,24 @@ namespace Interactive
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
 
-            ConditionalChecker cChecker = eventSystem.GetComponent<ConditionalChecker>();
+            SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             AssetViewer aViewer = eventSystem.GetComponent<AssetViewer>();
 
             currentScene.show();
-            cChecker.setCurrentScene(currentScene);
+            sNavi.setCurrentScene(currentScene);
 
-            HasBeenClicked passingCondition = new HasBeenClicked(passingClickerSceneAsset);
-            HasBeenClicked failingCondition = new HasBeenClicked(placeholderClickerSceneAsset);
+            HasBeenClicked passingCondition = new HasBeenClicked(passingAsset);
+            HasBeenClicked failingCondition = new HasBeenClicked(placeholderAsset);
             List<Conditional> conditionals = new List<Conditional>
             {
                 passingCondition,
                 failingCondition
             };
 
-            cChecker.addConditions(passingClickerSceneAsset, conditionals);
+            sNavi.addConditions(passingAsset, conditionals);
             
-            cChecker.addErrorScene(passingClickerSceneAsset, passingCondition, errorScenes[0]);
-            cChecker.addErrorScene(passingClickerSceneAsset, failingCondition, errorScenes[1]);
+            sNavi.addErrorScene(passingAsset, passingCondition, errorScenes[0]);
+            sNavi.addErrorScene(passingAsset, failingCondition, errorScenes[1]);
 
             yield return new WaitForSeconds(1f);
             
@@ -186,7 +186,7 @@ namespace Interactive
 
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(cChecker.getCurrentScene(), errorScenes[1]);
+            Assert.AreEqual(sNavi.getCurrentScene(), errorScenes[1]);
         }
     }
 }

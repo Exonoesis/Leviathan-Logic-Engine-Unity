@@ -18,12 +18,12 @@ public class AssetViewer : MonoBehaviour
     }
 
     private RectTransform aPanelRT;
-    private ConditionalChecker cChecker;
+    private SceneNavigator sNavi;
     private Dictionary<GameObject, Asset> prefabRelations;
 
     void Awake()
     {
-        cChecker = ConditionalChecker.Instance;
+        sNavi = SceneNavigator.Instance;
         aPanelRT = GameObject.FindWithTag("AssetsPanel")
             .GetComponent<RectTransform>();
         
@@ -51,19 +51,11 @@ public class AssetViewer : MonoBehaviour
 
     public void handleClickedPrefab(GameObject prefab)
     {
-        Asset rawAsset = prefabRelations[prefab];
+        Asset asset = prefabRelations[prefab];
         
-        if (rawAsset is ClickerSceneAsset)
-        {
-            print("ClickerSceneAsset");
-            ClickerSceneAsset asset = (ClickerSceneAsset) rawAsset;
-            asset.incrementClickedNum();
-            cChecker.changeSceneIfSatisfied(asset);
-        }
-        else if (rawAsset is ButtonAsset)
-        {
-            cChecker.changeSceneIfSatisfied(rawAsset);
-        }
+        asset.incrementClickedNum();
+        
+        sNavi.changeSceneIfSatisfied(asset);
     }
 
     public Asset getAsset(GameObject prefab)
