@@ -9,7 +9,7 @@ namespace Interactive
 {
     public class SceneNavigatorTests
     {
-        private string speaker = "Eevee";
+        private string speaker = "Cat";
         private string passDialogue = "How did I get here?";
         private string failDialogue = "We're missing an important item.";
         private List<Texture> backgrounds = new List<Texture>
@@ -18,7 +18,7 @@ namespace Interactive
             Resources.Load<Texture>("Images/BG/Stairs")
         };
 
-        private string assetName = "CA [Eevee]";
+        private string assetName = "CA [Cat]";
         private Vector3 assetPosition = new Vector3(130, 92);
         
         [SetUp]
@@ -131,7 +131,7 @@ namespace Interactive
 
             yield return new WaitForSeconds(1f);
             
-            sNavi.changeSceneIfSatisfied(aViewer.getAsset(aPanel.transform.GetChild(0).gameObject));
+            sNavi.changeSceneIfSatisfied(aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject));
 
             yield return new WaitForSeconds(3f);
 

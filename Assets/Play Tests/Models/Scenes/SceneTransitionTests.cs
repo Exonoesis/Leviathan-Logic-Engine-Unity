@@ -9,7 +9,7 @@ namespace Visual
 {
     public class SceneTransitionTests
     {
-        private string speaker1 = "Eevee";
+        private string speaker1 = "Cat";
         private string dialogue1 = "While I may be soft and cute, I'm also lost and scared. " +
                                    "I don't know where I am, what's going on, or how I got here.";
         
@@ -21,7 +21,7 @@ namespace Visual
         
         private List<Asset> assets1 = new List<Asset> 
         {
-            new Asset("CA [Eevee]",
+            new Asset("CA [Cat]",
                 new Vector3(130, 92), 
                 null)
         };
@@ -40,17 +40,17 @@ namespace Visual
                 .GetComponent<DialogueViewer>();
             
             string speaker2 = "Jesse";
-            string dialogue2 = "That's very unfortunate, Eevee. I wish I could help you out there. "
+            string dialogue2 = "That's very unfortunate, small cat. I wish I could help you out there. "
                                + "However this is only a test and soon we will vanish.";
             
-            Cutscene scene1 = new Cutscene(speaker1, dialogue1, backgrounds[0]);
-            Cutscene scene2 = new Cutscene(speaker2, dialogue2, backgrounds[1]);
+            Cutscene firstScene = new Cutscene(speaker1, dialogue1, backgrounds[0]);
+            Cutscene secondScene = new Cutscene(speaker2, dialogue2, backgrounds[1]);
 
-            scene1.show();
+            firstScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
             
-            scene1.hide();
-            scene2.show();
+            firstScene.hide();
+            secondScene.show();
             
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
             
@@ -64,14 +64,14 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
             
-            Cutscene scene1 = new Cutscene(speaker1, dialogue1, backgrounds[1]);
-            ClickerScene scene2 = new ClickerScene(assets1, backgrounds[0]);
+            Cutscene firstScene = new Cutscene(speaker1, dialogue1, backgrounds[1]);
+            ClickerScene secondScene = new ClickerScene(assets1, backgrounds[0]);
             
-            scene1.show();
+            firstScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
             
-            scene1.hide();
-            scene2.show();
+            firstScene.hide();
+            secondScene.show();
             yield return new WaitForSeconds(3f);
             
             Assert.Inconclusive("Does the transition look smooth?");
@@ -84,14 +84,14 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
 
-            ClickerScene scene1 = new ClickerScene(assets1, backgrounds[0]);
-            Cutscene scene2 = new Cutscene(speaker1, dialogue1, backgrounds[1]);
+            ClickerScene firstScene = new ClickerScene(assets1, backgrounds[0]);
+            Cutscene secondScene = new Cutscene(speaker1, dialogue1, backgrounds[1]);
             
-            scene1.show();
+            firstScene.show();
             yield return new WaitForSeconds(3f);
             
-            scene1.hide();
-            scene2.show();
+            firstScene.hide();
+            secondScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
             
             Assert.Inconclusive("Does the transition look smooth?");
@@ -102,19 +102,19 @@ namespace Visual
         {
             List<Asset> assets2 = new List<Asset> 
             {
-                new Asset("CA [Eevee]",
-                    new Vector3(230, 192), 
+                new Asset("CA [Cat]",
+                    new Vector3(270, 132), 
                     null)
             };
 
-            ClickerScene scene1 = new ClickerScene(assets1, backgrounds[0]);
-            ClickerScene scene2 = new ClickerScene(assets2, backgrounds[1]);
+            ClickerScene firstScene = new ClickerScene(assets1, backgrounds[0]);
+            ClickerScene secondScene = new ClickerScene(assets2, backgrounds[1]);
             
-            scene1.show();
+            firstScene.show();
             yield return new WaitForSeconds(3f);
             
-            scene1.hide();
-            scene2.show();
+            firstScene.hide();
+            secondScene.show();
             yield return new WaitForSeconds(3f);
             
             Assert.Inconclusive("Does the transition look smooth?");

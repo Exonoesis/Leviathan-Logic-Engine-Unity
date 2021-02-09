@@ -18,8 +18,8 @@ TagManager:
   - BGPanelStatic
   - BGPanelDynamic
   - EventSystem
-  - Eevee
   - AssetsPanel
+  - Cat
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,7 @@ namespace Interactive
     {
         private List<Asset> assets = new List<Asset> 
         {
-            new Asset("CA [Eevee]",
+            new Asset("CA [Cat]",
                 new Vector3(130, 92), 
                 null)
         };
@@ -35,7 +35,7 @@ namespace Interactive
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            Asset asset = (Asset) aViewer.getAsset(aPanel.transform.GetChild(0).gameObject);
+            Asset asset = (Asset) aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
             asset.incrementClickedNum();
             
             Assert.AreEqual(1, asset.getClickedNum());
@@ -58,7 +58,7 @@ namespace Interactive
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            Asset asset = (Asset) aViewer.getAsset(aPanel.transform.GetChild(0).gameObject);
+            Asset asset = (Asset) aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
             
             Assert.AreEqual(0, asset.getClickedNum());
             

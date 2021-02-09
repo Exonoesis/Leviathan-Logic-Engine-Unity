@@ -380,7 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 4294967295
   m_MaxRayIntersections: 0
 --- !u!20 &519420031
 Camera:
@@ -407,7 +407,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 179
   orthographic: 1
   orthographic size: 124
   m_Depth: 0
@@ -735,6 +735,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1405017716
 Canvas:
   m_ObjectHideFlags: 0

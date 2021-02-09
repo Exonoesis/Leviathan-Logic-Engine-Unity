@@ -58,7 +58,7 @@ public class AssetViewer : MonoBehaviour
         sNavi.changeSceneIfSatisfied(asset);
     }
 
-    public Asset getAsset(GameObject prefab)
+    public Asset getAssetFrom(GameObject prefab)
     {
         return prefabRelations[prefab];
     }

@@ -11,7 +11,7 @@ namespace Visual
     public class AssetViewerTests
     {
         private Asset _desiredAsset = new Asset(
-            "CA [Eevee]", 
+            "CA [Cat]", 
             new Vector3(130, 92), 
             null);
         
@@ -51,7 +51,7 @@ namespace Visual
             aViewer.placeInScene(_desiredAsset);
             yield return new WaitForSeconds(1f);
 
-            GameObject asset = GameObject.FindWithTag("Eevee");
+            GameObject asset = GameObject.FindWithTag("Cat");
             Image assetImage = asset.GetComponent<Image>();
             
             Assert.AreEqual(Color.white, assetImage.color);
@@ -71,7 +71,7 @@ namespace Visual
             aViewer.placeInScene(_desiredAsset);
             yield return new WaitForSeconds(1f);
 
-            GameObject asset = GameObject.FindWithTag("Eevee");
+            GameObject asset = GameObject.FindWithTag("Cat");
             Image assetImage = asset.GetComponent<Image>();
 
             aViewer.Darken(asset);
