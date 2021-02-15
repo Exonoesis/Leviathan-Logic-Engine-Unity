@@ -20,6 +20,7 @@ public class AssetViewer : MonoBehaviour
     private RectTransform aPanelRT;
     private SceneNavigator sNavi;
     private Dictionary<GameObject, Asset> prefabRelations;
+    private Dictionary<string, GameObject> basePrefabs;
 
     void Awake()
     {
@@ -28,13 +29,27 @@ public class AssetViewer : MonoBehaviour
             .GetComponent<RectTransform>();
         
         prefabRelations = new Dictionary<GameObject, Asset>();
+        basePrefabs = new Dictionary<string, GameObject>();
     }
 
     public void placeInScene(Asset asset)
     {
-        GameObject prefabObject = Instantiate(asset.getPrefab(), aPanelRT);
+        GameObject assetBasePrefab;
+        if (basePrefabs.ContainsKey(asset.getPrefabName()))
+        {
+            assetBasePrefab = basePrefabs[asset.getPrefabName()];
+        }
+        else
+        {
+            assetBasePrefab = Resources.Load("Prefabs/" + asset.getPrefabName()) as GameObject;
+            basePrefabs[asset.getPrefabName()] = assetBasePrefab;
+        }
+
+        GameObject prefabObject = Instantiate(assetBasePrefab, aPanelRT);
 
         prefabObject.transform.position = asset.getPosition();
+        
+        asset.setPrefab(prefabObject);
 
         prefabRelations.Add(prefabObject, asset);
     }
@@ -65,11 +80,11 @@ public class AssetViewer : MonoBehaviour
 
     public void Darken(GameObject prefab)
     {
-        prefab.GetComponent<Image>().color = Color.grey;
+        prefab.GetComponentInChildren<Image>().color = Color.grey;
     }
 
     public void Lighten(GameObject prefab)
     {
-        prefab.GetComponent<Image>().color = Color.white;
+        prefab.GetComponentInChildren<Image>().color = Color.white;
     }
 }

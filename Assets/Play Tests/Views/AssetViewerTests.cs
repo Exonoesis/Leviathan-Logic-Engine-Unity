@@ -13,7 +13,8 @@ namespace Visual
         private Asset _desiredAsset = new Asset(
             "CA [Cat]", 
             new Vector3(130, 92), 
-            null);
+            null,
+            new ClickerSceneObject());
         
         [SetUp]
         public void Setup()

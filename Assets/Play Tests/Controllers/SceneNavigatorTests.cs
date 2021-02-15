@@ -46,7 +46,7 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene);
+            Asset asset = new Asset(assetName, assetPosition, nextScene, new ClickerSceneObject());
             
             ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, backgrounds[1]
                 );
@@ -74,7 +74,7 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene);
+            Asset asset = new Asset(assetName, assetPosition, nextScene, new ClickerSceneObject());
 
             ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, 
                 backgrounds[1]);
@@ -109,7 +109,7 @@ namespace Interactive
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
             Cutscene errorScene = new Cutscene(speaker, failDialogue, backgrounds[1]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene);
+            Asset asset = new Asset(assetName, assetPosition, nextScene, new ClickerSceneObject());
             
             ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, 
                 backgrounds[1]);
@@ -147,8 +147,17 @@ namespace Interactive
                 new Cutscene(speaker, "Oops", backgrounds[1])
             };
             
-            Asset passingAsset = new Asset(assetName, assetPosition, null);
-            Asset placeholderAsset = new Asset(assetName, new Vector3(275,147), null);
+            Asset passingAsset = new Asset(
+                assetName, 
+                assetPosition, 
+                null,
+                new ClickerSceneObject());
+            
+            Asset placeholderAsset = new Asset(
+                assetName, 
+                new Vector3(275,147), 
+                null,
+                new ClickerSceneObject());
 
             List<Asset> assets = new List<Asset>()
             {

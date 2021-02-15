@@ -5,14 +5,16 @@ public class Asset
     private int _clickedNum;
     private Vector3 _position;
     private Scene _nextScene;
-    private GameObject _prefab;
+    private string _prefabName;
+    private GameObject _prefabInstance;
+    private State _state;
 
-    public Asset(string prefabName, Vector3 position, Scene nextScene)
+    public Asset(string prefabName, Vector3 position, Scene nextScene, State state)
     {
         _position = position;
         _nextScene = nextScene;
-
-        _prefab = Resources.Load("Prefabs/" + prefabName) as GameObject;
+        _state = state;
+        _prefabName = prefabName;
     }
 
     public Vector3 getPosition()
@@ -20,9 +22,19 @@ public class Asset
         return _position;
     }
 
+    public string getPrefabName()
+    {
+        return _prefabName;
+    }
+
     public GameObject getPrefab()
     {
-        return _prefab;
+        return _prefabInstance;
+    }
+
+    public void setPrefab(GameObject prefab)
+    {
+        _prefabInstance = prefab;
     }
 
     public Scene getNextScene()
@@ -35,6 +47,11 @@ public class Asset
         _nextScene = scene;
     }
 
+    public State getState()
+    {
+        return _state;
+    }
+    
     public int getClickedNum()
     {
         return _clickedNum;

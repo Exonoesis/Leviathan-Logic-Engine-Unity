@@ -11,7 +11,10 @@ public class MouseListener : MonoBehaviour
     
     void OnMouseOver()
     {
-        aViewer.Darken(gameObject);
+        Asset selectedAsset = aViewer.getAssetFrom(transform.parent.gameObject);
+        
+        State assetState = selectedAsset.getState();
+        assetState.HoverEnter(selectedAsset);
         
         if (Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
         {
@@ -21,6 +24,9 @@ public class MouseListener : MonoBehaviour
 
     void OnMouseExit()
     {
-        aViewer.Lighten(gameObject);
+        Asset selectedAsset = aViewer.getAssetFrom(transform.parent.gameObject);
+
+        State assetState = selectedAsset.getState();
+        assetState.HoverExit(selectedAsset);
     }
 }

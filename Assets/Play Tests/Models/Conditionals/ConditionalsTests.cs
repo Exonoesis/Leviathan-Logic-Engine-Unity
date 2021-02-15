@@ -13,7 +13,8 @@ namespace Interactive
         {
             new Asset("CA [Cat]",
                 new Vector3(130, 92), 
-                null)
+                null,
+                new ClickerSceneObject())
         };
         
         [SetUp]
