@@ -35,7 +35,7 @@ namespace Visual
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             var asset = aPanel.transform.GetChild(0);
 
-            Assert.AreEqual(_desiredAsset.getPrefab().name + "(Clone)", asset.name);
+            Assert.AreEqual(_desiredAsset.getPrefab().name, asset.name);
 
             Vector3 position = asset.position;
             Assert.AreEqual(Math.Floor(_desiredAsset.getPosition().x), Math.Floor(position.x));
