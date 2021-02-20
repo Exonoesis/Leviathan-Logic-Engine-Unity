@@ -45,4 +45,4 @@ To see the current working features you can run the Playtests in the Unity Edito
 ---
 
 ### License/Disclaimer
-The Leviathan Logic Engine is distributed under GPLv3 which can be viewed via the [Project Copy](COPYING) or [External Copy](https://choosealicense.com/licenses/gpl-3.0/).
+The Leviathan Logic Engine is distributed under GPLv3 which can be viewed via the [Project Copy](COPYING) or [External Copy](https://www.gnu.org/licenses/gpl-3.0.en.html).
