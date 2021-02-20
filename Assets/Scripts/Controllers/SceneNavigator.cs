@@ -60,7 +60,7 @@ public class SceneNavigator : MonoBehaviour
 
     private void showNextScene(Asset clickedAsset)
     {
-        Scene sceneToShow = clickedAsset.getNextScene();
+        Scene sceneToShow = clickedAsset.getState().getNextScene();
 
         _currentScene.hide();
         setCurrentScene(sceneToShow);

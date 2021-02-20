@@ -46,9 +46,9 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene, new ClickerSceneObject());
+            Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             
-            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, backgrounds[1]
+            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, backgrounds[1]
                 );
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -62,8 +62,9 @@ namespace Interactive
 
             yield return new WaitForSeconds(1f);
 
-            aViewer.handleClickedPrefab(aPanel.transform.GetChild(0).gameObject);
-
+            Asset sceneAsset = aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            sceneAsset.getState().Click(sceneAsset);
+            
             yield return new WaitForSeconds(3f);
 
             Assert.AreEqual(sNavi.getCurrentScene(), nextScene);
@@ -74,9 +75,9 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene, new ClickerSceneObject());
+            Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
 
-            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, 
+            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, 
                 backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -96,8 +97,9 @@ namespace Interactive
 
             yield return new WaitForSeconds(1f);
 
-            aViewer.handleClickedPrefab(aPanel.transform.GetChild(0).gameObject);
-
+            Asset sceneAsset = aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            sceneAsset.getState().Click(sceneAsset);
+            
             yield return new WaitForSeconds(3f);
 
             Assert.AreEqual(sNavi.getCurrentScene(), nextScene);
@@ -109,9 +111,9 @@ namespace Interactive
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
             Cutscene errorScene = new Cutscene(speaker, failDialogue, backgrounds[1]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene, new ClickerSceneObject());
+            Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             
-            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, 
+            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, 
                 backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -149,15 +151,13 @@ namespace Interactive
             
             Asset passingAsset = new Asset(
                 assetName, 
-                assetPosition, 
-                null,
-                new ClickerSceneObject());
+                assetPosition,
+                new PaCElement(null));
             
             Asset placeholderAsset = new Asset(
                 assetName, 
                 new Vector3(275,147), 
-                null,
-                new ClickerSceneObject());
+                new PaCElement(null));
 
             List<Asset> assets = new List<Asset>()
             {
@@ -165,7 +165,7 @@ namespace Interactive
                 placeholderAsset
             };
             
-            ClickerScene currentScene = new ClickerScene(assets, backgrounds[1]);
+            PointandClick currentScene = new PointandClick(assets, backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
@@ -191,8 +191,9 @@ namespace Interactive
 
             yield return new WaitForSeconds(1f);
             
-            aViewer.handleClickedPrefab(aPanel.transform.GetChild(0).gameObject);
-
+            Asset sceneAsset = aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            sceneAsset.getState().Click(sceneAsset);
+            
             yield return new WaitForSeconds(3f);
 
             Assert.AreEqual(sNavi.getCurrentScene(), errorScenes[1]);

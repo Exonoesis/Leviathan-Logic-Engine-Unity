@@ -13,8 +13,7 @@ namespace Interactive
         {
             new Asset("CA [Cat]",
                 new Vector3(130, 92), 
-                null,
-                new ClickerSceneObject())
+                new PaCElement(null))
         };
         
         [SetUp]
@@ -26,9 +25,17 @@ namespace Interactive
         [UnityTest]
         public IEnumerator HasBeenClickedConditionalPass()
         {
-            ClickerScene assetOnlyScene = new ClickerScene(assets);
+            Cutscene dummyScene = new Cutscene("Duck",
+                "Quack!", 
+                Resources.Load<Texture>("Images/BG/Trees"));
+            
+            assets[0].getState().setNextScene(dummyScene);
+            
+            PointandClick assetOnlyScene = new PointandClick(assets);
 
             assetOnlyScene.show();
+            SceneNavigator.Instance.setCurrentScene(assetOnlyScene);
+            
             yield return new WaitForSeconds(1f);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -36,10 +43,10 @@ namespace Interactive
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            Asset asset = (Asset) aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
-            asset.incrementClickedNum();
-            
-            Assert.AreEqual(1, asset.getClickedNum());
+            Asset asset = aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            asset.getState().Click(asset);
+                
+            Assert.IsTrue(asset.getState().isClicked());
 
             HasBeenClicked clickedConditional = new HasBeenClicked(asset);
             
@@ -49,7 +56,7 @@ namespace Interactive
         [UnityTest]
         public IEnumerator HasBeenClickedConditionalFail()
         {
-            ClickerScene assetOnlyScene = new ClickerScene(assets);
+            PointandClick assetOnlyScene = new PointandClick(assets);
 
             assetOnlyScene.show();
             yield return new WaitForSeconds(1f);
@@ -59,9 +66,9 @@ namespace Interactive
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            Asset asset = (Asset) aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            Asset asset = aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
             
-            Assert.AreEqual(0, asset.getClickedNum());
+            Assert.IsFalse(asset.getState().isClicked());
             
             HasBeenClicked clickedConditional = new HasBeenClicked(asset);
 

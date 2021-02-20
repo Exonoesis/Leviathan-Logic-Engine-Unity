@@ -18,13 +18,11 @@ public class AssetViewer : MonoBehaviour
     }
 
     private RectTransform aPanelRT;
-    private SceneNavigator sNavi;
     private Dictionary<GameObject, Asset> prefabRelations;
     private Dictionary<string, GameObject> basePrefabs;
 
     void Awake()
     {
-        sNavi = SceneNavigator.Instance;
         aPanelRT = GameObject.FindWithTag("AssetsPanel")
             .GetComponent<RectTransform>();
         
@@ -63,16 +61,7 @@ public class AssetViewer : MonoBehaviour
 
         prefabRelations.Clear();
     }
-
-    public void handleClickedPrefab(GameObject prefab)
-    {
-        Asset asset = prefabRelations[prefab];
-        
-        asset.incrementClickedNum();
-        
-        sNavi.changeSceneIfSatisfied(asset);
-    }
-
+    
     public Asset getAssetFrom(GameObject prefab)
     {
         return prefabRelations[prefab];

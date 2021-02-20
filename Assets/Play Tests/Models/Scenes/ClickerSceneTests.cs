@@ -16,8 +16,7 @@ namespace Visual
         {
             new Asset("CA [Cat]",
             new Vector3(130, 92), 
-            null,
-            new ClickerSceneObject())
+            new PaCElement(null))
         };
         
         [SetUp]
@@ -29,7 +28,7 @@ namespace Visual
         [UnityTest]
         public IEnumerator ShowsBackground()
         {
-            ClickerScene currentScene = new ClickerScene(assets, background);
+            PointandClick currentScene = new PointandClick(assets, background);
 
             currentScene.show();
             yield return new WaitForSeconds(1f);
@@ -43,7 +42,7 @@ namespace Visual
         [UnityTest]
         public IEnumerator ShowsAssets()
         {
-            ClickerScene assetOnlyScene = new ClickerScene(assets);
+            PointandClick assetOnlyScene = new PointandClick(assets);
             
             assetOnlyScene.show();
             yield return new WaitForSeconds(1f);
@@ -61,7 +60,7 @@ namespace Visual
         [UnityTest]
         public IEnumerator RemovesAssetsFromScene()
         {
-            ClickerScene assetOnlyScene = new ClickerScene(assets);
+            PointandClick assetOnlyScene = new PointandClick(assets);
             
             assetOnlyScene.show();
             yield return new WaitForSeconds(1f);

@@ -18,7 +18,7 @@ public class MouseListener : MonoBehaviour
         
         if (Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
         {
-            aViewer.handleClickedPrefab(transform.parent.gameObject);
+            assetState.Click(selectedAsset);
         }
     }
 

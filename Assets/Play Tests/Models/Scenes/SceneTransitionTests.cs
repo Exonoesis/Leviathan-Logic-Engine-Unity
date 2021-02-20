@@ -23,8 +23,7 @@ namespace Visual
         {
             new Asset("CA [Cat]",
                 new Vector3(130, 92), 
-                null,
-                new ClickerSceneObject())
+                new PaCElement(null))
         };
         
         [SetUp]
@@ -66,7 +65,7 @@ namespace Visual
                 .GetComponent<DialogueViewer>();
             
             Cutscene firstScene = new Cutscene(speaker1, dialogue1, backgrounds[1]);
-            ClickerScene secondScene = new ClickerScene(assets1, backgrounds[0]);
+            PointandClick secondScene = new PointandClick(assets1, backgrounds[0]);
             
             firstScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
@@ -85,7 +84,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
 
-            ClickerScene firstScene = new ClickerScene(assets1, backgrounds[0]);
+            PointandClick firstScene = new PointandClick(assets1, backgrounds[0]);
             Cutscene secondScene = new Cutscene(speaker1, dialogue1, backgrounds[1]);
             
             firstScene.show();
@@ -105,12 +104,11 @@ namespace Visual
             {
                 new Asset("CA [Cat]",
                     new Vector3(270, 132), 
-                    null,
-                    new ClickerSceneObject())
+                    new PaCElement(null))
             };
 
-            ClickerScene firstScene = new ClickerScene(assets1, backgrounds[0]);
-            ClickerScene secondScene = new ClickerScene(assets2, backgrounds[1]);
+            PointandClick firstScene = new PointandClick(assets1, backgrounds[0]);
+            PointandClick secondScene = new PointandClick(assets2, backgrounds[1]);
             
             firstScene.show();
             yield return new WaitForSeconds(3f);

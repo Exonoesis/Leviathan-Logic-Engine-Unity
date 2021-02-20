@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ClickerScene : Scene
+public class PointandClick : Scene
 {
     private BackgroundViewer bgViewer;
     private AssetViewer aViewer;
@@ -9,7 +9,7 @@ public class ClickerScene : Scene
     private List<Asset> _assets;
     private Texture _background;
 
-    public ClickerScene(List<Asset> assets, Texture background = null)
+    public PointandClick(List<Asset> assets, Texture background = null)
     {
         bgViewer = BackgroundViewer.Instance;
         aViewer = AssetViewer.Instance;
