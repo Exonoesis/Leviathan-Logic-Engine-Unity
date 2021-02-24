@@ -32,7 +32,7 @@ The goal is for the engine to support a variety of mechanics from all different 
 - Linux/Ubuntu
 
 ### Installation/Getting Started
-1. Download [Unity Hub](https://unity3d.com/get-unity/download])
+1. Download [Unity Hub](https://unity3d.com/get-unity/download)
 2. In Unity Hub download the latest version of the Unity Editor
 3. Clone the Repository
 4. In Unity Hub click the 'Add' button and navigate to the cloned repository
