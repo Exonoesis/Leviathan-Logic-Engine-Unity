@@ -23,7 +23,7 @@ I made this logic engine to serve as the foundation for my own games (both free 
 - Choice based interactions
 - and more!
 
-The Leviathan Logic Engine is in active use by myself and thus in active development. Additional features will be added by yours truly as my projects call for them or via the code contributions of others. The goal is for the engine to support a variety of mechanics from all different genres which can be blended together to create unique game experiences.
+The goal is for the engine to support a variety of mechanics from all different genres which can be blended together to create unique game experiences. Additional features will be added as new projects call for them.
 
 ---
 
