@@ -3,15 +3,9 @@
 ---
 
 ### Project Description
-This engine is a cross-genre game making tool meant to be approachable for every type of game designer. 
+The Leviathan Logic Engine is a content-focused game creation framework with ease of flow in mind. The union of this framework and third-party tools aspires to maintain focus on the game's vision, keeping specialties such as art, narrative, and audio creation at the forefront. 
 
-The creation process is intended to be done through user-friendly external tools which use plain language to ease the creation process. This allows the designer to focus on art, narrative, and audio components; all without any programming knowledge.
-
-> NOTE: This project is still in the early stages of development. This version of the engine is far from being considered complete and there are no tools as of yet. Using the engine in its current state will require programming knowledge.
-
-However, for those who wish to create their own unique mechanics and customize the game experience beyond its current capabilities; the code base is written as cleanly as possible to facilitate modifications. 
-
-Underpinning every decision in this project is the goal to reduce cognitive load and improve ease of flow for the designer.
+> NOTE: This project is still in the early stages of development. This version of the engine is far from being considered complete, and there are no tools yet. Using the engine in its current state will require programming knowledge.
 
 ---
 
@@ -24,10 +18,10 @@ Underpinning every decision in this project is the goal to reduce cognitive load
 ##### Planned
 - Basic card game logic
 - Visual Novel conversational system with character portraits
-- Choice based interactions
+- Choice-based interactions
 - and more!
 
-The goal is for the engine to support a variety of mechanics from all different genres which can be blended together to create unique game experiences. Additional features will be added as new projects call for them.
+The engine's goal is to support various mechanics from all different genres, blending to create unique game experiences. Additional features will be added as new projects call for them.
 
 ---
 
@@ -37,16 +31,16 @@ The goal is for the engine to support a variety of mechanics from all different 
 
 ### Getting Started
 1. Download [Unity Hub](https://unity3d.com/get-unity/download)
-2. In Unity Hub download the latest version of the Unity Editor
+2. In Unity Hub, download the latest version of the Unity Editor
 3. Clone the Repository
-4. In Unity Hub click the 'Add' button and navigate to the cloned repository
+4. In Unity Hub, click the 'Add' button and navigate to the cloned repository
 5. Highlight the outermost folder of the cloned repository and click OK
 6. Double click the newly added project to open it in the Unity Editor
 
-To see the current working features you can run the Playtests in the Unity Editor via 
-`Window -> General -> Test Runner`. Ensure you are on the PlayMode tab and click Run All. Optionally you can run individual tests or run them by feature group.
+To see the current working features, run the Playtests in the Unity Editor via 
+`Window -> General -> Test Runner`. Ensure that the PlayMode tab is selected and click *Run All*. Optionally you can run individual tests or run them by feature group.
 
 ---
 
 ### License
-The Leviathan Logic Engine is distributed under GPLv3 which can be viewed via the [Project Copy](COPYING) or [External Copy](https://www.gnu.org/licenses/gpl-3.0.en.html).
+The Leviathan Logic Engine is distributed under GPLv3, which can be viewed via the [Project Copy](COPYING) or [External Copy](https://www.gnu.org/licenses/gpl-3.0.en.html).
