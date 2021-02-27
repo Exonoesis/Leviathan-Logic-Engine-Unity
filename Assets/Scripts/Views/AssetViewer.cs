@@ -30,6 +30,11 @@ public class AssetViewer : MonoBehaviour
         basePrefabs = new Dictionary<string, GameObject>();
     }
 
+    public void trackCoreAsset(Asset asset)
+    {
+        prefabRelations.Add(asset.getPrefab(), asset);
+    }
+    
     public void placeInScene(Asset asset)
     {
         GameObject assetBasePrefab;
