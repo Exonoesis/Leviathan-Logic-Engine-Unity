@@ -30,6 +30,10 @@ public class DialogueViewer : MonoBehaviour
 
     private int dialogueLength;
 
+    private Asset navButton;
+
+    private AssetViewer aViewer;
+
     void Awake()
     {
         DialoguePanel = GameObject.FindWithTag("DialoguePanel");
@@ -39,7 +43,19 @@ public class DialogueViewer : MonoBehaviour
         DialogueText = GameObject
             .FindWithTag("DialogueText")
             .GetComponent<TextMeshProUGUI>();
+        
+        aViewer = AssetViewer.Instance;
 
+        GameObject navButtonObject = GameObject.FindWithTag("NavButton");
+        
+        navButton = new Asset(
+            navButtonObject.name, 
+            navButtonObject.transform.position, 
+            new Button());
+        
+        navButton.setPrefab(navButtonObject.gameObject);
+        aViewer.trackCoreAsset(navButton);
+        
         DialoguePanel.SetActive(false);
     }
 
@@ -109,5 +125,10 @@ public class DialogueViewer : MonoBehaviour
     public void hideDialoguePanel()
     {
         DialoguePanel.SetActive(false);
+    }
+
+    public void setNavDes(Scene destination)
+    {
+        navButton.getState().setNextScene(destination);
     }
 }

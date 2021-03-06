@@ -25,7 +25,8 @@ namespace Interactive
         [UnityTest]
         public IEnumerator HasBeenClickedConditionalPass()
         {
-            Cutscene dummyScene = new Cutscene("Duck",
+            Cutscene dummyScene = new Cutscene(null,
+                "Duck",
                 "Quack!", 
                 Resources.Load<Texture>("Images/BG/Trees"));
             

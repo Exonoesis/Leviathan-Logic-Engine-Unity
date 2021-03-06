@@ -65,7 +65,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
 
-            Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
+            Cutscene currentScene = new Cutscene(null, desiredSpeaker, desiredDialogue);
 
             currentScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());

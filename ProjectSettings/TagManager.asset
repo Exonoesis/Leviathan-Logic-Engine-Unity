@@ -20,6 +20,7 @@ TagManager:
   - EventSystem
   - AssetsPanel
   - Cat
+  - NavButton
   layers:
   - Default
   - TransparentFX

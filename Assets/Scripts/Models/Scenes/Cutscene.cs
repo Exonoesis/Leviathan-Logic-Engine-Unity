@@ -9,7 +9,9 @@ public class Cutscene : Scene
     private string _speaker;
     private string _dialogue = ""; //Should be an array for additive text?
 
-    public Cutscene(string speaker, string dialogue, Texture background = null)
+    private Scene _nextScene;
+
+    public Cutscene(Scene nextScene, string speaker, string dialogue, Texture background = null)
     {
         bgViewer = BackgroundViewer.Instance;
         dlViewer = DialogueViewer.Instance;
@@ -17,12 +19,16 @@ public class Cutscene : Scene
         _speaker = speaker;
         _dialogue = dialogue;
         _background = background;
+        
+        _nextScene = nextScene;
     }
 
     public override void show()
     {
         showBackground();
         showDialogue();
+        
+        dlViewer.setNavDes(_nextScene);
     }
 
     private void showBackground()

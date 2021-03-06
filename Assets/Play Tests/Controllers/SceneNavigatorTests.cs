@@ -44,7 +44,7 @@ namespace Interactive
         [UnityTest]
         public IEnumerator NoConditionals()
         {
-            Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
+            Cutscene nextScene = new Cutscene(null, speaker, passDialogue, backgrounds[0]);
 
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             
@@ -73,7 +73,7 @@ namespace Interactive
         [UnityTest]
         public IEnumerator OnePass()
         {
-            Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
+            Cutscene nextScene = new Cutscene(null, speaker, passDialogue, backgrounds[0]);
 
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
 
@@ -108,8 +108,8 @@ namespace Interactive
         [UnityTest]
         public IEnumerator OneFail()
         {
-            Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
-            Cutscene errorScene = new Cutscene(speaker, failDialogue, backgrounds[1]);
+            Cutscene nextScene = new Cutscene(null, speaker, passDialogue, backgrounds[0]);
+            Cutscene errorScene = new Cutscene(null, speaker, failDialogue, backgrounds[1]);
 
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             
@@ -145,8 +145,8 @@ namespace Interactive
         {
             List<Scene> errorScenes = new List<Scene>
             {
-                new Cutscene(speaker, "I should not be here", backgrounds[1]),
-                new Cutscene(speaker, "Oops", backgrounds[1])
+                new Cutscene(null, speaker, "I should not be here", backgrounds[1]),
+                new Cutscene(null, speaker, "Oops", backgrounds[1])
             };
             
             Asset passingAsset = new Asset(

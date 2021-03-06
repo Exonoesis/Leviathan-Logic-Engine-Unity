@@ -43,8 +43,8 @@ namespace Visual
             string dialogue2 = "That's very unfortunate, small cat. I wish I could help you out there. "
                                + "However this is only a test and soon we will vanish.";
             
-            Cutscene firstScene = new Cutscene(speaker1, dialogue1, backgrounds[0]);
-            Cutscene secondScene = new Cutscene(speaker2, dialogue2, backgrounds[1]);
+            Cutscene firstScene = new Cutscene(null, speaker1, dialogue1, backgrounds[0]);
+            Cutscene secondScene = new Cutscene(null, speaker2, dialogue2, backgrounds[1]);
 
             firstScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
@@ -64,7 +64,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
             
-            Cutscene firstScene = new Cutscene(speaker1, dialogue1, backgrounds[1]);
+            Cutscene firstScene = new Cutscene(null, speaker1, dialogue1, backgrounds[1]);
             PointandClick secondScene = new PointandClick(assets1, backgrounds[0]);
             
             firstScene.show();
@@ -85,7 +85,7 @@ namespace Visual
                 .GetComponent<DialogueViewer>();
 
             PointandClick firstScene = new PointandClick(assets1, backgrounds[0]);
-            Cutscene secondScene = new Cutscene(speaker1, dialogue1, backgrounds[1]);
+            Cutscene secondScene = new Cutscene(null, speaker1, dialogue1, backgrounds[1]);
             
             firstScene.show();
             yield return new WaitForSeconds(3f);

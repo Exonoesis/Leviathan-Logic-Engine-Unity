@@ -20,21 +20,21 @@ public class AssetViewer : MonoBehaviour
     private RectTransform aPanelRT;
     private Dictionary<GameObject, Asset> prefabRelations;
     private Dictionary<string, GameObject> basePrefabs;
+    private Dictionary<GameObject, Asset> coreAssets;
 
     void Awake()
     {
         aPanelRT = GameObject.FindWithTag("AssetsPanel")
             .GetComponent<RectTransform>();
-        
-        prefabRelations = new Dictionary<GameObject, Asset>();
-        basePrefabs = new Dictionary<string, GameObject>();
-    }
-
-    public void trackCoreAsset(Asset asset)
-    {
-        prefabRelations.Add(asset.getPrefab(), asset);
     }
     
+    public AssetViewer()
+    {
+        prefabRelations = new Dictionary<GameObject, Asset>();
+        basePrefabs = new Dictionary<string, GameObject>();
+        coreAssets = new Dictionary<GameObject, Asset>();
+    }
+
     public void placeInScene(Asset asset)
     {
         GameObject assetBasePrefab;
@@ -57,6 +57,11 @@ public class AssetViewer : MonoBehaviour
         prefabRelations.Add(prefabObject, asset);
     }
 
+    public void trackCoreAsset(Asset asset)
+    {
+        coreAssets.Add(asset.getPrefab(), asset);
+    }
+
     public void clearAssets()
     {
         foreach (GameObject prefab in prefabRelations.Keys)
@@ -70,6 +75,11 @@ public class AssetViewer : MonoBehaviour
     public Asset getAssetFrom(GameObject prefab)
     {
         return prefabRelations[prefab];
+    }
+    
+    public Asset getCoreAssetFrom(GameObject prefab)
+    {
+        return coreAssets[prefab];
     }
 
     public void Darken(GameObject prefab)
