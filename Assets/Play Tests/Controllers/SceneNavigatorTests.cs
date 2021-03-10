@@ -62,7 +62,7 @@ namespace Interactive
 
             yield return new WaitForSeconds(1f);
 
-            Asset sceneAsset = aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            Asset sceneAsset = aViewer.getSceneAssetFrom(aPanel.transform.GetChild(0).gameObject);
             sceneAsset.getState().Click(sceneAsset);
             
             yield return new WaitForSeconds(3f);
@@ -97,7 +97,7 @@ namespace Interactive
 
             yield return new WaitForSeconds(1f);
 
-            Asset sceneAsset = aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            Asset sceneAsset = aViewer.getSceneAssetFrom(aPanel.transform.GetChild(0).gameObject);
             sceneAsset.getState().Click(sceneAsset);
             
             yield return new WaitForSeconds(3f);
@@ -133,7 +133,7 @@ namespace Interactive
 
             yield return new WaitForSeconds(1f);
             
-            sNavi.changeSceneIfSatisfied(aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject));
+            sNavi.changeSceneIfSatisfied(aViewer.getSceneAssetFrom(aPanel.transform.GetChild(0).gameObject));
 
             yield return new WaitForSeconds(3f);
 
@@ -191,7 +191,7 @@ namespace Interactive
 
             yield return new WaitForSeconds(1f);
             
-            Asset sceneAsset = aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            Asset sceneAsset = aViewer.getSceneAssetFrom(aPanel.transform.GetChild(0).gameObject);
             sceneAsset.getState().Click(sceneAsset);
             
             yield return new WaitForSeconds(3f);

@@ -18,8 +18,15 @@ public class AssetViewer : MonoBehaviour
     }
 
     private RectTransform aPanelRT;
-    private Dictionary<GameObject, Asset> prefabRelations;
+    
     private Dictionary<string, GameObject> basePrefabs;
+    
+    //Scene Assets are temporary and belong to the currently loaded Scene.
+    //The Dictionary is populated when a Scene containing Assets is loaded and is cleared upon scene change.
+    private Dictionary<GameObject, Asset> sceneAssets;
+    
+    //Core Assets are persistent throughout the game.
+    //The Dictionary is populated at game initialization and is not cleared during runtime.
     private Dictionary<GameObject, Asset> coreAssets;
 
     void Awake()
@@ -30,7 +37,7 @@ public class AssetViewer : MonoBehaviour
     
     public AssetViewer()
     {
-        prefabRelations = new Dictionary<GameObject, Asset>();
+        sceneAssets = new Dictionary<GameObject, Asset>();
         basePrefabs = new Dictionary<string, GameObject>();
         coreAssets = new Dictionary<GameObject, Asset>();
     }
@@ -54,7 +61,7 @@ public class AssetViewer : MonoBehaviour
         
         asset.setPrefab(prefabObject);
 
-        prefabRelations.Add(prefabObject, asset);
+        sceneAssets.Add(prefabObject, asset);
     }
 
     public void trackCoreAsset(Asset asset)
@@ -64,17 +71,17 @@ public class AssetViewer : MonoBehaviour
 
     public void clearAssets()
     {
-        foreach (GameObject prefab in prefabRelations.Keys)
+        foreach (GameObject prefab in sceneAssets.Keys)
         {
             Destroy(prefab);
         }
 
-        prefabRelations.Clear();
+        sceneAssets.Clear();
     }
     
-    public Asset getAssetFrom(GameObject prefab)
+    public Asset getSceneAssetFrom(GameObject prefab)
     {
-        return prefabRelations[prefab];
+        return sceneAssets[prefab];
     }
     
     public Asset getCoreAssetFrom(GameObject prefab)

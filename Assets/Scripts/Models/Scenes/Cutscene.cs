@@ -28,7 +28,7 @@ public class Cutscene : Scene
         showBackground();
         showDialogue();
         
-        dlViewer.setNavDes(_nextScene);
+        dlViewer.setNavDest(_nextScene);
     }
 
     private void showBackground()

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MouseListener : MonoBehaviour
+public class SceneAssetMouseListener : MonoBehaviour
 {
     private AssetViewer aViewer;
 
@@ -11,7 +11,7 @@ public class MouseListener : MonoBehaviour
     
     void OnMouseOver()
     {
-        Asset selectedAsset = aViewer.getAssetFrom(transform.parent.gameObject);
+        Asset selectedAsset = aViewer.getSceneAssetFrom(transform.parent.gameObject);
         
         State assetState = selectedAsset.getState();
         assetState.HoverEnter(selectedAsset);
@@ -24,7 +24,7 @@ public class MouseListener : MonoBehaviour
 
     void OnMouseExit()
     {
-        Asset selectedAsset = aViewer.getAssetFrom(transform.parent.gameObject);
+        Asset selectedAsset = aViewer.getSceneAssetFrom(transform.parent.gameObject);
 
         State assetState = selectedAsset.getState();
         assetState.HoverExit(selectedAsset);

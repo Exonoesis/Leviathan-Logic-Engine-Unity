@@ -44,7 +44,7 @@ namespace Interactive
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            Asset asset = aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            Asset asset = aViewer.getSceneAssetFrom(aPanel.transform.GetChild(0).gameObject);
             asset.getState().Click(asset);
                 
             Assert.IsTrue(asset.getState().isClicked());
@@ -67,7 +67,7 @@ namespace Interactive
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            Asset asset = aViewer.getAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            Asset asset = aViewer.getSceneAssetFrom(aPanel.transform.GetChild(0).gameObject);
             
             Assert.IsFalse(asset.getState().isClicked());
             

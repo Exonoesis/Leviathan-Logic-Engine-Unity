@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-//Discussion of conceptual difference between Core Assets and Scene Assets
-
 public class Asset
 {
     private Vector3 _position;

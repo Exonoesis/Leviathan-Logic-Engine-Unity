@@ -127,7 +127,7 @@ public class DialogueViewer : MonoBehaviour
         DialoguePanel.SetActive(false);
     }
 
-    public void setNavDes(Scene destination)
+    public void setNavDest(Scene destination)
     {
         navButton.getState().setNextScene(destination);
     }
