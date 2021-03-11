@@ -77,8 +77,10 @@ public class SceneNavigator : MonoBehaviour
         _conditionsTable.Add(asset, conditionList);
     }
 
-    public void addErrorScene(Asset asset, Conditional condition, Scene errorScene)
+    public void addErrorScene(Asset asset, Conditional condition, Cutscene errorScene)
     {
+        errorScene.setNextScene(_currentScene);
+        
         _errorSceneTable.Add((asset, condition), errorScene);
     }
 }

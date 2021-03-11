@@ -20,19 +20,18 @@ public class DialogueViewer : MonoBehaviour
     private GameObject DialoguePanel;
     private TextMeshProUGUI SpeakerName;
     private TextMeshProUGUI DialogueText;
+    
+    private AssetViewer aViewer;
 
     public float charPrintDelay = 0.05f;
-
+    
     private bool isTyping;
-    private bool isHoldingText;
-
-    private Coroutine typingCoroutine;
-
     private int dialogueLength;
-
+    
+    private Coroutine typingCoroutine;
+    
     private Asset navButton;
-
-    private AssetViewer aViewer;
+    private GameObject navButtonObject;
 
     void Awake()
     {
@@ -46,7 +45,7 @@ public class DialogueViewer : MonoBehaviour
         
         aViewer = AssetViewer.Instance;
 
-        GameObject navButtonObject = GameObject.FindWithTag("NavButton");
+        navButtonObject = GameObject.FindWithTag("NavButton");
         
         navButton = new Asset(
             navButtonObject.name, 
@@ -67,12 +66,11 @@ public class DialogueViewer : MonoBehaviour
 
             DialogueText.maxVisibleCharacters = dialogueLength;
             isTyping = false;
-            isHoldingText = true;
         }
 
-        if (isHoldingText && Input.GetMouseButtonUp(MouseCodes.PrimaryButton))
+        if (!isTyping)
         {
-            isHoldingText = false;
+            navButtonObject.SetActive(true);
         }
     }
 
@@ -81,14 +79,21 @@ public class DialogueViewer : MonoBehaviour
         return isTyping;
     }
 
+    public Asset getNavButton()
+    {
+        return navButton;
+    }
+
     public void PrintDialogue(string speaker, string text)
     {
         if (!DialoguePanel.activeSelf)
         {
             DialoguePanel.SetActive(true);
         }
+        
+        navButtonObject.SetActive(false);
 
-        if (!isTyping && !isHoldingText)
+        if (!isTyping)
         {
             typingCoroutine = StartCoroutine(Teletype(speaker, text));
         }
@@ -97,7 +102,7 @@ public class DialogueViewer : MonoBehaviour
     private IEnumerator Teletype(string speaker, string text)
     {
         isTyping = true;
-
+        
         SpeakerName.text = speaker;
         DialogueText.text = text;
         DialogueText.maxVisibleCharacters = 0;

@@ -26,6 +26,8 @@ namespace Visual
                 new PaCElement(null))
         };
         
+        
+        
         [SetUp]
         public void Setup()
         {
@@ -35,24 +37,23 @@ namespace Visual
         [UnityTest]
         public IEnumerator CutsceneCutscene()
         {
-            DialogueViewer dlViewer = GameObject
-                .FindWithTag("EventSystem")
-                .GetComponent<DialogueViewer>();
+            GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+            DialogueViewer dlViewer = eventSystem.GetComponent<DialogueViewer>();
+            SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             
             string speaker2 = "Jesse";
             string dialogue2 = "That's very unfortunate, small cat. I wish I could help you out there. "
                                + "However this is only a test and soon we will vanish.";
             
-            Cutscene firstScene = new Cutscene(null, speaker1, dialogue1, backgrounds[0]);
-            Cutscene secondScene = new Cutscene(null, speaker2, dialogue2, backgrounds[1]);
+            Cutscene secondScene = new Cutscene(speaker2, dialogue2, backgrounds[1]);
+            Cutscene firstScene = new Cutscene(speaker1, dialogue1, backgrounds[0], secondScene);
+            
+            sNavi.setCurrentScene(firstScene);
 
             firstScene.show();
+            yield return new WaitUntil(() => dlViewer.getNavButton().getState().isClicked());
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
-            
-            firstScene.hide();
-            secondScene.show();
-            
-            yield return new WaitUntil(() => !dlViewer.getIsTyping());
+            yield return new WaitForSeconds(1f);
             
             Assert.Inconclusive("Does the transition look smooth?");
         }
@@ -60,19 +61,18 @@ namespace Visual
         [UnityTest]
         public IEnumerator CutsceneClicker()
         {
-            DialogueViewer dlViewer = GameObject
-                .FindWithTag("EventSystem")
-                .GetComponent<DialogueViewer>();
+            GameObject eventSystem = GameObject.FindWithTag("EventSystem");
+            DialogueViewer dlViewer = eventSystem.GetComponent<DialogueViewer>();
+            SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             
-            Cutscene firstScene = new Cutscene(null, speaker1, dialogue1, backgrounds[1]);
             PointandClick secondScene = new PointandClick(assets1, backgrounds[0]);
+            Cutscene firstScene = new Cutscene(speaker1, dialogue1, backgrounds[1], secondScene);
+            
+            sNavi.setCurrentScene(firstScene);
             
             firstScene.show();
-            yield return new WaitUntil(() => !dlViewer.getIsTyping());
-            
-            firstScene.hide();
-            secondScene.show();
-            yield return new WaitForSeconds(3f);
+            yield return new WaitUntil(() => dlViewer.getNavButton().getState().isClicked());
+            yield return new WaitForSeconds(2f);
             
             Assert.Inconclusive("Does the transition look smooth?");
         }
@@ -83,9 +83,9 @@ namespace Visual
             DialogueViewer dlViewer = GameObject
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
-
+            
             PointandClick firstScene = new PointandClick(assets1, backgrounds[0]);
-            Cutscene secondScene = new Cutscene(null, speaker1, dialogue1, backgrounds[1]);
+            Cutscene secondScene = new Cutscene(speaker1, dialogue1, backgrounds[1]);
             
             firstScene.show();
             yield return new WaitForSeconds(3f);
@@ -93,6 +93,7 @@ namespace Visual
             firstScene.hide();
             secondScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
+            yield return new WaitForSeconds(1f);
             
             Assert.Inconclusive("Does the transition look smooth?");
         }

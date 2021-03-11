@@ -2,6 +2,8 @@ public class Button : State
 {
     private AssetViewer aViewer;
     private SceneNavigator sNavi;
+
+    private bool _isClicked;
     
     private Scene _nextScene;
     
@@ -19,6 +21,7 @@ public class Button : State
 
     public override void Click(Asset asset)
     {
+        _isClicked = true;
         sNavi = SceneNavigator.Instance;
         
         sNavi.changeSceneIfSatisfied(asset);
@@ -26,7 +29,7 @@ public class Button : State
 
     public override bool isClicked()
     {
-        return false;
+        return _isClicked;
     }
 
     public override Scene getNextScene()

@@ -44,12 +44,11 @@ namespace Interactive
         [UnityTest]
         public IEnumerator NoConditionals()
         {
-            Cutscene nextScene = new Cutscene(null, speaker, passDialogue, backgrounds[0]);
+            Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             
-            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, backgrounds[1]
-                );
+            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
@@ -73,7 +72,7 @@ namespace Interactive
         [UnityTest]
         public IEnumerator OnePass()
         {
-            Cutscene nextScene = new Cutscene(null, speaker, passDialogue, backgrounds[0]);
+            Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
 
@@ -108,8 +107,8 @@ namespace Interactive
         [UnityTest]
         public IEnumerator OneFail()
         {
-            Cutscene nextScene = new Cutscene(null, speaker, passDialogue, backgrounds[0]);
-            Cutscene errorScene = new Cutscene(null, speaker, failDialogue, backgrounds[1]);
+            Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
+            Cutscene errorScene = new Cutscene(speaker, failDialogue, backgrounds[1]);
 
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             
@@ -121,6 +120,7 @@ namespace Interactive
 
             SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             AssetViewer aViewer = eventSystem.GetComponent<AssetViewer>();
+            DialogueViewer dlViewer = eventSystem.GetComponent<DialogueViewer>();
 
             currentScene.show();
             sNavi.setCurrentScene(currentScene);
@@ -138,15 +138,22 @@ namespace Interactive
             yield return new WaitForSeconds(3f);
 
             Assert.AreEqual(sNavi.getCurrentScene(), errorScene);
+
+            Asset navButton = dlViewer.getNavButton();
+            navButton.getState().Click(navButton);
+            
+            Assert.AreEqual(currentScene, sNavi.getCurrentScene());
+            
+            yield return new WaitForSeconds(3f);
         }
         
         [UnityTest]
         public IEnumerator OnePassOneFail()
         {
-            List<Scene> errorScenes = new List<Scene>
+            List<Cutscene> errorScenes = new List<Cutscene>
             {
-                new Cutscene(null, speaker, "I should not be here", backgrounds[1]),
-                new Cutscene(null, speaker, "Oops", backgrounds[1])
+                new Cutscene(speaker, "I should not be here", backgrounds[1]),
+                new Cutscene(speaker, "Oops", backgrounds[1])
             };
             
             Asset passingAsset = new Asset(
@@ -172,6 +179,7 @@ namespace Interactive
 
             SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             AssetViewer aViewer = eventSystem.GetComponent<AssetViewer>();
+            DialogueViewer dlViewer = eventSystem.GetComponent<DialogueViewer>();
 
             currentScene.show();
             sNavi.setCurrentScene(currentScene);
@@ -196,7 +204,14 @@ namespace Interactive
             
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(sNavi.getCurrentScene(), errorScenes[1]);
+            Assert.AreEqual(errorScenes[1], sNavi.getCurrentScene());
+            
+            Asset navButton = dlViewer.getNavButton();
+            navButton.getState().Click(navButton);
+            
+            Assert.AreEqual(currentScene, sNavi.getCurrentScene());
+            
+            yield return new WaitForSeconds(3f);
         }
     }
 }

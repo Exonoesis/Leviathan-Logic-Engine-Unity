@@ -11,7 +11,7 @@ public class Cutscene : Scene
 
     private Scene _nextScene;
 
-    public Cutscene(Scene nextScene, string speaker, string dialogue, Texture background = null)
+    public Cutscene(string speaker, string dialogue, Texture background = null, Scene nextScene = null)
     {
         bgViewer = BackgroundViewer.Instance;
         dlViewer = DialogueViewer.Instance;
@@ -55,5 +55,10 @@ public class Cutscene : Scene
     private void deactivateDialoguePanel()
     {
         dlViewer.hideDialoguePanel();
+    }
+
+    public void setNextScene(Scene nextScene)
+    {
+        _nextScene = nextScene;
     }
 }

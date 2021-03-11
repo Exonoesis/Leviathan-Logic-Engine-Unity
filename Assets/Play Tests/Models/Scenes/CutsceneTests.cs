@@ -28,7 +28,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
             
-            Cutscene currentScene = new Cutscene(null, desiredSpeaker, desiredDialogue);
+            Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
 
             currentScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
@@ -49,7 +49,7 @@ namespace Visual
         {
             Texture desiredBackground = Resources.Load<Texture>("Images/BG/Stairs");
             
-            Cutscene currentScene = new Cutscene(null, desiredSpeaker, desiredDialogue, desiredBackground);
+            Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue, desiredBackground);
 
             currentScene.show();
             yield return new WaitForSeconds(1f);
@@ -67,7 +67,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
 
-            Cutscene currentScene = new Cutscene(null, desiredSpeaker, desiredDialogue);
+            Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
 
             currentScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());

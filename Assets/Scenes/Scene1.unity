@@ -911,6 +911,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Core [NavButton]
       objectReference: {fileID: 0}
+    - target: {fileID: 1005743271589873971, guid: 99aeed77699d3ab1b9f2a7323452eb37,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005743271589873971, guid: 99aeed77699d3ab1b9f2a7323452eb37,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005743271758324136, guid: 99aeed77699d3ab1b9f2a7323452eb37,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 207.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005743271758324136, guid: 99aeed77699d3ab1b9f2a7323452eb37,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -113.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005743271758324137, guid: 99aeed77699d3ab1b9f2a7323452eb37,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1005743272380465189, guid: 99aeed77699d3ab1b9f2a7323452eb37,
         type: 3}
       propertyPath: m_Pivot.x
