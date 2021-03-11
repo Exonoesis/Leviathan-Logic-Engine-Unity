@@ -9,6 +9,6 @@
 
     public override bool isMet()
     {
-        return _asset.getClickedNum() > 0;
+        return _asset.getState().isClicked();
     }
 }

@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace Interactive
 {
-    public class ConditionalCheckerTests
+    public class SceneNavigatorTests
     {
-        private string speaker = "Eevee";
+        private string speaker = "Cat";
         private string passDialogue = "How did I get here?";
         private string failDialogue = "We're missing an important item.";
         private List<Texture> backgrounds = new List<Texture>
@@ -18,7 +18,7 @@ namespace Interactive
             Resources.Load<Texture>("Images/BG/Stairs")
         };
 
-        private string assetName = "CA [Eevee]";
+        private string assetName = "CA [Cat]";
         private Vector3 assetPosition = new Vector3(130, 92);
         
         [SetUp]
@@ -46,27 +46,27 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene);
+            Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             
-            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, backgrounds[1]
-                );
+            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
 
-            ConditionalChecker cChecker = eventSystem.GetComponent<ConditionalChecker>();
+            SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             AssetViewer aViewer = eventSystem.GetComponent<AssetViewer>();
 
             currentScene.show();
-            cChecker.setCurrentScene(currentScene);
+            sNavi.setCurrentScene(currentScene);
 
             yield return new WaitForSeconds(1f);
 
-            aViewer.handleClickedPrefab(aPanel.transform.GetChild(0).gameObject);
-
+            Asset sceneAsset = aViewer.getSceneAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            sceneAsset.getState().Click(sceneAsset);
+            
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(cChecker.getCurrentScene(), nextScene);
+            Assert.AreEqual(sNavi.getCurrentScene(), nextScene);
         }
         
         [UnityTest]
@@ -74,21 +74,21 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene);
+            Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
 
-            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, 
+            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, 
                 backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
 
-            ConditionalChecker cChecker = eventSystem.GetComponent<ConditionalChecker>();
+            SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             AssetViewer aViewer = eventSystem.GetComponent<AssetViewer>();
 
             currentScene.show();
-            cChecker.setCurrentScene(currentScene);
+            sNavi.setCurrentScene(currentScene);
             
-            cChecker.addConditions(asset, 
+            sNavi.addConditions(asset, 
                 new List<Conditional>
                 {
                     new HasBeenClicked(asset)
@@ -96,11 +96,12 @@ namespace Interactive
 
             yield return new WaitForSeconds(1f);
 
-            aViewer.handleClickedPrefab(aPanel.transform.GetChild(0).gameObject);
-
+            Asset sceneAsset = aViewer.getSceneAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            sceneAsset.getState().Click(sceneAsset);
+            
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(cChecker.getCurrentScene(), nextScene);
+            Assert.AreEqual(sNavi.getCurrentScene(), nextScene);
         }
         
         [UnityTest]
@@ -109,46 +110,61 @@ namespace Interactive
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
             Cutscene errorScene = new Cutscene(speaker, failDialogue, backgrounds[1]);
 
-            Asset asset = new Asset(assetName, assetPosition, nextScene);
+            Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             
-            ClickerScene currentScene = new ClickerScene(new List<Asset>{asset}, 
+            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, 
                 backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
 
-            ConditionalChecker cChecker = eventSystem.GetComponent<ConditionalChecker>();
+            SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             AssetViewer aViewer = eventSystem.GetComponent<AssetViewer>();
+            DialogueViewer dlViewer = eventSystem.GetComponent<DialogueViewer>();
 
             currentScene.show();
-            cChecker.setCurrentScene(currentScene);
+            sNavi.setCurrentScene(currentScene);
 
             HasBeenClicked clickedCondition = new HasBeenClicked(asset);
             List<Conditional> conditionals = new List<Conditional>{clickedCondition};
 
-            cChecker.addConditions(asset, conditionals);
-            cChecker.addErrorScene(asset, clickedCondition, errorScene);
+            sNavi.addConditions(asset, conditionals);
+            sNavi.addErrorScene(asset, clickedCondition, errorScene);
 
             yield return new WaitForSeconds(1f);
             
-            cChecker.changeSceneIfSatisfied(aViewer.getAsset(aPanel.transform.GetChild(0).gameObject));
+            sNavi.changeSceneIfSatisfied(aViewer.getSceneAssetFrom(aPanel.transform.GetChild(0).gameObject));
 
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(cChecker.getCurrentScene(), errorScene);
+            Assert.AreEqual(sNavi.getCurrentScene(), errorScene);
+
+            Asset navButton = dlViewer.getNavButton();
+            navButton.getState().Click(navButton);
+            
+            Assert.AreEqual(currentScene, sNavi.getCurrentScene());
+            
+            yield return new WaitForSeconds(3f);
         }
         
         [UnityTest]
         public IEnumerator OnePassOneFail()
         {
-            List<Scene> errorScenes = new List<Scene>
+            List<Cutscene> errorScenes = new List<Cutscene>
             {
                 new Cutscene(speaker, "I should not be here", backgrounds[1]),
                 new Cutscene(speaker, "Oops", backgrounds[1])
             };
             
-            Asset passingAsset = new Asset(assetName, assetPosition, null);
-            Asset placeholderAsset = new Asset(assetName, new Vector3(275,147), null);
+            Asset passingAsset = new Asset(
+                assetName, 
+                assetPosition,
+                new PaCElement(null));
+            
+            Asset placeholderAsset = new Asset(
+                assetName, 
+                new Vector3(275,147), 
+                new PaCElement(null));
 
             List<Asset> assets = new List<Asset>()
             {
@@ -156,16 +172,17 @@ namespace Interactive
                 placeholderAsset
             };
             
-            ClickerScene currentScene = new ClickerScene(assets, backgrounds[1]);
+            PointandClick currentScene = new PointandClick(assets, backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
 
-            ConditionalChecker cChecker = eventSystem.GetComponent<ConditionalChecker>();
+            SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             AssetViewer aViewer = eventSystem.GetComponent<AssetViewer>();
+            DialogueViewer dlViewer = eventSystem.GetComponent<DialogueViewer>();
 
             currentScene.show();
-            cChecker.setCurrentScene(currentScene);
+            sNavi.setCurrentScene(currentScene);
 
             HasBeenClicked passingCondition = new HasBeenClicked(passingAsset);
             HasBeenClicked failingCondition = new HasBeenClicked(placeholderAsset);
@@ -175,18 +192,26 @@ namespace Interactive
                 failingCondition
             };
 
-            cChecker.addConditions(passingAsset, conditionals);
+            sNavi.addConditions(passingAsset, conditionals);
             
-            cChecker.addErrorScene(passingAsset, passingCondition, errorScenes[0]);
-            cChecker.addErrorScene(passingAsset, failingCondition, errorScenes[1]);
+            sNavi.addErrorScene(passingAsset, passingCondition, errorScenes[0]);
+            sNavi.addErrorScene(passingAsset, failingCondition, errorScenes[1]);
 
             yield return new WaitForSeconds(1f);
             
-            aViewer.handleClickedPrefab(aPanel.transform.GetChild(0).gameObject);
-
+            Asset sceneAsset = aViewer.getSceneAssetFrom(aPanel.transform.GetChild(0).gameObject);
+            sceneAsset.getState().Click(sceneAsset);
+            
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(cChecker.getCurrentScene(), errorScenes[1]);
+            Assert.AreEqual(errorScenes[1], sNavi.getCurrentScene());
+            
+            Asset navButton = dlViewer.getNavButton();
+            navButton.getState().Click(navButton);
+            
+            Assert.AreEqual(currentScene, sNavi.getCurrentScene());
+            
+            yield return new WaitForSeconds(3f);
         }
     }
 }

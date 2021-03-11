@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ConditionalChecker : MonoBehaviour
+public class SceneNavigator : MonoBehaviour
 {
-    private static ConditionalChecker _instance;
-    public static ConditionalChecker Instance
+    private static SceneNavigator _instance;
+    public static SceneNavigator Instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = FindObjectOfType<ConditionalChecker>();
+                _instance = FindObjectOfType<SceneNavigator>();
             }
-
             return _instance;
         }
     }
@@ -61,7 +60,7 @@ public class ConditionalChecker : MonoBehaviour
 
     private void showNextScene(Asset clickedAsset)
     {
-        Scene sceneToShow = clickedAsset.getDesiredScene();
+        Scene sceneToShow = clickedAsset.getState().getNextScene();
 
         _currentScene.hide();
         setCurrentScene(sceneToShow);
@@ -78,8 +77,10 @@ public class ConditionalChecker : MonoBehaviour
         _conditionsTable.Add(asset, conditionList);
     }
 
-    public void addErrorScene(Asset asset, Conditional condition, Scene errorScene)
+    public void addErrorScene(Asset asset, Conditional condition, Cutscene errorScene)
     {
+        errorScene.setNextScene(_currentScene);
+        
         _errorSceneTable.Add((asset, condition), errorScene);
     }
 }

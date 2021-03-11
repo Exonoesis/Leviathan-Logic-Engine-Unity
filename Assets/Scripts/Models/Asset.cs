@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
 
-public class Asset 
+public class Asset
 {
     private Vector3 _position;
-    private GameObject _prefab;
-    private Scene _desiredScene;
+    private string _prefabName;
+    private GameObject _prefabInstance;
+    private State _state;
 
-    private int _clickedNum;
-
-    public Asset(string prefabName, Vector3 position, Scene desiredScene)
+    public Asset(string prefabName, Vector3 position, State state)
     {
         _position = position;
-        _desiredScene = desiredScene;
-
-        _prefab = Resources.Load("Prefabs/" + prefabName) as GameObject;
+        _state = state;
+        _prefabName = prefabName;
     }
 
     public Vector3 getPosition()
@@ -21,23 +19,23 @@ public class Asset
         return _position;
     }
 
+    public string getPrefabName()
+    {
+        return _prefabName;
+    }
+
     public GameObject getPrefab()
     {
-        return _prefab;
+        return _prefabInstance;
     }
 
-    public Scene getDesiredScene()
+    public void setPrefab(GameObject prefab)
     {
-        return _desiredScene;
+        _prefabInstance = prefab;
     }
 
-    public int getClickedNum()
+    public State getState()
     {
-        return _clickedNum;
-    }
-
-    public void incrementClickedNum()
-    {
-        _clickedNum += 1;
+        return _state;
     }
 }

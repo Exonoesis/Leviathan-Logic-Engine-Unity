@@ -13,71 +13,89 @@ public class AssetViewer : MonoBehaviour
             {
                 _instance = FindObjectOfType<AssetViewer>();
             }
-
             return _instance;
         }
     }
 
     private RectTransform aPanelRT;
-    private ConditionalChecker cChecker;
-    private Dictionary<GameObject, Asset> prefabRelations;
+    
+    private Dictionary<string, GameObject> basePrefabs;
+    
+    //Scene Assets are temporary and belong to the currently loaded Scene.
+    //The Dictionary is populated when a Scene containing Assets is loaded and is cleared upon scene change.
+    private Dictionary<GameObject, Asset> sceneAssets;
+    
+    //Core Assets are persistent throughout the game.
+    //The Dictionary is populated at game initialization and is not cleared during runtime.
+    private Dictionary<GameObject, Asset> coreAssets;
 
     void Awake()
     {
-        GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
-        cChecker = ConditionalChecker.Instance;
-        aPanelRT = aPanel.GetComponent<RectTransform>();
-        
-
-        prefabRelations = new Dictionary<GameObject, Asset>();
+        aPanelRT = GameObject.FindWithTag("AssetsPanel")
+            .GetComponent<RectTransform>();
+    }
+    
+    public AssetViewer()
+    {
+        sceneAssets = new Dictionary<GameObject, Asset>();
+        basePrefabs = new Dictionary<string, GameObject>();
+        coreAssets = new Dictionary<GameObject, Asset>();
     }
 
     public void placeInScene(Asset asset)
     {
-        GameObject prefab = asset.getPrefab();
+        GameObject assetBasePrefab;
+        if (basePrefabs.ContainsKey(asset.getPrefabName()))
+        {
+            assetBasePrefab = basePrefabs[asset.getPrefabName()];
+        }
+        else
+        {
+            assetBasePrefab = Resources.Load("Prefabs/" + asset.getPrefabName()) as GameObject;
+            basePrefabs[asset.getPrefabName()] = assetBasePrefab;
+        }
 
-        GameObject prefabObject = Instantiate(prefab, aPanelRT);
+        GameObject prefabObject = Instantiate(assetBasePrefab, aPanelRT);
 
         prefabObject.transform.position = asset.getPosition();
+        
+        asset.setPrefab(prefabObject);
 
-        prefabRelations.Add(prefabObject, asset);
+        sceneAssets.Add(prefabObject, asset);
+    }
+
+    public void trackCoreAsset(Asset asset)
+    {
+        coreAssets.Add(asset.getPrefab(), asset);
     }
 
     public void clearAssets()
     {
-        foreach (GameObject prefab in prefabRelations.Keys)
+        foreach (GameObject prefab in sceneAssets.Keys)
         {
             Destroy(prefab);
         }
 
-        prefabRelations.Clear();
+        sceneAssets.Clear();
     }
-
-    public void handleClickedPrefab(GameObject prefab)
+    
+    public Asset getSceneAssetFrom(GameObject prefab)
     {
-        Asset asset = prefabRelations[prefab];
-
-        asset.incrementClickedNum();
-
-        cChecker.changeSceneIfSatisfied(asset);
+        return sceneAssets[prefab];
     }
-
-    public Asset getAsset(GameObject prefab)
+    
+    public Asset getCoreAssetFrom(GameObject prefab)
     {
-        Asset asset = prefabRelations[prefab];
-
-        return asset;
+        return coreAssets[prefab];
     }
 
     public void Darken(GameObject prefab)
     {
-        Image image = prefab.GetComponent<Image>();
-        image.color = Color.grey;
+        prefab.GetComponentInChildren<Image>().color = Color.grey;
     }
 
     public void Lighten(GameObject prefab)
     {
-        Image image = prefab.GetComponent<Image>();
-        image.color = Color.white;
+        prefab.GetComponentInChildren<Image>().color = Color.white;
     }
 }
