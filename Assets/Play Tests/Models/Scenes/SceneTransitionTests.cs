@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Visual
 {
+    [Ignore("These tests are purely cosmetic, some requiring mouse inputs.")]
     public class SceneTransitionTests
     {
         private string speaker1 = "Cat";
