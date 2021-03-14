@@ -44,15 +44,17 @@ public class AssetViewer : MonoBehaviour
 
     public void placeInScene(Asset asset)
     {
+        string prefabName = asset.getPrefabName();
         GameObject assetBasePrefab;
-        if (basePrefabs.ContainsKey(asset.getPrefabName()))
+        
+        if (basePrefabs.ContainsKey(prefabName))
         {
-            assetBasePrefab = basePrefabs[asset.getPrefabName()];
+            assetBasePrefab = basePrefabs[prefabName];
         }
         else
         {
-            assetBasePrefab = Resources.Load("Prefabs/" + asset.getPrefabName()) as GameObject;
-            basePrefabs[asset.getPrefabName()] = assetBasePrefab;
+            assetBasePrefab = Resources.Load("Prefabs/" + prefabName) as GameObject;
+            basePrefabs[prefabName] = assetBasePrefab;
         }
 
         GameObject prefabObject = Instantiate(assetBasePrefab, aPanelRT);
@@ -68,16 +70,6 @@ public class AssetViewer : MonoBehaviour
     {
         coreAssets.Add(asset.getPrefab(), asset);
     }
-
-    public void clearAssets()
-    {
-        foreach (GameObject prefab in sceneAssets.Keys)
-        {
-            Destroy(prefab);
-        }
-
-        sceneAssets.Clear();
-    }
     
     public Asset getSceneAssetFrom(GameObject prefab)
     {
@@ -87,6 +79,16 @@ public class AssetViewer : MonoBehaviour
     public Asset getCoreAssetFrom(GameObject prefab)
     {
         return coreAssets[prefab];
+    }
+    
+    public void clearSceneAssets()
+    {
+        foreach (GameObject prefab in sceneAssets.Keys)
+        {
+            Destroy(prefab);
+        }
+
+        sceneAssets.Clear();
     }
 
     public void Darken(GameObject prefab)

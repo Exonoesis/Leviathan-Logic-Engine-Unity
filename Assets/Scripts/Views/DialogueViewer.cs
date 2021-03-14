@@ -17,24 +17,25 @@ public class DialogueViewer : MonoBehaviour
         }
     }
 
+    private AssetViewer aViewer;
+    
     private GameObject DialoguePanel;
     private TextMeshProUGUI SpeakerName;
     private TextMeshProUGUI DialogueText;
     
-    private AssetViewer aViewer;
-
+    private Asset navButton;
+    private GameObject navButtonObject;
+    
+    private int dialogueLength;
     public float charPrintDelay = 0.05f;
     
     private bool isTyping;
-    private int dialogueLength;
-    
     private Coroutine typingCoroutine;
-    
-    private Asset navButton;
-    private GameObject navButtonObject;
 
     void Awake()
     {
+        aViewer = AssetViewer.Instance;
+        
         DialoguePanel = GameObject.FindWithTag("DialoguePanel");
         SpeakerName = GameObject
             .FindWithTag("SpeakerNameText")
@@ -42,9 +43,6 @@ public class DialogueViewer : MonoBehaviour
         DialogueText = GameObject
             .FindWithTag("DialogueText")
             .GetComponent<TextMeshProUGUI>();
-        
-        aViewer = AssetViewer.Instance;
-
         navButtonObject = GameObject.FindWithTag("NavButton");
         
         navButton = new Asset(
@@ -52,7 +50,7 @@ public class DialogueViewer : MonoBehaviour
             navButtonObject.transform.position, 
             new Button());
         
-        navButton.setPrefab(navButtonObject.gameObject);
+        navButton.setPrefab(navButtonObject);
         aViewer.trackCoreAsset(navButton);
         
         DialoguePanel.SetActive(false);
@@ -74,16 +72,6 @@ public class DialogueViewer : MonoBehaviour
         }
     }
 
-    public bool getIsTyping()
-    {
-        return isTyping;
-    }
-
-    public Asset getNavButton()
-    {
-        return navButton;
-    }
-
     public void PrintDialogue(string speaker, string text)
     {
         if (!DialoguePanel.activeSelf)
@@ -93,10 +81,7 @@ public class DialogueViewer : MonoBehaviour
         
         navButtonObject.SetActive(false);
 
-        if (!isTyping)
-        {
-            typingCoroutine = StartCoroutine(Teletype(speaker, text));
-        }
+        typingCoroutine = StartCoroutine(Teletype(speaker, text));
     }
 
     private IEnumerator Teletype(string speaker, string text)
@@ -120,6 +105,21 @@ public class DialogueViewer : MonoBehaviour
         }
         isTyping = false;
     }
+    
+    public bool getIsTyping()
+    {
+        return isTyping;
+    }
+
+    public Asset getNavButton()
+    {
+        return navButton;
+    }
+    
+    public void setNavDest(Scene destination)
+    {
+        navButton.getState().setNextScene(destination);
+    }
 
     public void clearTextFields()
     {
@@ -130,10 +130,5 @@ public class DialogueViewer : MonoBehaviour
     public void hideDialoguePanel()
     {
         DialoguePanel.SetActive(false);
-    }
-
-    public void setNavDest(Scene destination)
-    {
-        navButton.getState().setNextScene(destination);
     }
 }

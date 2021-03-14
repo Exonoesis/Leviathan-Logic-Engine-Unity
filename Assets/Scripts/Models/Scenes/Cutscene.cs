@@ -43,17 +43,7 @@ public class Cutscene : Scene
 
     public override void hide()
     {
-        clearDialoguePanel();
-        deactivateDialoguePanel();
-    }
-
-    private void clearDialoguePanel()
-    {
         dlViewer.clearTextFields();
-    }
-
-    private void deactivateDialoguePanel()
-    {
         dlViewer.hideDialoguePanel();
     }
 

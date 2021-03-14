@@ -39,6 +39,6 @@ public class PointandClick : Scene
 
     public override void hide()
     {
-        aViewer.clearAssets();
+        aViewer.clearSceneAssets();
     }
 }

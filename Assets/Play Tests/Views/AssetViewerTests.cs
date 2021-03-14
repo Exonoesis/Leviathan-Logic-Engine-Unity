@@ -98,7 +98,7 @@ namespace Visual
 
             Assert.AreEqual(1, numAssets);
 
-            aViewer.clearAssets();
+            aViewer.clearSceneAssets();
             yield return new WaitForSeconds(1f);
 
             numAssets = aPanel.transform.childCount;
