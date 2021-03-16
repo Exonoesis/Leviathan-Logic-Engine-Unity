@@ -18,19 +18,14 @@ public class SceneNavigator : MonoBehaviour
 
     private Scene _currentScene;
     private Dictionary<Asset, List<Conditional>> _conditionsTable;
-    private Dictionary<(Asset, Conditional), Scene> _errorSceneTable;
-
-    public Scene getCurrentScene()
-    {
-        return _currentScene;
-    }
-
+    private Dictionary<(Asset, Conditional), Cutscene> _errorSceneTable;
+    
     void Awake()
     {
         _conditionsTable = new Dictionary<Asset, List<Conditional>>();
-        _errorSceneTable = new Dictionary<(Asset, Conditional), Scene>();
+        _errorSceneTable = new Dictionary<(Asset, Conditional), Cutscene>();
     }
-
+    
     public void changeSceneIfSatisfied(Asset clickedAsset)
     {
         if (_conditionsTable.ContainsKey(clickedAsset))
@@ -51,7 +46,7 @@ public class SceneNavigator : MonoBehaviour
 
     private void showErrorScene(Asset clickedAsset, Conditional failedCondition)
     {
-        Scene errorToShow = _errorSceneTable[(clickedAsset, failedCondition)];
+        Cutscene errorToShow = _errorSceneTable[(clickedAsset, failedCondition)];
 
         _currentScene.hide();
         setCurrentScene(errorToShow);
@@ -66,12 +61,7 @@ public class SceneNavigator : MonoBehaviour
         setCurrentScene(sceneToShow);
         sceneToShow.show();
     }
-
-    public void setCurrentScene(Scene newScene)
-    {
-        _currentScene = newScene;
-    }
-
+    
     public void addConditions(Asset asset, List<Conditional> conditionList)
     {
         _conditionsTable.Add(asset, conditionList);
@@ -82,5 +72,15 @@ public class SceneNavigator : MonoBehaviour
         errorScene.setNextScene(_currentScene);
         
         _errorSceneTable.Add((asset, condition), errorScene);
+    }
+
+    public Scene getCurrentScene()
+    {
+        return _currentScene;
+    }
+    
+    public void setCurrentScene(Scene newScene)
+    {
+        _currentScene = newScene;
     }
 }

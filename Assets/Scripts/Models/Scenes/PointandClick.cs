@@ -20,23 +20,14 @@ public class PointandClick : Scene
 
     public override void show()
     {
-        showBackground();
-        showAssets();
-    }
-
-    private void showBackground()
-    {
         bgViewer.Transition(_background);
-    }
-
-    private void showAssets()
-    {
+        
         foreach (Asset asset in _assets)
         {
             aViewer.placeInScene(asset);
         }
     }
-
+    
     public override void hide()
     {
         aViewer.clearSceneAssets();

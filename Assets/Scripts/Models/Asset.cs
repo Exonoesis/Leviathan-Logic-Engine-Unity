@@ -2,26 +2,31 @@
 
 public class Asset
 {
-    private Vector3 _position;
     private string _prefabName;
-    private GameObject _prefabInstance;
+    private Vector3 _position;
     private State _state;
 
+    private GameObject _prefabInstance;
+    
     public Asset(string prefabName, Vector3 position, State state)
     {
+        _prefabName = prefabName;
         _position = position;
         _state = state;
-        _prefabName = prefabName;
     }
-
+    public string getPrefabName()
+    {
+        return _prefabName;
+    }
+    
     public Vector3 getPosition()
     {
         return _position;
     }
 
-    public string getPrefabName()
+    public State getState()
     {
-        return _prefabName;
+        return _state;
     }
 
     public GameObject getPrefab()
@@ -32,10 +37,5 @@ public class Asset
     public void setPrefab(GameObject prefab)
     {
         _prefabInstance = prefab;
-    }
-
-    public State getState()
-    {
-        return _state;
     }
 }
