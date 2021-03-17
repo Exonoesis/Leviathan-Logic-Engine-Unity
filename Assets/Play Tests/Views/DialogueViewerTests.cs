@@ -29,14 +29,18 @@ namespace Visual
             
             dlViewer.PrintDialogue(desiredSpeaker, desiredDialogue);
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
-
-            GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
-            string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
+            
+            string currentSpeaker = GameObject
+                .FindWithTag("SpeakerNameText")
+                .GetComponent<TMPro.TextMeshProUGUI>()
+                .text;
 
             Assert.AreEqual(desiredSpeaker, currentSpeaker);
 
-            GameObject dialogueText = GameObject.FindWithTag("DialogueText");
-            string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
+            string currentDialogue = GameObject
+                .FindWithTag("DialogueText")
+                .GetComponent<TMPro.TextMeshProUGUI>()
+                .text;
 
             Assert.AreEqual(desiredDialogue, currentDialogue);
         }

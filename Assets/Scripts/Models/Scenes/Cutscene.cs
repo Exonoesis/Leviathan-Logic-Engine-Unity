@@ -5,9 +5,9 @@ public class Cutscene : Scene
     private BackgroundViewer bgViewer;
     private DialogueViewer dlViewer;
 
-    private Texture _background;
     private string _speaker;
-    private string _dialogue = ""; //Should be an array for additive text?
+    private string _dialogue;
+    private Texture _background;
 
     private Scene _nextScene;
 
@@ -25,35 +25,14 @@ public class Cutscene : Scene
 
     public override void show()
     {
-        showBackground();
-        showDialogue();
-        
+        bgViewer.Transition(_background);
+        dlViewer.PrintDialogue(_speaker, _dialogue);
         dlViewer.setNavDest(_nextScene);
     }
-
-    private void showBackground()
-    {
-        bgViewer.Transition(_background);
-    }
-
-    private void showDialogue()
-    {
-        dlViewer.PrintDialogue(_speaker, _dialogue);
-    }
-
+    
     public override void hide()
     {
-        clearDialoguePanel();
-        deactivateDialoguePanel();
-    }
-
-    private void clearDialoguePanel()
-    {
         dlViewer.clearTextFields();
-    }
-
-    private void deactivateDialoguePanel()
-    {
         dlViewer.hideDialoguePanel();
     }
 

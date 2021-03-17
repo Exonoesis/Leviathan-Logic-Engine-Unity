@@ -3,9 +3,8 @@ public class Button : State
     private AssetViewer aViewer;
     private SceneNavigator sNavi;
 
-    private bool _isClicked;
-    
     private Scene _nextScene;
+    private bool _isClicked;
     
     public override void HoverEnter(Asset asset)
     {
@@ -21,8 +20,9 @@ public class Button : State
 
     public override void Click(Asset asset)
     {
-        _isClicked = true;
         sNavi = SceneNavigator.Instance;
+        
+        _isClicked = true;
         
         sNavi.changeSceneIfSatisfied(asset);
     }

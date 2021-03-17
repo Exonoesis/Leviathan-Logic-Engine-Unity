@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Visual
 {
+    //Comment out this line for local testing purposes, otherwise Unity will not run these tests
     [Ignore("These tests are purely cosmetic, some requiring mouse inputs.")]
     public class SceneTransitionTests
     {
@@ -27,8 +28,6 @@ namespace Visual
                 new PaCElement(null))
         };
         
-        
-        
         [SetUp]
         public void Setup()
         {
@@ -36,7 +35,7 @@ namespace Visual
         }
 
         [UnityTest]
-        public IEnumerator CutsceneCutscene()
+        public IEnumerator CutsceneToCutscene()
         {
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
             DialogueViewer dlViewer = eventSystem.GetComponent<DialogueViewer>();
@@ -44,13 +43,13 @@ namespace Visual
             
             string speaker2 = "Jesse";
             string dialogue2 = "That's very unfortunate, small cat. I wish I could help you out there. "
-                               + "However this is only a test and soon we will vanish.";
+                               + "However, this is only a test and soon we will vanish the void.";
             
             Cutscene secondScene = new Cutscene(speaker2, dialogue2, backgrounds[1]);
             Cutscene firstScene = new Cutscene(speaker1, dialogue1, backgrounds[0], secondScene);
             
             sNavi.setCurrentScene(firstScene);
-
+            
             firstScene.show();
             yield return new WaitUntil(() => dlViewer.getNavButton().getState().isClicked());
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
@@ -60,7 +59,7 @@ namespace Visual
         }
         
         [UnityTest]
-        public IEnumerator CutsceneClicker()
+        public IEnumerator CutsceneToPaC()
         {
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
             DialogueViewer dlViewer = eventSystem.GetComponent<DialogueViewer>();
@@ -79,17 +78,17 @@ namespace Visual
         }
         
         [UnityTest]
-        public IEnumerator ClickerCutscene()
+        public IEnumerator PaCToCutscene()
         {
             DialogueViewer dlViewer = GameObject
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
             
-            PointandClick firstScene = new PointandClick(assets1, backgrounds[0]);
             Cutscene secondScene = new Cutscene(speaker1, dialogue1, backgrounds[1]);
+            PointandClick firstScene = new PointandClick(assets1, backgrounds[0]);
             
             firstScene.show();
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             
             firstScene.hide();
             secondScene.show();
@@ -100,7 +99,7 @@ namespace Visual
         }
         
         [UnityTest]
-        public IEnumerator ClickerClicker()
+        public IEnumerator PaCToPaC()
         {
             List<Asset> assets2 = new List<Asset> 
             {
@@ -109,15 +108,15 @@ namespace Visual
                     new PaCElement(null))
             };
 
-            PointandClick firstScene = new PointandClick(assets1, backgrounds[0]);
             PointandClick secondScene = new PointandClick(assets2, backgrounds[1]);
+            PointandClick firstScene = new PointandClick(assets1, backgrounds[0]);
             
             firstScene.show();
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             
             firstScene.hide();
             secondScene.show();
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             
             Assert.Inconclusive("Does the transition look smooth?");
         }

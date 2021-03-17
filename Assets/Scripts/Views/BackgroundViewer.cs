@@ -18,34 +18,35 @@ public class BackgroundViewer : MonoBehaviour
 
     private GameObject BGStatic;
     private GameObject BGDynamic;
-
-    private bool isTransitioning = false;
-    private float speed = .5f;
-
-    private RawImage dynamicImage;
+    
     private RawImage staticImage;
+    private RawImage dynamicImage;
+
+    private bool isTransitioning;
+    private float fadeSpeed = .5f;
 
     public void Awake()
     {
-        speed *= Time.deltaTime;
+        fadeSpeed *= Time.deltaTime;
 
         BGStatic = GameObject.FindWithTag("BGPanelStatic");
         BGDynamic = GameObject.FindWithTag("BGPanelDynamic");
-        BGDynamic.SetActive(false);
-
+        
         dynamicImage = BGDynamic.GetComponent<RawImage>();
         staticImage = BGStatic.GetComponent<RawImage>();
+        
+        BGDynamic.SetActive(false);
     }
 
     public void Update()
     {
         if (isTransitioning)
         {
-            dynamicImage.color = ToAlpha(dynamicImage.color,
+            dynamicImage.color = toAlpha(dynamicImage.color,
                 Mathf.MoveTowards(
                     dynamicImage.color.a,
                     0f, 
-                    speed));
+                    fadeSpeed));
 
             if (dynamicImage.color.a <= 0)
             {
@@ -56,23 +57,23 @@ public class BackgroundViewer : MonoBehaviour
 
         else if (dynamicImage.color.a < 1)
         {
-            dynamicImage.color = ToAlpha(dynamicImage.color, 1f);
+            dynamicImage.color = toAlpha(dynamicImage.color, 1f);
         }
     }
 
-    public void Transition(Texture tex)
+    public void Transition(Texture texture)
     {
-        if (!isTransitioning && tex != null)
+        if (!isTransitioning && texture != null)
         {
             dynamicImage.texture = staticImage.texture;
             BGDynamic.SetActive(true);
 
-            staticImage.texture = tex;
+            staticImage.texture = texture;
             isTransitioning = true;
         }
     }
 
-    public static Color ToAlpha(Color color, float alpha)
+    public static Color toAlpha(Color color, float alpha)
     {
         return new Color(color.r, color.g, color.b, alpha);
     }

@@ -37,8 +37,10 @@ namespace Visual
             Assert.AreEqual(_desiredAsset.getPrefab().name, asset.name);
 
             Vector3 position = asset.position;
-            Assert.AreEqual(Math.Floor(_desiredAsset.getPosition().x), Math.Floor(position.x));
-            Assert.AreEqual(Math.Floor(_desiredAsset.getPosition().y), Math.Floor(position.y));
+            Vector3 desiredPosition = _desiredAsset.getPosition();
+            
+            Assert.AreEqual(Math.Floor(desiredPosition.x), Math.Floor(position.x));
+            Assert.AreEqual(Math.Floor(desiredPosition.y), Math.Floor(position.y));
         }
         
         [UnityTest]
@@ -62,7 +64,7 @@ namespace Visual
         }
         
         [UnityTest]
-        public IEnumerator AssetLightensAfterDimming()
+        public IEnumerator AssetLightens()
         {
             AssetViewer aViewer = GameObject
                 .FindWithTag("EventSystem")
@@ -98,7 +100,7 @@ namespace Visual
 
             Assert.AreEqual(1, numAssets);
 
-            aViewer.clearAssets();
+            aViewer.clearSceneAssets();
             yield return new WaitForSeconds(1f);
 
             numAssets = aPanel.transform.childCount;

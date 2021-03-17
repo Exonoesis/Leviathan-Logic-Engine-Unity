@@ -27,27 +27,11 @@ namespace Interactive
             SceneManager.LoadScene(0);
         }
         
-        /*
-        Due to some sort of issue with loading scenes a teardown method is required in order to properly reset
-        the scene. Without it, backgrounds are not visually appearing in certain tests.
-        UnloadScene() was chosen - despite being obsolete - because, and I quote, 
-              
-        "It is not possible to UnloadSceneAsync if there are no scenes to load. 
-        For example, a project that has a single scene cannot use this static member."
-        
-        [TearDown]
-        public void TearDown()
-        {
-            SceneManager.UnloadScene(0);
-        }
-        */
         [UnityTest]
         public IEnumerator NoConditionals()
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
-
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
-            
             PointandClick currentScene = new PointandClick(new List<Asset>{asset}, backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -66,18 +50,15 @@ namespace Interactive
             
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(sNavi.getCurrentScene(), nextScene);
+            Assert.AreEqual(nextScene, sNavi.getCurrentScene());
         }
         
         [UnityTest]
         public IEnumerator OnePass()
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
-
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
-
-            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, 
-                backgrounds[1]);
+            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
@@ -101,7 +82,7 @@ namespace Interactive
             
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(sNavi.getCurrentScene(), nextScene);
+            Assert.AreEqual(nextScene, sNavi.getCurrentScene());
         }
         
         [UnityTest]
@@ -109,11 +90,8 @@ namespace Interactive
         {
             Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
             Cutscene errorScene = new Cutscene(speaker, failDialogue, backgrounds[1]);
-
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
-            
-            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, 
-                backgrounds[1]);
+            PointandClick currentScene = new PointandClick(new List<Asset>{asset}, backgrounds[1]);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
             GameObject eventSystem = GameObject.FindWithTag("EventSystem");
@@ -137,7 +115,7 @@ namespace Interactive
 
             yield return new WaitForSeconds(3f);
 
-            Assert.AreEqual(sNavi.getCurrentScene(), errorScene);
+            Assert.AreEqual(errorScene, sNavi.getCurrentScene());
 
             Asset navButton = dlViewer.getNavButton();
             navButton.getState().Click(navButton);
@@ -152,8 +130,8 @@ namespace Interactive
         {
             List<Cutscene> errorScenes = new List<Cutscene>
             {
-                new Cutscene(speaker, "I should not be here", backgrounds[1]),
-                new Cutscene(speaker, "Oops", backgrounds[1])
+                new Cutscene(speaker, "I should not be here.", backgrounds[1]),
+                new Cutscene(speaker, "Oops!", backgrounds[1])
             };
             
             Asset passingAsset = new Asset(
