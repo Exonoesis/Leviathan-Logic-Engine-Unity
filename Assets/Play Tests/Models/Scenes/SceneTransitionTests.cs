@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Visual
 {
     //Comment out this line for local testing purposes, otherwise Unity will not run these tests
-    //[Ignore("These tests are purely cosmetic, some requiring mouse inputs.")]
+    [Ignore("These tests are purely cosmetic, some requiring mouse inputs.")]
     public class SceneTransitionTests
     {
         private string speaker1 = "Cat";
