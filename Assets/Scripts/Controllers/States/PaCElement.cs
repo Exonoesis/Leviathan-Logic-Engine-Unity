@@ -4,7 +4,7 @@ public class PaCElement : State
     private SceneNavigator sNavi;
 
     private Scene _nextScene;
-    private bool clicked;
+    private bool _isClicked;
 
     public PaCElement(Scene nextScene)
     {
@@ -27,14 +27,14 @@ public class PaCElement : State
     {
         sNavi = SceneNavigator.Instance;
         
-        clicked = true;
+        _isClicked = true;
         
         sNavi.changeSceneIfSatisfied(asset);
     }
     
     public override bool isClicked()
     {
-        return clicked;
+        return _isClicked;
     }
 
     public override Scene getNextScene()

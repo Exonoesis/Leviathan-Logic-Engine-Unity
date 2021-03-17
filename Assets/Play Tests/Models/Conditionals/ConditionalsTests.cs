@@ -32,10 +32,10 @@ namespace Interactive
             
             assets[0].getState().setNextScene(dummyScene);
             
-            PointandClick assetOnlyScene = new PointandClick(assets);
+            PointandClick currentScene = new PointandClick(assets);
 
-            assetOnlyScene.show();
-            SceneNavigator.Instance.setCurrentScene(assetOnlyScene);
+            currentScene.show();
+            SceneNavigator.Instance.setCurrentScene(currentScene);
             
             yield return new WaitForSeconds(1f);
 
@@ -57,9 +57,9 @@ namespace Interactive
         [UnityTest]
         public IEnumerator HasBeenClickedConditionalFail()
         {
-            PointandClick assetOnlyScene = new PointandClick(assets);
+            PointandClick currentScene = new PointandClick(assets);
 
-            assetOnlyScene.show();
+            currentScene.show();
             yield return new WaitForSeconds(1f);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");

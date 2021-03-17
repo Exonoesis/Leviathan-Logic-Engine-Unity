@@ -33,13 +33,17 @@ namespace Visual
             currentScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
 
-            GameObject speakerNameText = GameObject.FindWithTag("SpeakerNameText");
-            string currentSpeaker = speakerNameText.GetComponent<TMPro.TextMeshProUGUI>().text;
+            string currentSpeaker = GameObject
+                .FindWithTag("SpeakerNameText")
+                .GetComponent<TMPro.TextMeshProUGUI>()
+                .text;
 
             Assert.AreEqual(desiredSpeaker, currentSpeaker);
 
-            GameObject dialogueText = GameObject.FindWithTag("DialogueText");
-            string currentDialogue = dialogueText.GetComponent<TMPro.TextMeshProUGUI>().text;
+            string currentDialogue = GameObject
+                .FindWithTag("DialogueText")
+                .GetComponent<TMPro.TextMeshProUGUI>()
+                .text;
 
             Assert.AreEqual(desiredDialogue, currentDialogue);
         }
@@ -54,8 +58,10 @@ namespace Visual
             currentScene.show();
             yield return new WaitForSeconds(1f);
 
-            GameObject staticPanel = GameObject.FindWithTag("BGPanelStatic");
-            Texture currentBackground = staticPanel.GetComponent<RawImage>().texture;
+            Texture currentBackground = GameObject
+                .FindWithTag("BGPanelStatic")
+                .GetComponent<RawImage>()
+                .texture;
 
             Assert.AreEqual(desiredBackground, currentBackground);
         }

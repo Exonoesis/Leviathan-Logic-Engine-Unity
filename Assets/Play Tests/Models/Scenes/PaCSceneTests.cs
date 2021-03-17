@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Visual
 {
-    public class ClickerSceneTests
+    public class PaCSceneTests
     {
         private Texture background = Resources.Load<Texture>("Images/BG/Stairs");
         private List<Asset> assets = new List<Asset> 
@@ -33,8 +33,10 @@ namespace Visual
             currentScene.show();
             yield return new WaitForSeconds(1f);
 
-            GameObject staticPanel = GameObject.FindWithTag("BGPanelStatic");
-            Texture currentBackground = staticPanel.GetComponent<RawImage>().texture;
+            Texture currentBackground = GameObject
+                .FindWithTag("BGPanelStatic")
+                .GetComponent<RawImage>()
+                .texture;
 
             Assert.AreEqual(background, currentBackground);
         }
@@ -42,9 +44,9 @@ namespace Visual
         [UnityTest]
         public IEnumerator ShowsAssets()
         {
-            PointandClick assetOnlyScene = new PointandClick(assets);
+            PointandClick currentScene = new PointandClick(assets);
             
-            assetOnlyScene.show();
+            currentScene.show();
             yield return new WaitForSeconds(1f);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -52,17 +54,19 @@ namespace Visual
 
             Assert.AreEqual(assets[0].getPrefab().name, asset.name);
 
-            Vector3 position = asset.position;
-            Assert.AreEqual(Math.Floor(assets[0].getPosition().x), Math.Floor(position.x));
-            Assert.AreEqual(Math.Floor(assets[0].getPosition().y), Math.Floor(position.y));
+            Vector3 scenePosition = asset.position;
+            Vector3 desiredPosition = assets[0].getPosition();
+            
+            Assert.AreEqual(Math.Floor(desiredPosition.x), Math.Floor(scenePosition.x));
+            Assert.AreEqual(Math.Floor(desiredPosition.y), Math.Floor(scenePosition.y));
         }
         
         [UnityTest]
         public IEnumerator RemovesAssetsFromScene()
         {
-            PointandClick assetOnlyScene = new PointandClick(assets);
+            PointandClick currentScene = new PointandClick(assets);
             
-            assetOnlyScene.show();
+            currentScene.show();
             yield return new WaitForSeconds(1f);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
@@ -70,7 +74,7 @@ namespace Visual
 
             Assert.AreEqual(assets.Count, numAssets);
 
-            assetOnlyScene.hide();
+            currentScene.hide();
             yield return new WaitForSeconds(1f);
 
             numAssets = aPanel.transform.childCount;

@@ -16,7 +16,7 @@ namespace Visual
         }
         
         [UnityTest]
-        public IEnumerator ShowsTransition()
+        public IEnumerator ChangesBackground()
         {
             BackgroundViewer bgViewer = GameObject
                 .FindWithTag("EventSystem")
