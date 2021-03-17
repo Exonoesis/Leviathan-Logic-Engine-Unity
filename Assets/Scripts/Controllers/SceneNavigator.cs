@@ -36,30 +36,19 @@ public class SceneNavigator : MonoBehaviour
             {
                 if (!condition.isMet())
                 {
-                    showErrorScene(clickedAsset, condition);
+                    Cutscene errorToShow = _errorSceneTable[(clickedAsset, condition)];
+                    showScene(errorToShow);
                     return;
                 }
             }
         }
-        showNextScene(clickedAsset);
+        showScene(clickedAsset.getState().getNextScene());
     }
-
-    private void showErrorScene(Asset clickedAsset, Conditional failedCondition)
+    private void showScene(Scene newScene)
     {
-        Cutscene errorToShow = _errorSceneTable[(clickedAsset, failedCondition)];
-
         _currentScene.hide();
-        setCurrentScene(errorToShow);
-        errorToShow.show();
-    }
-
-    private void showNextScene(Asset clickedAsset)
-    {
-        Scene sceneToShow = clickedAsset.getState().getNextScene();
-
-        _currentScene.hide();
-        setCurrentScene(sceneToShow);
-        sceneToShow.show();
+        setCurrentScene(newScene);
+        newScene.show();
     }
     
     public void addConditions(Asset asset, List<Conditional> conditionList)
