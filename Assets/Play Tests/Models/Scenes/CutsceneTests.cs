@@ -9,11 +9,15 @@ namespace Visual
 {
     public class CutsceneTests
     {
-        private string desiredSpeaker = "Jesse";
-        private string desiredDialogue = "This is a test of the <color=purple>color " +
+        private static string desiredSpeaker = "Cat";
+        private static string desiredDialogue = "This is a test of the <color=purple>color " +
                                          "changing system</color>. It's <b>built-in</b>, and that's real <i>fancy</i>. " +
                                          "Now I need to make this longer to test other issues and make sure that " +
                                          "the line snapping is fixed by this new method. Floccinaucinihilipilification.";
+
+        private Asset cat = new Asset("CP [Cat]",
+            new Vector3(0,0),
+            new Character(desiredSpeaker, desiredDialogue));
         
         [SetUp]
         public void Setup()
@@ -28,7 +32,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
             
-            Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
+            Cutscene currentScene = new Cutscene((cat, null));
 
             currentScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());
@@ -53,7 +57,7 @@ namespace Visual
         {
             Texture desiredBackground = Resources.Load<Texture>("Images/BG/Stairs");
             
-            Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue, desiredBackground);
+            Cutscene currentScene = new Cutscene((cat, null), desiredBackground);
 
             currentScene.show();
             yield return new WaitForSeconds(1f);
@@ -73,7 +77,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
 
-            Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
+            Cutscene currentScene = new Cutscene((cat, null));
 
             currentScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());

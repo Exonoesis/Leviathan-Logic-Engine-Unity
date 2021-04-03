@@ -32,6 +32,11 @@ public class Button : State
         return _isClicked;
     }
 
+    public override string queryFor(string key)
+    {
+        return null;
+    }
+
     public override Scene getNextScene()
     {
         return _nextScene;

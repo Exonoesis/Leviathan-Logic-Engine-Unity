@@ -4,29 +4,45 @@ public class Cutscene : Scene
 {
     private BackgroundViewer bgViewer;
     private DialogueViewer dlViewer;
+    private AssetViewer aViewer;
 
-    private string _speaker;
-    private string _dialogue;
+    private (Asset speaker, Asset observer) _characters;
     private Texture _background;
-
     private Scene _nextScene;
 
-    public Cutscene(string speaker, string dialogue, Texture background = null, Scene nextScene = null)
+    public Cutscene((Asset speaker, Asset observer) characters, Texture background = null, Scene nextScene = null)
     {
         bgViewer = BackgroundViewer.Instance;
         dlViewer = DialogueViewer.Instance;
-
-        _speaker = speaker;
-        _dialogue = dialogue;
-        _background = background;
+        aViewer = AssetViewer.Instance;
         
+        _characters = characters;
+        _background = background;
         _nextScene = nextScene;
     }
 
     public override void show()
     {
+        State characterData = _characters.speaker.getState();
+        string characterName = characterData.queryFor(CharacterQueries.Name);
+        
         bgViewer.Transition(_background);
-        dlViewer.PrintDialogue(_speaker, _dialogue);
+
+        if (characterName != "")
+        {
+            aViewer.placeInScene(_characters.speaker);
+        }
+        
+        if (_characters.observer != null)
+        {
+            aViewer.placeInScene(_characters.observer);
+            aViewer.Darken(_characters.observer.getPrefab());
+        }
+        
+        dlViewer.PrintDialogue(
+            characterName, 
+            characterData.queryFor(CharacterQueries.Dialogue));
+        
         dlViewer.setNavDest(_nextScene);
     }
     
@@ -34,6 +50,7 @@ public class Cutscene : Scene
     {
         dlViewer.clearTextFields();
         dlViewer.hideDialoguePanel();
+        aViewer.clearSceneAssets();
     }
 
     public void setNextScene(Scene nextScene)

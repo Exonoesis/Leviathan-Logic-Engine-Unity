@@ -19,8 +19,10 @@ TagManager:
   - BGPanelDynamic
   - EventSystem
   - AssetsPanel
-  - Cat
   - NavButton
+  - Kitten
+  - Cat
+  - BigKitten
   layers:
   - Default
   - TransparentFX

@@ -7,14 +7,10 @@ using System.Collections.Generic;
 
 namespace Visual
 {
-    //Comment out this line for local testing purposes, otherwise Unity will not run these tests
+    //Comment out this line for local testing purposes, otherwise Unity will not run these tests.
     [Ignore("These tests are purely cosmetic, some requiring mouse inputs.")]
     public class SceneTransitionTests
     {
-        private string speaker1 = "Cat";
-        private string dialogue1 = "While I may be soft and cute, I'm also lost and scared. " +
-                                   "I don't know where I am, what's going on, or how I got here.";
-        
         private List<Texture> backgrounds = new List<Texture>
         {
             Resources.Load<Texture>("Images/BG/Trees"),
@@ -23,10 +19,22 @@ namespace Visual
         
         private List<Asset> assets1 = new List<Asset> 
         {
-            new Asset("CA [Cat]",
+            new Asset("CA [Kitten]",
                 new Vector3(130, 92), 
                 new PaCElement(null))
         };
+
+        private Asset kitten = new Asset("CP [Kitten]",
+            new Vector3(0, 0),
+            new Character("Kitten", 
+                "While I may be soft and cute, I'm also lost and scared. " +
+                "I don't know where I am, what's going on, or how I got here."));
+
+        private Asset cat = new Asset("CP [Cat]",
+            new Vector3(50, 0),
+            new Character("Cat",
+                "That's very unfortunate, small kitten. I wish I could help you out there. " + 
+                "However, this is only a test and soon we will vanish the void."));
         
         [SetUp]
         public void Setup()
@@ -41,12 +49,8 @@ namespace Visual
             DialogueViewer dlViewer = eventSystem.GetComponent<DialogueViewer>();
             SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             
-            string speaker2 = "Jesse";
-            string dialogue2 = "That's very unfortunate, small cat. I wish I could help you out there. "
-                               + "However, this is only a test and soon we will vanish the void.";
-            
-            Cutscene secondScene = new Cutscene(speaker2, dialogue2, backgrounds[1]);
-            Cutscene firstScene = new Cutscene(speaker1, dialogue1, backgrounds[0], secondScene);
+            Cutscene secondScene = new Cutscene((cat, kitten), backgrounds[1]);
+            Cutscene firstScene = new Cutscene((kitten, cat), backgrounds[0], secondScene);
             
             sNavi.setCurrentScene(firstScene);
             
@@ -66,7 +70,7 @@ namespace Visual
             SceneNavigator sNavi = eventSystem.GetComponent<SceneNavigator>();
             
             PointandClick secondScene = new PointandClick(assets1, backgrounds[0]);
-            Cutscene firstScene = new Cutscene(speaker1, dialogue1, backgrounds[1], secondScene);
+            Cutscene firstScene = new Cutscene((kitten, cat), backgrounds[1], secondScene);
             
             sNavi.setCurrentScene(firstScene);
             
@@ -84,7 +88,7 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
             
-            Cutscene secondScene = new Cutscene(speaker1, dialogue1, backgrounds[1]);
+            Cutscene secondScene = new Cutscene((kitten, null), backgrounds[1]);
             PointandClick firstScene = new PointandClick(assets1, backgrounds[0]);
             
             firstScene.show();
@@ -103,7 +107,7 @@ namespace Visual
         {
             List<Asset> assets2 = new List<Asset> 
             {
-                new Asset("CA [Cat]",
+                new Asset("CA [Kitten]",
                     new Vector3(270, 132), 
                     new PaCElement(null))
             };
