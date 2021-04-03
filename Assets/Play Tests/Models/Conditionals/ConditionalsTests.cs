@@ -11,7 +11,7 @@ namespace Interactive
     {
         private List<Asset> assets = new List<Asset> 
         {
-            new Asset("CA [Cat]",
+            new Asset("CA [Kitten]",
                 new Vector3(130, 92), 
                 new PaCElement(null))
         };
@@ -25,9 +25,12 @@ namespace Interactive
         [UnityTest]
         public IEnumerator HasBeenClickedConditionalPass()
         {
+            Asset kitten = new Asset("CP [Kitten]",
+                new Vector3(0, 0),
+                new Character("Kitten", "Meow"));
+            
             Cutscene dummyScene = new Cutscene(
-                "Duck",
-                "Quack!", 
+                (kitten, null), 
                 Resources.Load<Texture>("Images/BG/Trees"));
             
             assets[0].getState().setNextScene(dummyScene);

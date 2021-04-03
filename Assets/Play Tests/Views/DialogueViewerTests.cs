@@ -8,7 +8,7 @@ namespace Visual
 {
     public class DialogueViewerTests
     {
-        private string desiredSpeaker = "Jesse";
+        private string desiredSpeaker = "Kitten";
         private string desiredDialogue = "This is a test of the <color=purple>color " +
                                  "changing system</color>. It's <b>built-in</b>, and that's real <i>fancy</i>. " +
                                  "Now I need to make this longer to test other issues and make sure that " +
@@ -69,7 +69,11 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<DialogueViewer>();
 
-            Cutscene currentScene = new Cutscene(desiredSpeaker, desiredDialogue);
+            Asset kitten = new Asset ("CP [Kitten]",
+                new Vector3(0, 0),
+                new Character(desiredSpeaker,desiredDialogue));
+
+            Cutscene currentScene = new Cutscene((kitten, null));
 
             currentScene.show();
             yield return new WaitUntil(() => !dlViewer.getIsTyping());

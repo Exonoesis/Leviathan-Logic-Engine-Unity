@@ -9,16 +9,17 @@ namespace Interactive
 {
     public class SceneNavigatorTests
     {
-        private string speaker = "Cat";
-        private string passDialogue = "How did I get here?";
-        private string failDialogue = "We're missing an important item.";
+        private Asset passKitten = new Asset("CP [Kitten]",
+            new Vector3(0, 0),
+            new Character("Kitten", "How did I get here?"));
+        
         private List<Texture> backgrounds = new List<Texture>
         {
             Resources.Load<Texture>("Images/BG/Trees"),
             Resources.Load<Texture>("Images/BG/Stairs")
         };
 
-        private string assetName = "CA [Cat]";
+        private string assetName = "CA [Kitten]";
         private Vector3 assetPosition = new Vector3(130, 92);
         
         [SetUp]
@@ -30,7 +31,7 @@ namespace Interactive
         [UnityTest]
         public IEnumerator NoConditionals()
         {
-            Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
+            Cutscene nextScene = new Cutscene((passKitten, null), backgrounds[0]);
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             PointandClick currentScene = new PointandClick(new List<Asset>{asset}, backgrounds[1]);
 
@@ -56,7 +57,7 @@ namespace Interactive
         [UnityTest]
         public IEnumerator OnePass()
         {
-            Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
+            Cutscene nextScene = new Cutscene((passKitten, null), backgrounds[0]);
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             PointandClick currentScene = new PointandClick(new List<Asset>{asset}, backgrounds[1]);
 
@@ -88,8 +89,12 @@ namespace Interactive
         [UnityTest]
         public IEnumerator OneFail()
         {
-            Cutscene nextScene = new Cutscene(speaker, passDialogue, backgrounds[0]);
-            Cutscene errorScene = new Cutscene(speaker, failDialogue, backgrounds[1]);
+            Asset failKitten = new Asset("CP [Kitten]",
+                new Vector3(0, 0),
+                new Character("Kitten", "We're missing an important item."));
+            
+            Cutscene nextScene = new Cutscene((passKitten, null), backgrounds[0]);
+            Cutscene errorScene = new Cutscene((failKitten, null), backgrounds[1]);
             Asset asset = new Asset(assetName, assetPosition, new PaCElement(nextScene));
             PointandClick currentScene = new PointandClick(new List<Asset>{asset}, backgrounds[1]);
 
@@ -128,10 +133,18 @@ namespace Interactive
         [UnityTest]
         public IEnumerator OnePassOneFail()
         {
+            Asset e1kitten = new Asset("CP [Kitten]",
+                new Vector3(0, 0),
+                new Character("Kitten", "I should not be here."));
+
+            Asset e2kitten = new Asset("CP [Kitten]",
+                new Vector3(50, 0),
+                new Character("Kitten", "Oops!"));
+            
             List<Cutscene> errorScenes = new List<Cutscene>
             {
-                new Cutscene(speaker, "I should not be here.", backgrounds[1]),
-                new Cutscene(speaker, "Oops!", backgrounds[1])
+                new Cutscene((e1kitten, null), backgrounds[1]),
+                new Cutscene((e2kitten, null), backgrounds[1])
             };
             
             Asset passingAsset = new Asset(

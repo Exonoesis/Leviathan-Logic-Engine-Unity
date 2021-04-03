@@ -14,7 +14,7 @@ namespace Visual
         private Texture background = Resources.Load<Texture>("Images/BG/Stairs");
         private List<Asset> assets = new List<Asset> 
         {
-            new Asset("CA [Cat]",
+            new Asset("CA [Kitten]",
             new Vector3(130, 92), 
             new PaCElement(null))
         };
