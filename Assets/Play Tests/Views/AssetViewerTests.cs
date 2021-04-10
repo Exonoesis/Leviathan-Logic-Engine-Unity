@@ -31,8 +31,10 @@ namespace Visual
             aViewer.placeInScene(_desiredAsset);
             yield return new WaitForSeconds(1f);
 
-            GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
-            var asset = aPanel.transform.GetChild(0);
+            var asset = GameObject
+                .FindWithTag("AssetsPanel")
+                .transform
+                .GetChild(0);
 
             Assert.AreEqual(_desiredAsset.getPrefab().name, asset.name);
 
