@@ -7,6 +7,7 @@ public abstract class State
     
     //Queries
     public abstract bool isClicked();
+    public abstract string queryFor(string key);
     public abstract Scene getNextScene();
     
     //Record Keeping

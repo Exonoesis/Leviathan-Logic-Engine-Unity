@@ -11,7 +11,7 @@ namespace Visual
     public class AssetViewerTests
     {
         private Asset _desiredAsset = new Asset(
-            "CA [Cat]", 
+            "CA [Kitten]", 
             new Vector3(130, 92),
             new PaCElement(null));
         
@@ -31,8 +31,10 @@ namespace Visual
             aViewer.placeInScene(_desiredAsset);
             yield return new WaitForSeconds(1f);
 
-            GameObject aPanel = GameObject.FindWithTag("AssetsPanel");
-            var asset = aPanel.transform.GetChild(0);
+            var asset = GameObject
+                .FindWithTag("AssetsPanel")
+                .transform
+                .GetChild(0);
 
             Assert.AreEqual(_desiredAsset.getPrefab().name, asset.name);
 
@@ -53,7 +55,7 @@ namespace Visual
             aViewer.placeInScene(_desiredAsset);
             yield return new WaitForSeconds(1f);
 
-            GameObject asset = GameObject.FindWithTag("Cat");
+            GameObject asset = GameObject.FindWithTag("Kitten");
             Image assetImage = asset.GetComponent<Image>();
             
             Assert.AreEqual(Color.white, assetImage.color);
@@ -73,7 +75,7 @@ namespace Visual
             aViewer.placeInScene(_desiredAsset);
             yield return new WaitForSeconds(1f);
 
-            GameObject asset = GameObject.FindWithTag("Cat");
+            GameObject asset = GameObject.FindWithTag("Kitten");
             Image assetImage = asset.GetComponent<Image>();
 
             aViewer.Darken(asset);
