@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,12 +30,29 @@ public class AssetViewer : MonoBehaviour
     //The Dictionary is populated at game initialization and is not cleared during runtime.
     private Dictionary<GameObject, Asset> coreAssets;
 
+    private Coroutine moveCoroutine;
+    private GameObject movingPrefab;
+    private Vector3 targetPosition;
+    
+    private bool isMoving;
+    
     void Awake()
     {
         aPanelRT = GameObject.FindWithTag("AssetsPanel")
             .GetComponent<RectTransform>();
     }
-    
+
+    private void Update()
+    {
+        if (isMoving && Input.GetMouseButtonDown(MouseCodes.PrimaryButton))
+        {
+            StopCoroutine(moveCoroutine);
+            PlaceAt(movingPrefab, targetPosition);
+
+            isMoving = false;
+        }
+    }
+
     public AssetViewer()
     {
         sceneAssets = new Dictionary<GameObject, Asset>();
@@ -99,5 +117,56 @@ public class AssetViewer : MonoBehaviour
     public void Lighten(GameObject prefab)
     {
         prefab.GetComponentInChildren<Image>().color = Color.white;
+    }
+
+    public void MoveTo(GameObject prefab, Vector3 target, float speed, MovementTypes style)
+    {
+        moveCoroutine = StartCoroutine(MoveAsset(prefab, target, speed, style));
+    }
+    
+    //For SmoothDamp only; higher speed = slower movement
+    private IEnumerator MoveAsset(GameObject prefab, Vector3 target, float speed, MovementTypes style)
+    {
+        isMoving = true;
+        movingPrefab = prefab;
+        targetPosition = target;
+        
+        Vector3 currentPosition = prefab.transform.position;
+        Vector3 velocity = Vector3.zero;
+
+        speed *= Time.deltaTime;
+
+        while (Vector3.Distance(currentPosition, target) > .1f)
+        {
+            switch (style)
+            {
+                case MovementTypes.Smooth:
+                    currentPosition = Vector3.MoveTowards(currentPosition, target, speed * 50);
+                    break;
+                case MovementTypes.FastStart:
+                    currentPosition = Vector3.Lerp(currentPosition, target, speed);
+                    break;
+                case MovementTypes.FastMiddle:
+                    currentPosition = Vector3.SmoothDamp(currentPosition, target, ref velocity, speed * 10);
+                    break;
+            }
+            
+            PlaceAt(prefab, currentPosition);
+            yield return new WaitForEndOfFrame();
+        }
+        
+        isMoving = false;
+    }
+
+    private void PlaceAt(GameObject prefab, Vector3 target)
+    {
+        prefab.transform.position = target;
+        Asset asset = getSceneAssetFrom(prefab);
+        asset.setPosition(target);
+    }
+    
+    public bool getIsMoving()
+    {
+        return isMoving;
     }
 }

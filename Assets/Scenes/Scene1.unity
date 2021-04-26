@@ -204,7 +204,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -924,12 +924,12 @@ PrefabInstance:
     - target: {fileID: 1005743271758324136, guid: 99aeed77699d3ab1b9f2a7323452eb37,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 207.6
+      value: 426
       objectReference: {fileID: 0}
     - target: {fileID: 1005743271758324136, guid: 99aeed77699d3ab1b9f2a7323452eb37,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -113.2
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1005743271758324137, guid: 99aeed77699d3ab1b9f2a7323452eb37,
         type: 3}
@@ -1129,7 +1129,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
