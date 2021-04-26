@@ -7,8 +7,9 @@ using System.Collections.Generic;
 
 namespace Visual
 {
-    //Comment out this line for local testing purposes, otherwise Unity will not run these tests.
-    //[Ignore("These tests are purely cosmetic, some requiring mouse inputs.")]
+    //Comment out the line below for local testing purposes, otherwise Unity will not run these tests.
+    [Ignore("These tests are purely cosmetic, some requiring mouse inputs.")]
+    
     public class SceneTransitionTests
     {
         private List<Texture> backgrounds = new List<Texture>
@@ -34,7 +35,7 @@ namespace Visual
             new Vector3(90, 0),
             new Character("Cat",
                 "That's very unfortunate, small kitten. I wish I could help you out there. " + 
-                "However, this is only a test and soon we will vanish the void."));
+                "However, this is only a test and soon we will vanish into the void."));
         
         [SetUp]
         public void Setup()
