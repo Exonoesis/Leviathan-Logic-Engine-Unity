@@ -141,8 +141,9 @@ namespace Visual
                 
                 aViewer.MoveTo(prefab.gameObject, targetPos,5f, MovementTypes.Smooth);
                 yield return new WaitUntil(() => !aViewer.getIsMoving());
-                
-                Assert.IsTrue(Vector3.Distance(prefab.position, targetPos) < .1f);
+
+                int prefabDistance = Mathf.RoundToInt(Vector3.Distance(prefab.position, targetPos));
+                Assert.AreEqual(0, prefabDistance);
                 
                 Asset asset = aViewer.getSceneAssetFrom(prefab.gameObject);
                 asset.setPosition(origPos);
@@ -176,7 +177,8 @@ namespace Visual
                 aViewer.MoveTo(prefab.gameObject, targetPos,5f, MovementTypes.FastStart);
                 yield return new WaitUntil(() => !aViewer.getIsMoving());
                 
-                Assert.IsTrue(Vector3.Distance(prefab.position, targetPos) < .1f);
+                int prefabDistance = Mathf.RoundToInt(Vector3.Distance(prefab.position, targetPos));
+                Assert.AreEqual(0, prefabDistance);
                 
                 Asset asset = aViewer.getSceneAssetFrom(prefab.gameObject);
                 asset.setPosition(origPos);
@@ -210,7 +212,8 @@ namespace Visual
                 aViewer.MoveTo(prefab.gameObject, targetPos,5f, MovementTypes.FastMiddle);
                 yield return new WaitUntil(() => !aViewer.getIsMoving());
                 
-                Assert.IsTrue(Vector3.Distance(prefab.position, targetPos) < .1f);
+                int prefabDistance = Mathf.RoundToInt(Vector3.Distance(prefab.position, targetPos));
+                Assert.AreEqual(0, prefabDistance);
 
                 Asset asset = aViewer.getSceneAssetFrom(prefab.gameObject);
                 asset.setPosition(origPos);
