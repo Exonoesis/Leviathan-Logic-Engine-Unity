@@ -32,7 +32,7 @@ public class AssetViewer : MonoBehaviour
 
     private Coroutine moveCoroutine;
     private GameObject movingPrefab;
-    private Vector3 targetPosition;
+    private Vector2 targetPosition;
     
     private bool isMoving;
     
@@ -119,35 +119,35 @@ public class AssetViewer : MonoBehaviour
         prefab.GetComponentInChildren<Image>().color = Color.white;
     }
 
-    public void MoveTo(GameObject prefab, Vector3 target, float speed, MovementTypes style)
+    public void MoveTo(GameObject prefab, Vector2 target, float speed, MovementTypes style)
     {
         moveCoroutine = StartCoroutine(MoveAsset(prefab, target, speed, style));
     }
     
     //For SmoothDamp only; higher speed = slower movement
-    private IEnumerator MoveAsset(GameObject prefab, Vector3 target, float speed, MovementTypes style)
+    private IEnumerator MoveAsset(GameObject prefab, Vector2 target, float speed, MovementTypes style)
     {
         isMoving = true;
         movingPrefab = prefab;
         targetPosition = target;
         
-        Vector3 currentPosition = prefab.transform.position;
-        Vector3 velocity = Vector3.zero;
+        Vector2 currentPosition = prefab.transform.position;
+        Vector2 velocity = Vector2.zero;
 
         speed *= Time.deltaTime;
 
-        while (Vector3.Distance(currentPosition, target) > .1f)
+        while (Vector2.Distance(currentPosition, target) > .1f)
         {
             switch (style)
             {
                 case MovementTypes.Smooth:
-                    currentPosition = Vector3.MoveTowards(currentPosition, target, speed * 50);
+                    currentPosition = Vector2.MoveTowards(currentPosition, target, speed * 50);
                     break;
                 case MovementTypes.FastStart:
-                    currentPosition = Vector3.Lerp(currentPosition, target, speed);
+                    currentPosition = Vector2.Lerp(currentPosition, target, speed);
                     break;
                 case MovementTypes.FastMiddle:
-                    currentPosition = Vector3.SmoothDamp(currentPosition, target, ref velocity, speed * 10);
+                    currentPosition = Vector2.SmoothDamp(currentPosition, target, ref velocity, speed * 10);
                     break;
             }
             
@@ -158,7 +158,7 @@ public class AssetViewer : MonoBehaviour
         isMoving = false;
     }
 
-    private void PlaceAt(GameObject prefab, Vector3 target)
+    private void PlaceAt(GameObject prefab, Vector2 target)
     {
         prefab.transform.position = target;
         Asset asset = getSceneAssetFrom(prefab);

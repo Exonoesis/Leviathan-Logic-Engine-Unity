@@ -136,16 +136,16 @@ namespace Visual
                     .transform
                     .GetChild(0);
 
-                Vector3 origPos = prefab.transform.position;
-                Vector3 targetPos = new Vector3(300, 25, 0);
+                Vector2 origPos = prefab.transform.position;
+                Vector2 targetPos = new Vector2(300, 25);
                 
                 aViewer.MoveTo(prefab.gameObject, targetPos,5f, MovementTypes.Smooth);
                 yield return new WaitUntil(() => !aViewer.getIsMoving());
 
-                Vector3 newPos = prefab.transform.position;
+                Vector2 newPos = prefab.transform.position;
                 Assert.AreNotEqual(origPos, newPos);
 
-                int prefabDistance = Mathf.RoundToInt(Vector3.Distance(newPos, targetPos));
+                int prefabDistance = Mathf.RoundToInt(Vector2.Distance(newPos, targetPos));
                 Assert.AreEqual(0, prefabDistance);
                 
                 Asset asset = aViewer.getSceneAssetFrom(prefab.gameObject);
@@ -174,8 +174,8 @@ namespace Visual
                     .transform
                     .GetChild(0);
                 
-                Vector3 origPos = prefab.transform.position;
-                Vector3 targetPos = new Vector3(300, 25, 0);
+                Vector2 origPos = prefab.transform.position;
+                Vector2 targetPos = new Vector2(300, 25);
                 
                 aViewer.MoveTo(prefab.gameObject, targetPos,5f, MovementTypes.FastStart);
                 yield return new WaitUntil(() => !aViewer.getIsMoving());
@@ -183,7 +183,7 @@ namespace Visual
                 Vector3 newPos = prefab.transform.position;
                 Assert.AreNotEqual(origPos, newPos);
 
-                int prefabDistance = Mathf.RoundToInt(Vector3.Distance(newPos, targetPos));
+                int prefabDistance = Mathf.RoundToInt(Vector2.Distance(newPos, targetPos));
                 Assert.AreEqual(0, prefabDistance);
                 
                 Asset asset = aViewer.getSceneAssetFrom(prefab.gameObject);
@@ -212,16 +212,16 @@ namespace Visual
                     .transform
                     .GetChild(0);
                 
-                Vector3 origPos = prefab.transform.position;
-                Vector3 targetPos = new Vector3(300, 25, 0);
+                Vector2 origPos = prefab.transform.position;
+                Vector2 targetPos = new Vector3(300, 25);
                 
                 aViewer.MoveTo(prefab.gameObject, targetPos,5f, MovementTypes.FastMiddle);
                 yield return new WaitUntil(() => !aViewer.getIsMoving());
                 
-                Vector3 newPos = prefab.transform.position;
+                Vector2 newPos = prefab.transform.position;
                 Assert.AreNotEqual(origPos, newPos);
 
-                int prefabDistance = Mathf.RoundToInt(Vector3.Distance(newPos, targetPos));
+                int prefabDistance = Mathf.RoundToInt(Vector2.Distance(newPos, targetPos));
                 Assert.AreEqual(0, prefabDistance);
 
                 Asset asset = aViewer.getSceneAssetFrom(prefab.gameObject);
