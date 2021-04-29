@@ -152,7 +152,7 @@ public class AssetViewer : MonoBehaviour
             }
             
             PlaceAt(prefab, currentPosition);
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(.01f);
         }
         
         isMoving = false;
