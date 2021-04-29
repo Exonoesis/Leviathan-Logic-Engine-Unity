@@ -155,81 +155,81 @@ namespace Visual
             }
         }
         
-        // [UnityTest]
-        // public IEnumerator MoveToLerp()
-        // {
-        //     AssetViewer aViewer = GameObject
-        //         .FindWithTag("EventSystem")
-        //         .GetComponent<AssetViewer>();
-        //     
-        //     Scene[] scenes = {new PointandClick(assets), new Cutscene((cat, null))};
-        //     
-        //     foreach (Scene scene in scenes)
-        //     {
-        //         scene.show();
-        //         yield return new WaitForSeconds(1f);
-        //         
-        //         var prefab = GameObject
-        //             .FindWithTag("AssetsPanel")
-        //             .transform
-        //             .GetChild(0);
-        //         
-        //         Vector2 origPos = prefab.transform.position;
-        //         Vector2 targetPos = new Vector2(300, 25);
-        //         
-        //         aViewer.MoveTo(prefab.gameObject, targetPos,5f, MovementTypes.FastStart);
-        //         yield return new WaitUntil(() => !aViewer.getIsMoving());
-        //         
-        //         Vector3 newPos = prefab.transform.position;
-        //         Assert.AreNotEqual(origPos, newPos);
-        //
-        //         int prefabDistance = Mathf.RoundToInt(Vector2.Distance(newPos, targetPos));
-        //         Assert.AreEqual(0, prefabDistance);
-        //         
-        //         Asset asset = aViewer.getSceneAssetFrom(prefab.gameObject);
-        //         asset.setPosition(origPos);
-        //         
-        //         scene.hide();
-        //     }
-        // }
-        //
-        // [UnityTest]
-        // public IEnumerator MoveToSmoothDamp()
-        // {
-        //     AssetViewer aViewer = GameObject
-        //         .FindWithTag("EventSystem")
-        //         .GetComponent<AssetViewer>();
-        //     
-        //     Scene[] scenes = {new PointandClick(assets), new Cutscene((cat, null))};
-        //     
-        //     foreach (Scene scene in scenes)
-        //     {
-        //         scene.show();
-        //         yield return new WaitForSeconds(1f);
-        //         
-        //         var prefab = GameObject
-        //             .FindWithTag("AssetsPanel")
-        //             .transform
-        //             .GetChild(0);
-        //         
-        //         Vector2 origPos = prefab.transform.position;
-        //         Vector2 targetPos = new Vector3(300, 25);
-        //         
-        //         aViewer.MoveTo(prefab.gameObject, targetPos,5f, MovementTypes.FastMiddle);
-        //         yield return new WaitUntil(() => !aViewer.getIsMoving());
-        //         
-        //         Vector2 newPos = prefab.transform.position;
-        //         Assert.AreNotEqual(origPos, newPos);
-        //
-        //         int prefabDistance = Mathf.RoundToInt(Vector2.Distance(newPos, targetPos));
-        //         Assert.AreEqual(0, prefabDistance);
-        //
-        //         Asset asset = aViewer.getSceneAssetFrom(prefab.gameObject);
-        //         asset.setPosition(origPos);
-        //         
-        //         scene.hide();
-        //     }
-        // }
+        [UnityTest]
+        public IEnumerator MoveToLerp()
+        {
+            AssetViewer aViewer = GameObject
+                .FindWithTag("EventSystem")
+                .GetComponent<AssetViewer>();
+            
+            Scene[] scenes = {new PointandClick(assets), new Cutscene((cat, null))};
+            
+            foreach (Scene scene in scenes)
+            {
+                scene.show();
+                yield return new WaitForSeconds(1f);
+                
+                var prefab = GameObject
+                    .FindWithTag("AssetsPanel")
+                    .transform
+                    .GetChild(0);
+                
+                Vector2 origPos = prefab.transform.position;
+                Vector2 targetPos = new Vector2(300, 25);
+                
+                aViewer.MoveTo(prefab.gameObject, targetPos,5f, MovementTypes.FastStart);
+                yield return new WaitUntil(() => !aViewer.getIsMoving());
+                
+                Vector3 newPos = prefab.transform.position;
+                Assert.AreNotEqual(origPos, newPos);
+        
+                int prefabDistance = Mathf.RoundToInt(Vector2.Distance(newPos, targetPos));
+                Assert.AreEqual(0, prefabDistance);
+                
+                Asset asset = aViewer.getSceneAssetFrom(prefab.gameObject);
+                asset.setPosition(origPos);
+                
+                scene.hide();
+            }
+        }
+        
+        [UnityTest]
+        public IEnumerator MoveToSmoothDamp()
+        {
+            AssetViewer aViewer = GameObject
+                .FindWithTag("EventSystem")
+                .GetComponent<AssetViewer>();
+            
+            Scene[] scenes = {new PointandClick(assets), new Cutscene((cat, null))};
+            
+            foreach (Scene scene in scenes)
+            {
+                scene.show();
+                yield return new WaitForSeconds(1f);
+                
+                var prefab = GameObject
+                    .FindWithTag("AssetsPanel")
+                    .transform
+                    .GetChild(0);
+                
+                Vector2 origPos = prefab.transform.position;
+                Vector2 targetPos = new Vector3(300, 25);
+                
+                aViewer.MoveTo(prefab.gameObject, targetPos,5f, MovementTypes.FastMiddle);
+                yield return new WaitUntil(() => !aViewer.getIsMoving());
+                
+                Vector2 newPos = prefab.transform.position;
+                Assert.AreNotEqual(origPos, newPos);
+        
+                int prefabDistance = Mathf.RoundToInt(Vector2.Distance(newPos, targetPos));
+                Assert.AreEqual(0, prefabDistance);
+        
+                Asset asset = aViewer.getSceneAssetFrom(prefab.gameObject);
+                asset.setPosition(origPos);
+                
+                scene.hide();
+            }
+        }
         
     }
 }
