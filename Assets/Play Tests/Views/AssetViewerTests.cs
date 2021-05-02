@@ -35,7 +35,9 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            aViewer.placeInScene(assets[0]);
+            Asset desiredAsset = assets[0];
+            
+            aViewer.placeInScene(desiredAsset);
             yield return new WaitForSeconds(1f);
 
             var asset = GameObject
@@ -43,10 +45,10 @@ namespace Visual
                 .transform
                 .GetChild(0);
 
-            Assert.AreEqual(assets[0].getPrefab().name, asset.name);
+            Assert.AreEqual(desiredAsset.getPrefab().name, asset.name);
 
             Vector3 position = asset.position;
-            Vector3 desiredPosition = assets[0].getPosition();
+            Vector3 desiredPosition = desiredAsset.getPosition();
             
             Assert.AreEqual(Math.Floor(desiredPosition.x), Math.Floor(position.x));
             Assert.AreEqual(Math.Floor(desiredPosition.y), Math.Floor(position.y));
@@ -59,7 +61,9 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
             
-            aViewer.placeInScene(assets[0]);
+            Asset desiredAsset = assets[0];
+            
+            aViewer.placeInScene(desiredAsset);
             yield return new WaitForSeconds(1f);
 
             GameObject asset = GameObject.FindWithTag("Kitten");
@@ -79,7 +83,9 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
 
-            aViewer.placeInScene(assets[0]);
+            Asset desiredAsset = assets[0];
+            
+            aViewer.placeInScene(desiredAsset);
             yield return new WaitForSeconds(1f);
 
             GameObject asset = GameObject.FindWithTag("Kitten");
@@ -101,7 +107,9 @@ namespace Visual
                 .FindWithTag("EventSystem")
                 .GetComponent<AssetViewer>();
 
-            aViewer.placeInScene(assets[0]);
+            Asset desiredAsset = assets[0];
+            
+            aViewer.placeInScene(desiredAsset);
             yield return new WaitForSeconds(1f);
 
             GameObject aPanel = GameObject.FindWithTag("AssetsPanel");

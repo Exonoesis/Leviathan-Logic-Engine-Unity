@@ -136,25 +136,21 @@ public class AssetViewer : MonoBehaviour
 
         speed *= Time.deltaTime;
 
-        while (Vector2.Distance(currentPosition, target) > .1f)
+        while (Mathf.RoundToInt(Vector2.Distance(currentPosition, target)) > 0)
         {
-            switch (style)
+            currentPosition = style switch
             {
-                case MovementTypes.Smooth:
-                    currentPosition = Vector2.MoveTowards(currentPosition, target, speed * 50);
-                    break;
-                case MovementTypes.FastStart:
-                    currentPosition = Vector2.Lerp(currentPosition, target, speed);
-                    break;
-                case MovementTypes.FastMiddle:
-                    currentPosition = Vector2.SmoothDamp(currentPosition, target, ref velocity, speed * 10);
-                    break;
-            }
-            
+                MovementTypes.Smooth => Vector2.MoveTowards(currentPosition, target, speed * 50),
+                MovementTypes.FastStart => Vector2.Lerp(currentPosition, target, speed),
+                MovementTypes.FastMiddle => Vector2.SmoothDamp(currentPosition, target, ref velocity, speed * 10),
+                _ => currentPosition
+            };
+
             PlaceAt(prefab, currentPosition);
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.001f);
         }
         
+        PlaceAt(prefab, targetPosition);
         isMoving = false;
     }
 
