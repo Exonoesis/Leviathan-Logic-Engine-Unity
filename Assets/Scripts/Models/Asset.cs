@@ -34,6 +34,10 @@ public class Asset
         return _prefabInstance;
     }
 
+    public void setPosition(Vector3 position)
+    {
+        _position = position;
+    }
     public void setPrefab(GameObject prefab)
     {
         _prefabInstance = prefab;
