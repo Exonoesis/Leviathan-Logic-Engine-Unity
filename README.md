@@ -14,10 +14,11 @@ The Leviathan Logic Engine is a content-focused game creation framework with eas
 - RPG teletype dialogue system
 - Point & Click player interactions
 - Conditional game progression
+- Visual Novel conversational system with character portraits
 
 ##### Planned
+- History feature to show previously seen dialogue/printed information
 - Basic card game logic
-- Visual Novel conversational system with character portraits
 - Choice-based interactions
 - and more!
 
