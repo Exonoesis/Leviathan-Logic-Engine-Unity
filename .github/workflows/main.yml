@@ -31,14 +31,14 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           testMode: playmode
           
-        - name: resharper
-            uses: glassechidna/resharper-action@master
-            with:
-              solution: Leviathan-Logic-Engine.sln
-          
       # Test Results
       - uses: actions/upload-artifact@v2
         if: always()
         with:
             name: Test results
             path: artifacts
+
+      - name: resharper
+        uses: glassechidna/resharper-action@master
+        with:
+          solution: Leviathan-Logic-Engine.sln
