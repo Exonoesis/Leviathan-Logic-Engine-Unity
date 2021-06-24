@@ -37,8 +37,3 @@ jobs:
         with:
             name: Test results
             path: artifacts
-
-      - name: resharper
-        uses: glassechidna/resharper-action@master
-        with:
-          solution: Leviathan-Logic-Engine.sln
