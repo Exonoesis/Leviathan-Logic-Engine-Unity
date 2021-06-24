@@ -2,6 +2,9 @@ name: ReSharper
 
 on:
   pull_request: {}
+  
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
   resharper:
@@ -10,6 +13,16 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
+      - name: Activate license
+        uses: MirrorNG/unity-runner@3.1.0
+        with:
+          entrypoint: /activate.sh
+            
+      - name: Generate Project Files
+        uses: MirrorNG/unity-runner@3.1.0
+        with:
+          args: -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath . -quit
+            
       - name: resharper
         uses: glassechidna/resharper-action@master
         with:

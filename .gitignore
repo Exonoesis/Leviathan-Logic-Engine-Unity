@@ -31,7 +31,6 @@ ExportedObj/
 *.csproj
 *.unityproj
 *.sln
-!Leviathan-Logic-Engine.sln
 *.suo
 *.tmp
 *.user
