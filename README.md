@@ -1,5 +1,7 @@
 # Leviathan Logic Engine
 
+>### IMPORTANT: The Unity version of this project has been depricated. It is being superseded by a Rust version which can be found [here.](https://github.com/Exonoesis/Leviathan-Lake)
+
 ---
 
 ### Project Description
